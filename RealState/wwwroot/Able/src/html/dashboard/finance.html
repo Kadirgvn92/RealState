@@ -1,0 +1,833 @@
+<!doctype html>
+<html lang="en">
+  <!-- [Head] start -->
+
+  <head>
+    @@include('../layouts/head-page-meta.html', {'title': 'Finance'}) @@include('../layouts/head-css.html')
+  </head>
+  <!-- [Head] end -->
+  <!-- [Body] Start -->
+
+  <body @@bodySetup>
+    @@include('../layouts/layout-vertical.html')
+
+    <!-- [ Main Content ] start -->
+    <div class="pc-container">
+      <div class="pc-content">
+        @@include('../layouts/breadcrumb.html', {'breadcrumb-item': 'Dashboard', 'breadcrumb-item-active': 'Finance'})
+        <!-- [ Main Content ] start -->
+        <div class="row">
+          <div class="col-md-5 col-xxl-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                  <h5 class="mb-0">My Card</h5>
+                  <div class="dropdown">
+                    <a
+                      class="avtar avtar-s btn-link-secondary dropdown-toggle arrow-none"
+                      href="#"
+                      data-bs-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      <i class="ti ti-dots-vertical f-18"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end">
+                      <a class="dropdown-item" href="#">Today</a>
+                      <a class="dropdown-item" href="#">Weekly</a>
+                      <a class="dropdown-item" href="#">Monthly</a>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="card rounded-4 overflow-hidden"
+                  style="background-image: url(../assets/images/widget/img-card-bg.svg); background-size: cover"
+                >
+                  <div class="card-body">
+                    <div class="d-flex">
+                      <div class="flex-grow-1 me-3">
+                        <p class="text-white text-sm text-opacity-50 mb-0">CARD NAME</p>
+                        <h5 class="text-white">Jonh Smith</h5>
+                      </div>
+                      <div class="flex-shrink-0">
+                        <img src="../assets/images/widget/img-card-master.svg" alt="img" class="img-fluid" />
+                      </div>
+                    </div>
+                    <h4 class="text-white my-3">**** **** **** **** 8361</h4>
+                    <div class="row">
+                      <div class="col-auto">
+                        <p class="text-white text-sm text-opacity-50 mb-0">EXP</p>
+                        <h6 class="text-white mb-0">7/30</h6>
+                      </div>
+                      <div class="col-auto">
+                        <p class="text-white text-sm text-opacity-50 mb-0">CVV</p>
+                        <h6 class="text-white mb-0">455</h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="text-center mt-3">
+                  <h3 class="mb-1">$1.480.000</h3>
+                  <p class="text-muted mb-0">Total Balance</p>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                  <h5 class="mb-0">Transactions</h5>
+                  <div class="dropdown">
+                    <a
+                      class="avtar avtar-s btn-link-secondary dropdown-toggle arrow-none"
+                      href="#"
+                      data-bs-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      <i class="ti ti-dots-vertical f-18"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end">
+                      <a class="dropdown-item" href="#">Today</a>
+                      <a class="dropdown-item" href="#">Weekly</a>
+                      <a class="dropdown-item" href="#">Monthly</a>
+                    </div>
+                  </div>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item px-0">
+                    <div class="d-flex align-items-center">
+                      <div class="flex-shrink-0">
+                        <div class="avtar avtar-s border"> AI </div>
+                      </div>
+                      <div class="flex-grow-1 ms-3">
+                        <div class="row g-1">
+                          <div class="col-6">
+                            <h6 class="mb-0">Apple Inc.</h6>
+                            <p class="text-muted mb-0"><small>#ABLE-PRO-T00232</small></p>
+                          </div>
+                          <div class="col-6 text-end">
+                            <h6 class="mb-1">$210,000</h6>
+                            <p class="text-danger mb-0"><i class="ti ti-arrow-down-left"></i> 10.6%</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item px-0">
+                    <div class="d-flex align-items-center">
+                      <div class="flex-shrink-0">
+                        <div class="avtar avtar-s border" data-bs-toggle="tooltip" data-bs-title="10,000 Tracks"><span>SM</span></div>
+                      </div>
+                      <div class="flex-grow-1 ms-3">
+                        <div class="row g-1">
+                          <div class="col-6">
+                            <h6 class="mb-0">Spotify Music</h6>
+                            <p class="text-muted mb-0"><small>#ABLE-PRO-T10232</small></p>
+                          </div>
+                          <div class="col-6 text-end">
+                            <h6 class="mb-1">- 10,000</h6>
+                            <p class="text-success mb-0"><i class="ti ti-arrow-up-right"></i> 30.6%</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item px-0">
+                    <div class="d-flex align-items-center">
+                      <div class="flex-shrink-0">
+                        <div class="avtar avtar-s border bg-light-primary" data-bs-toggle="tooltip" data-bs-title="143 Posts"
+                          ><span>MD</span>
+                        </div>
+                      </div>
+                      <div class="flex-grow-1 ms-3">
+                        <div class="row g-1">
+                          <div class="col-6">
+                            <h6 class="mb-0">Medium</h6>
+                            <p class="text-muted mb-0"><small>06:30 pm</small></p>
+                          </div>
+                          <div class="col-6 text-end">
+                            <h6 class="mb-1">-26</h6>
+                            <p class="text-warning mb-0"><i class="ti ti-arrows-left-right"></i> 5%</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item px-0">
+                    <div class="d-flex align-items-center">
+                      <div class="flex-shrink-0">
+                        <div class="avtar avtar-s border" data-bs-toggle="tooltip" data-bs-title="143 Posts"><span>U</span> </div>
+                      </div>
+                      <div class="flex-grow-1 ms-3">
+                        <div class="row g-1">
+                          <div class="col-6">
+                            <h6 class="mb-0">Uber</h6>
+                            <p class="text-muted mb-0"><small>08:40 pm</small></p>
+                          </div>
+                          <div class="col-6 text-end">
+                            <h6 class="mb-1">+210,000</h6>
+                            <p class="text-success mb-0"><i class="ti ti-arrow-up-right"></i> 10.6%</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item px-0">
+                    <div class="d-flex align-items-center">
+                      <div class="flex-shrink-0">
+                        <div class="avtar avtar-s border bg-light-warning" data-bs-toggle="tooltip" data-bs-title="143 Posts"
+                          ><span>OC</span>
+                        </div>
+                      </div>
+                      <div class="flex-grow-1 ms-3">
+                        <div class="row g-1">
+                          <div class="col-6">
+                            <h6 class="mb-0">Ola Cabs</h6>
+                            <p class="text-muted mb-0"><small>07:40 pm</small></p>
+                          </div>
+                          <div class="col-6 text-end">
+                            <h6 class="mb-1">+210,000</h6>
+                            <p class="text-success mb-0"><i class="ti ti-arrow-up-right"></i> 10.6%</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-7 col-xxl-8">
+            <div class="row">
+              <div class="col-md-6 col-xxl-4">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="d-flex align-items-start justify-content-between mb-3">
+                      <div>
+                        <h6 class="mb-0">Transactions</h6>
+                        <p class="mb-0 text-muted">2-31 July 2023</p>
+                      </div>
+                      <div class="dropdown">
+                        <a
+                          class="avtar avtar-xs btn-link-secondary dropdown-toggle arrow-none"
+                          href="#"
+                          data-bs-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                        >
+                          <i class="ti ti-dots-vertical f-18"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                          <a class="dropdown-item" href="#">Today</a>
+                          <a class="dropdown-item" href="#">Weekly</a>
+                          <a class="dropdown-item" href="#">Monthly</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="total-line-1-chart"></div>
+                    <div class="d-flex align-items-center justify-content-between gap-2 mt-3">
+                      <h4 class="mb-0"><small class="text-muted">$</small>650k</h4>
+                      <p class="mb-0 text-muted text-sm">Compare to last week</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-xxl-4">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="d-flex align-items-start justify-content-between mb-3">
+                      <div>
+                        <h6 class="mb-0">Transactions</h6>
+                        <p class="mb-0 text-muted">2-31 July 2023</p>
+                      </div>
+                      <div class="dropdown">
+                        <a
+                          class="avtar avtar-xs btn-link-secondary dropdown-toggle arrow-none"
+                          href="#"
+                          data-bs-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                        >
+                          <i class="ti ti-dots-vertical f-18"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                          <a class="dropdown-item" href="#">Today</a>
+                          <a class="dropdown-item" href="#">Weekly</a>
+                          <a class="dropdown-item" href="#">Monthly</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="total-line-2-chart"></div>
+                    <div class="d-flex align-items-center justify-content-between gap-2 mt-3">
+                      <h4 class="mb-0"><small class="text-muted">$</small>650k</h4>
+                      <p class="mb-0 text-muted text-sm">Compare to last week</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 col-xxl-4">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="d-flex align-items-start justify-content-between mb-3">
+                      <div>
+                        <h6 class="mb-0">Transactions</h6>
+                        <p class="mb-0 text-muted">2-31 July 2023</p>
+                      </div>
+                      <div class="dropdown">
+                        <a
+                          class="avtar avtar-xs btn-link-secondary dropdown-toggle arrow-none"
+                          href="#"
+                          data-bs-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                        >
+                          <i class="ti ti-dots-vertical f-18"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                          <a class="dropdown-item" href="#">Today</a>
+                          <a class="dropdown-item" href="#">Weekly</a>
+                          <a class="dropdown-item" href="#">Monthly</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="total-line-3-chart"></div>
+                    <div class="d-flex align-items-center justify-content-between gap-2 mt-3">
+                      <h4 class="mb-0"><small class="text-muted">$</small>650k</h4>
+                      <p class="mb-0 text-muted text-sm">Compare to last week</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                  <div>
+                    <h5 class="mb-1">Cashflow</h5>
+                    <p>5.44% <span class="badge text-bg-success">5.44%</span></p>
+                  </div>
+                  <select class="form-select rounded-3 form-select-sm w-auto">
+                    <option>Today</option>
+                    <option>Weekly</option>
+                    <option selected>Monthly</option>
+                  </select>
+                </div>
+                <div id="cashflow-bar-chart"></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                  <h5 class="mb-0">Where your money go ?</h5>
+                  <button class="btn btn-sm btn-primary">+ Add New</button>
+                </div>
+                <div class="row g-3">
+                  <div class="col-md-6 col-xxl-3">
+                    <div class="card shadow-none border mb-0">
+                      <div class="card-body p-3">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                          <img src="../assets/images/widget/img-food.png" alt="img" class="img-fluid" />
+                          <div class="dropdown">
+                            <a
+                              class="avtar avtar-xs btn-link-secondary dropdown-toggle arrow-none"
+                              href="#"
+                              data-bs-toggle="dropdown"
+                              aria-haspopup="true"
+                              aria-expanded="false"
+                            >
+                              <i class="ti ti-dots-vertical f-18"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                              <a class="dropdown-item" href="#">Today</a>
+                              <a class="dropdown-item" href="#">Weekly</a>
+                              <a class="dropdown-item" href="#">Monthly</a>
+                            </div>
+                          </div>
+                        </div>
+                        <h6 class="mb-3">Food & Drink</h6>
+                        <div class="bg-dark p-3 pt-4 rounded-4">
+                          <div class="progress bg-white bg-opacity-25" style="height: 6px">
+                            <div class="progress-bar bg-white" style="width: 65%"></div>
+                          </div>
+                          <div class="d-flex align-items-center justify-content-between mt-2">
+                            <p class="mb-0 text-white text-opacity-75 text-sm">65%</p>
+                            <p class="mb-0 text-white text-opacity-75 text-sm">$1000</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-xxl-3">
+                    <div class="card shadow-none border mb-0">
+                      <div class="card-body p-3">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                          <img src="../assets/images/widget/img-travel.png" alt="img" class="img-fluid" />
+                          <div class="dropdown">
+                            <a
+                              class="avtar avtar-xs btn-link-secondary dropdown-toggle arrow-none"
+                              href="#"
+                              data-bs-toggle="dropdown"
+                              aria-haspopup="true"
+                              aria-expanded="false"
+                            >
+                              <i class="ti ti-dots-vertical f-18"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                              <a class="dropdown-item" href="#">Today</a>
+                              <a class="dropdown-item" href="#">Weekly</a>
+                              <a class="dropdown-item" href="#">Monthly</a>
+                            </div>
+                          </div>
+                        </div>
+                        <h6 class="mb-3">Travel</h6>
+                        <div class="bg-dark p-3 pt-4 rounded-4">
+                          <div class="progress bg-white bg-opacity-25" style="height: 6px">
+                            <div class="progress-bar bg-white" style="width: 30%"></div>
+                          </div>
+                          <div class="d-flex align-items-center justify-content-between mt-2">
+                            <p class="mb-0 text-white text-opacity-75 text-sm">30%</p>
+                            <p class="mb-0 text-white text-opacity-75 text-sm">$400</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-xxl-3">
+                    <div class="card shadow-none border mb-0">
+                      <div class="card-body p-3">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                          <img src="../assets/images/widget/img-shoping.png" alt="img" class="img-fluid" />
+                          <div class="dropdown">
+                            <a
+                              class="avtar avtar-xs btn-link-secondary dropdown-toggle arrow-none"
+                              href="#"
+                              data-bs-toggle="dropdown"
+                              aria-haspopup="true"
+                              aria-expanded="false"
+                            >
+                              <i class="ti ti-dots-vertical f-18"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                              <a class="dropdown-item" href="#">Today</a>
+                              <a class="dropdown-item" href="#">Weekly</a>
+                              <a class="dropdown-item" href="#">Monthly</a>
+                            </div>
+                          </div>
+                        </div>
+                        <h6 class="mb-3">Shopping</h6>
+                        <div class="bg-dark p-3 pt-4 rounded-4">
+                          <div class="progress bg-white bg-opacity-25" style="height: 6px">
+                            <div class="progress-bar bg-white" style="width: 52%"></div>
+                          </div>
+                          <div class="d-flex align-items-center justify-content-between mt-2">
+                            <p class="mb-0 text-white text-opacity-75 text-sm">52%</p>
+                            <p class="mb-0 text-white text-opacity-75 text-sm">$900</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-xxl-3">
+                    <div class="card shadow-none border mb-0">
+                      <div class="card-body p-3">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                          <img src="../assets/images/widget/img-helth.png" alt="img" class="img-fluid" />
+                          <div class="dropdown">
+                            <a
+                              class="avtar avtar-xs btn-link-secondary dropdown-toggle arrow-none"
+                              href="#"
+                              data-bs-toggle="dropdown"
+                              aria-haspopup="true"
+                              aria-expanded="false"
+                            >
+                              <i class="ti ti-dots-vertical f-18"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                              <a class="dropdown-item" href="#">Today</a>
+                              <a class="dropdown-item" href="#">Weekly</a>
+                              <a class="dropdown-item" href="#">Monthly</a>
+                            </div>
+                          </div>
+                        </div>
+                        <h6 class="mb-3">Healthcare</h6>
+                        <div class="bg-dark p-3 pt-4 rounded-4">
+                          <div class="progress bg-white bg-opacity-25" style="height: 6px">
+                            <div class="progress-bar bg-white" style="width: 52%"></div>
+                          </div>
+                          <div class="d-flex align-items-center justify-content-between mt-2">
+                            <p class="mb-0 text-white text-opacity-75 text-sm">26%</p>
+                            <p class="mb-0 text-white text-opacity-75 text-sm">$250</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 col-xxl-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="mb-3">Accounts</h5>
+                <div class="row g-3">
+                  <div class="col-12">
+                    <div class="card shadow-none border mb-0">
+                      <div class="card-body p-3">
+                        <div class="d-flex align-items-center">
+                          <div class="flex-shrink-0">
+                            <img src="../assets/images/widget/img-card-1.png" alt="img" class="img-fluid" />
+                          </div>
+                          <div class="flex-grow-1 ms-3">
+                            <div class="d-flex align-items-center justify-content-center gap-2 text-success">
+                              <i class="ti ti-circle f-10"></i>
+                              <p class="mb-0">Active</p>
+                            </div>
+                          </div>
+                          <div class="flex-shrink-0">
+                            <h6 class="mb-0">12,920.000</h6>
+                            <p class="mb-0">US Dollar</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="card shadow-none border mb-0">
+                      <div class="card-body p-3">
+                        <div class="d-flex align-items-center">
+                          <div class="flex-shrink-0">
+                            <img src="../assets/images/widget/img-card-2.png" alt="img" class="img-fluid" />
+                          </div>
+                          <div class="flex-grow-1 ms-3">
+                            <div class="d-flex align-items-center justify-content-center gap-2 text-success">
+                              <i class="ti ti-circle f-10"></i>
+                              <p class="mb-0">Active</p>
+                            </div>
+                          </div>
+                          <div class="flex-shrink-0">
+                            <h6 class="mb-0">12,920.000</h6>
+                            <p class="mb-0">US Dollar</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <input class="form-control d-none" type="file" id="formFile" />
+                    <label for="formFile" class="form-label d-block mb-0">
+                      <span class="card shadow-none border mb-0">
+                        <span class="card-body p-3 text-center">
+                          <span class="d-flex align-items-center justify-content-center gap-2 flex-column">
+                            <span class="avtar avtar-s bg-dark text-white rounded-circle">
+                              <i class="ti ti-plus f-18"></i>
+                            </span>
+                            <span class="text-muted">Add to Account</span>
+                          </span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-xxl-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                  <h5 class="mb-0">Quick Transfer</h5>
+                  <div class="dropdown">
+                    <a
+                      class="avtar avtar-s btn-link-secondary dropdown-toggle arrow-none"
+                      href="#"
+                      data-bs-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      <i class="ti ti-dots-vertical f-18"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end">
+                      <a class="dropdown-item" href="#">Today</a>
+                      <a class="dropdown-item" href="#">Weekly</a>
+                      <a class="dropdown-item" href="#">Monthly</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center justify-content-between gap-2 my-3">
+                  <a href="#" class="avtar border border-secondary rounded-circle btn-light-secondary">
+                    <i class="ti ti-plus f-20"></i>
+                  </a>
+                  <a href="#" class="avtar"
+                    ><img class="rounded-circle img-fluid" src="../assets/images/user/avatar-1.jpg" alt="User image"
+                  /></a>
+                  <a href="#" class="avtar"
+                    ><img class="rounded-circle img-fluid" src="../assets/images/user/avatar-2.jpg" alt="User image"
+                  /></a>
+                  <a href="#" class="avtar"
+                    ><img class="rounded-circle img-fluid" src="../assets/images/user/avatar-3.jpg" alt="User image"
+                  /></a>
+                  <a href="#" class="avtar"
+                    ><img class="rounded-circle img-fluid" src="../assets/images/user/avatar-4.jpg" alt="User image"
+                  /></a>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item px-0">
+                    <div class="d-flex align-items-center">
+                      <div class="flex-shrink-0">
+                        <img src="../assets/images/widget/img-acitivity-3.svg" alt="img" class="wid-30 rounded" />
+                      </div>
+                      <div class="flex-grow-1 ms-3">
+                        <div class="row g-1">
+                          <div class="col-6">
+                            <h6 class="mb-0">Starbucks Cafe</h6>
+                            <p class="text-muted mb-0">11th Sep 2020</p>
+                          </div>
+                          <div class="col-6 text-end">
+                            <h5 class="mb-1 text-danger">-$26</h5>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item px-0">
+                    <div class="d-flex align-items-center">
+                      <div class="flex-shrink-0">
+                        <img src="../assets/images/widget/img-acitivity-3.svg" alt="img" class="wid-30 rounded" />
+                      </div>
+                      <div class="flex-grow-1 ms-3">
+                        <div class="row g-1">
+                          <div class="col-6">
+                            <h6 class="mb-0">Starbucks Cafe</h6>
+                            <p class="text-muted mb-0">11th Sep 2020</p>
+                          </div>
+                          <div class="col-6 text-end">
+                            <h5 class="mb-1 text-success">-$750.00</h5>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item px-0">
+                    <div class="d-flex align-items-center">
+                      <div class="flex-shrink-0">
+                        <img src="../assets/images/widget/img-acitivity-3.svg" alt="img" class="wid-30 rounded" />
+                      </div>
+                      <div class="flex-grow-1 ms-3">
+                        <div class="row g-1">
+                          <div class="col-6">
+                            <h6 class="mb-0">Starbucks Cafe</h6>
+                            <p class="text-muted mb-0">11th Sep 2020</p>
+                          </div>
+                          <div class="col-6 text-end">
+                            <h5 class="mb-1 text-danger">-$26</h5>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-xxl-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                  <h5 class="mb-0">Category</h5>
+                  <div class="dropdown">
+                    <a
+                      class="avtar avtar-s btn-link-secondary dropdown-toggle arrow-none"
+                      href="#"
+                      data-bs-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      <i class="ti ti-dots-vertical f-18"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end">
+                      <a class="dropdown-item" href="#">Today</a>
+                      <a class="dropdown-item" href="#">Weekly</a>
+                      <a class="dropdown-item" href="#">Monthly</a>
+                    </div>
+                  </div>
+                </div>
+                <div id="category-donut-chart"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="card table-card">
+              <div class="card-header d-flex align-items-center justify-content-between py-3">
+                <h5 class="mb-0">Transaction History</h5>
+                <button class="btn btn-sm btn-link-primary">View All</button>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-hover" id="pc-dt-simple">
+                    <thead>
+                      <tr>
+                        <th>User Name</th>
+                        <th>Category</th>
+                        <th>Date/Time</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th class="text-end">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <div class="flex-shrink-0">
+                              <img src="../assets/images/user/avatar-1.jpg" alt="user image" class="img-radius wid-40" />
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                              <h6 class="mb-0">Airi Satou</h6>
+                            </div>
+                          </div>
+                        </td>
+                        <td>Salary Payment</td>
+                        <td>2023/02/07 <span class="text-muted text-sm d-block">09:05 PM</span></td>
+                        <td>$950.54</td>
+                        <td><span class="badge text-bg-success">Completed</span></td>
+                        <td class="text-end">
+                          <a href="#" class="avtar avtar-xs btn-link-secondary">
+                            <i class="ti ti-eye f-20"></i>
+                          </a>
+                          <a href="#" class="avtar avtar-xs btn-link-secondary">
+                            <i class="ti ti-edit f-20"></i>
+                          </a>
+                          <a href="#" class="avtar avtar-xs btn-link-secondary">
+                            <i class="ti ti-trash f-20"></i>
+                          </a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <div class="flex-shrink-0">
+                              <img src="../assets/images/user/avatar-2.jpg" alt="user image" class="img-radius wid-40" />
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                              <h6 class="mb-0">Ashton Cox</h6>
+                            </div>
+                          </div>
+                        </td>
+                        <td>Project Payment</td>
+                        <td>2023/02/01 <span class="text-muted text-sm d-block">02:14 PM</span></td>
+                        <td>$520.30</td>
+                        <td><span class="badge text-bg-success">Completed</span></td>
+                        <td class="text-end">
+                          <a href="#" class="avtar avtar-xs btn-link-secondary">
+                            <i class="ti ti-eye f-20"></i>
+                          </a>
+                          <a href="#" class="avtar avtar-xs btn-link-secondary">
+                            <i class="ti ti-edit f-20"></i>
+                          </a>
+                          <a href="#" class="avtar avtar-xs btn-link-secondary">
+                            <i class="ti ti-trash f-20"></i>
+                          </a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <div class="flex-shrink-0">
+                              <img src="../assets/images/user/avatar-3.jpg" alt="user image" class="img-radius wid-40" />
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                              <h6 class="mb-0">Bradley Greer</h6>
+                            </div>
+                          </div>
+                        </td>
+                        <td>You Tube Subscribe</td>
+                        <td>2023/01/22 <span class="text-muted text-sm d-block">10:32 AM</span></td>
+                        <td>$100.00</td>
+                        <td><span class="badge text-bg-warning">Pending</span></td>
+                        <td class="text-end">
+                          <a href="#" class="avtar avtar-xs btn-link-secondary">
+                            <i class="ti ti-eye f-20"></i>
+                          </a>
+                          <a href="#" class="avtar avtar-xs btn-link-secondary">
+                            <i class="ti ti-edit f-20"></i>
+                          </a>
+                          <a href="#" class="avtar avtar-xs btn-link-secondary">
+                            <i class="ti ti-trash f-20"></i>
+                          </a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <div class="flex-shrink-0">
+                              <img src="../assets/images/user/avatar-4.jpg" alt="user image" class="img-radius wid-40" />
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                              <h6 class="mb-0">Brielle Williamson</h6>
+                            </div>
+                          </div>
+                        </td>
+                        <td>Slary Payment</td>
+                        <td>2023/02/07 <span class="text-muted text-sm d-block">09:05 PM</span></td>
+                        <td>$760.25</td>
+                        <td><span class="badge text-bg-primary">In Progress</span></td>
+                        <td class="text-end">
+                          <a href="#" class="avtar avtar-xs btn-link-secondary">
+                            <i class="ti ti-eye f-20"></i>
+                          </a>
+                          <a href="#" class="avtar avtar-xs btn-link-secondary">
+                            <i class="ti ti-edit f-20"></i>
+                          </a>
+                          <a href="#" class="avtar avtar-xs btn-link-secondary">
+                            <i class="ti ti-trash f-20"></i>
+                          </a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <div class="flex-shrink-0">
+                              <img src="../assets/images/user/avatar-5.jpg" alt="user image" class="img-radius wid-40" />
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                              <h6 class="mb-0">Airi Satou</h6>
+                            </div>
+                          </div>
+                        </td>
+                        <td>Spotify Subscribe</td>
+                        <td>2023/02/07 <span class="text-muted text-sm d-block">09:05 PM</span></td>
+                        <td>$60.05</td>
+                        <td><span class="badge text-bg-danger">Canceled</span></td>
+                        <td class="text-end">
+                          <a href="#" class="avtar avtar-xs btn-link-secondary">
+                            <i class="ti ti-eye f-20"></i>
+                          </a>
+                          <a href="#" class="avtar avtar-xs btn-link-secondary">
+                            <i class="ti ti-edit f-20"></i>
+                          </a>
+                          <a href="#" class="avtar avtar-xs btn-link-secondary">
+                            <i class="ti ti-trash f-20"></i>
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- [ Main Content ] end -->
+      </div>
+    </div>
+    <!-- [ Main Content ] end -->
+    @@include('../layouts/footer-block.html') @@include('../layouts/customizer.html')
+    <!-- [Page Specific JS] start -->
+    <script src="../assets/js/plugins/apexcharts.min.js"></script>
+    <script src="../assets/js/pages/dashboard-finance.js"></script>
+    <!-- [Page Specific JS] end -->
+    @@include('../layouts/footer-js.html')
+  </body>
+  <!-- [Body] end -->
+</html>

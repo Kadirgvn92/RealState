@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    @@include('../layouts/head-page-meta.html', {'title': 'Notifications'})
+    <!-- [Page specific CSS] start -->
+    <!-- notification css -->
+    <link rel="stylesheet" href="../assets/css/plugins/notifier.css" />
+    <!-- [Page specific CSS] end -->
+
+    @@include('../layouts/head-css.html')
+    <link rel="stylesheet" href="../assets/css/uikit.css" />
+  </head>
+
+  <body @@bodySetup class="component-page">
+    <!-- [ Main Content ] start -->
+    @@include('../layouts/loader.html') @@include('../layouts/component/component-header.html')
+    <section class="component-block">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-3"> @@include('../layouts/component/component-menu-list.html') </div>
+          <div class="col-xl-9">
+            <div class="row">
+              <!-- prettier-ignore -->
+              @@include('../layouts/component/component-breadcrumb.html',{title:'Notifications',text:'Beautiful notifications with CSS and Vanilla JavaScript!',link:'https://csilva2810.github.io/notifier/docs/en/index.html'})
+            </div>
+            <!-- [ Main Content ] start -->
+            <div class="row">
+              <!-- [ single-light ] start -->
+              <div class="col-sm-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h5>Notification Alert</h5>
+                  </div>
+                  <div class="card-body btn-page">
+                    <button type="button" class="btn btn-primary" id="btn-default">Default</button>
+                    <button type="button" class="btn btn-info" id="btn-info">Info</button>
+                    <button type="button" class="btn btn-success" id="btn-success">Success</button>
+                    <button type="button" class="btn btn-warning" id="btn-warning">Warning</button>
+                    <button type="button" class="btn btn-danger" id="btn-danger">Danger</button>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header">
+                    <h5>Notification with Icons</h5>
+                  </div>
+                  <div class="card-body btn-page">
+                    <button type="button" class="btn btn-primary" id="btn-default-i">Default</button>
+                    <button type="button" class="btn btn-info" id="btn-info-i">Info</button>
+                    <button type="button" class="btn btn-success" id="btn-success-i">Success</button>
+                    <button type="button" class="btn btn-warning" id="btn-warning-i">Warning</button>
+                    <button type="button" class="btn btn-danger" id="btn-danger-i">Danger</button>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header">
+                    <h5>Auto Close Notifications</h5>
+                  </div>
+                  <div class="card-body btn-page">
+                    <button type="button" class="btn btn-primary" id="btn-default-ac">Default</button>
+                    <button type="button" class="btn btn-info" id="btn-info-ac">Info</button>
+                    <button type="button" class="btn btn-success" id="btn-success-ac">Success</button>
+                    <button type="button" class="btn btn-warning" id="btn-warning-ac">Warning</button>
+                    <button type="button" class="btn btn-danger" id="btn-danger-ac">Danger</button>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header">
+                    <h5>Using the notification.hide() method</h5>
+                  </div>
+                  <div class="card-body btn-page">
+                    <button type="button" class="btn btn-primary" id="btn-nt-show">Show Notification</button>
+                    <button type="button" class="btn btn-danger" id="btn-nt-hide">Hide Notification</button>
+                  </div>
+                </div>
+              </div>
+              <!-- [ single-light ] end -->
+            </div>
+            <!-- [ Main Content ] end -->
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- [ Main Content ] end -->
+    @@include('../layouts/footer-js.html') @@include('../layouts/component/layout-component-footer-js.html')
+    <!-- [Page Specific JS] start -->
+    <!-- notification Js -->
+    <script src="../assets/js/plugins/notifier.js"></script>
+    <script src="../assets/js/pages/ac-notification.js"></script>
+    <!-- [Page Specific JS] end -->
+    @@include('../layouts/customizer.html')
+  </body>
+</html>

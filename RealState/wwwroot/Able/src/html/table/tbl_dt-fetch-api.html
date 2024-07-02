@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <!-- [Head] start -->
+  <head>
+    @@include('../layouts/head-page-meta.html', {'title': 'Fetch API'})
+    <link rel="stylesheet" href="../assets/css/plugins/style.css" />
+    @@include('../layouts/head-css.html')
+  </head>
+  <!-- [Head] end -->
+  <!-- [Body] Start -->
+  <body @@bodySetup>
+    @@include('../layouts/layout-vertical.html')
+
+    <!-- [ Main Content ] start -->
+    <section class="pc-container">
+      <div class="pc-content">
+        @@include('../layouts/breadcrumb.html', {'breadcrumb-item': 'Table', 'breadcrumb-item-active': 'Fetch API'})
+
+        <!-- [ Main Content ] start -->
+        <div class="row">
+          <!-- prettier-ignore -->
+          @@include('../layouts/component/component-link.html',{
+            title:'Simple-datatables',
+            text:'A lightweight, extendable, JavaScript HTML table library written in TypeScript and transpilled to Vanilla JavaScript. Similar to jQuery DataTables for use in modern browsers, but without the jQuery dependency.',
+            link:'https://github.com/fiduswriter/simple-datatables'
+          })
+        </div>
+        <div class="row">
+          <!-- [ basic-table ] start -->
+          <div class="col-xl-12">
+            <div class="card">
+              <div class="card-header">
+                <h5>Fetch API</h5>
+              </div>
+              <div class="card-body table-border-style">
+                <div class="table-responsive">
+                  <table class="table" id="pc-dt-fetchapi"> </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- [ basic-table ] end -->
+        </div>
+        <!-- [ Main Content ] end -->
+      </div>
+    </section>
+    <!-- [ Main Content ] end -->
+    @@include('../layouts/footer-block.html') @@include('../layouts/footer-js.html') @@include('../layouts/customizer.html')
+
+    <!-- [Page Specific JS] start -->
+    <script src="../assets/js/plugins/simple-datatables.js"></script>
+    <script>
+      fetch('../assets/json/datatable.json')
+        .then((response) => response.json())
+        .then((data) => {
+          if (!data.length) {
+            return;
+          }
+
+          let table = new simpleDatatables.DataTable('#pc-dt-fetchapi', {
+            data: {
+              headings: Object.keys(data[0]),
+              data: data.map((item) => Object.values(item))
+            }
+          });
+        });
+    </script>
+    <!-- [Page Specific JS] end -->
+  </body>
+  <!-- [Body] end -->
+</html>

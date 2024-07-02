@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+  <!-- [Head] start -->
+
+  <head>
+    @@include('../layouts/head-page-meta.html', {'title': 'Custom Icon Pack'}) @@include('../layouts/head-css.html')
+  </head>
+  <!-- [Head] end -->
+  <!-- [Body] Start -->
+
+  <body @@bodySetup>
+    @@include('../layouts/layout-vertical.html')
+
+    <!-- [ Main Content ] start -->
+    <div class="pc-container">
+      <div class="pc-content">
+        @@include('../layouts/breadcrumb.html', {'breadcrumb-item': 'Icons', 'breadcrumb-item-active': 'Custom Icon'})
+
+        <!-- [ Main Content ] start -->
+        <div class="row">
+          <!-- [ custom-icon ] start -->
+          <div class="col-sm-12">
+            <div class="card">
+              <div class="card-header">
+                <h5>Custom Icon</h5>
+                <p>Use svg icon with <code>&lt;use&gt;</code> in you html code as given below</p>
+                <code>
+                  &lt;svg class="pc-icon"&gt; &lt;use xlink:href="#custom-&lt;&lt; Copied code &gt;&gt;"&gt;&lt;/use&gt; &lt;/svg&gt;
+                </code>
+              </div>
+              <div class="card-body text-center">
+                <div class="row justify-content-center">
+                  <div class="col-sm-6">
+                    <input type="text" id="icon-search" class="form-control mb-4" placeholder="search . . " />
+                  </div>
+                </div>
+                <div class="i-main" id="icon-wrapper"></div>
+              </div>
+            </div>
+          </div>
+          <!-- [ custom-icon ] end -->
+        </div>
+        <!-- [ Main Content ] end -->
+      </div>
+    </div>
+    <!-- [ Main Content ] end -->
+    @@include('../layouts/footer-block.html') @@include('../layouts/footer-js.html') @@include('../layouts/customizer.html')
+
+    <!-- [Page Specific JS] start -->
+    <script src="../assets/js/plugins/clipboard.min.js"></script>
+    <script>
+      var icon_list = [
+        'custom-home',
+        'custom-document',
+        'custom-user',
+        'custom-box-1',
+        'custom-sort-outline',
+        'custom-level',
+        'custom-notification',
+        'custom-setting-2',
+        'custom-search-normal-1',
+        'custom-layer',
+        'custom-sms',
+        'custom-document-text',
+        'custom-user-bold',
+        'custom-security-safe',
+        'custom-notification-outline',
+        'custom-setting-outline',
+        'custom-share-bold',
+        'custom-lock-outline',
+        'custom-profile-2user-outline',
+        'custom-add-outline',
+        'custom-logout-1-outline',
+        'custom-star-bold',
+        'custom-airplane',
+        'custom-mouse-circle',
+        'custom-refresh-2',
+        'custom-simcard-2',
+        'custom-facebook',
+        'custom-google',
+        'custom-github',
+        'custom-sun-1',
+        'custom-moon',
+        'custom-mask',
+        'custom-mask-1-outline',
+        'custom-bag',
+        'custom-note-1',
+        'custom-video-play',
+        'custom-image',
+        'custom-folder-open',
+        'custom-user-add',
+        'custom-status-up',
+        'custom-notification-status',
+        'custom-crop',
+        'custom-keyboard',
+        'custom-graph',
+        'custom-kanban',
+        'custom-link',
+        'custom-login',
+        'custom-logout',
+        'custom-search-normal',
+        'custom-shapes',
+        'custom-calendar-1',
+        'custom-message-2',
+        'custom-shopping-bag',
+        'custom-document-filter',
+        'custom-direct-inbox',
+        'custom-user-square',
+        'custom-shield',
+        'custom-call-calling',
+        'custom-dollar-square',
+        'custom-flag',
+        'custom-data',
+        'custom-presentation-chart',
+        'custom-cpu-charge',
+        'custom-text-block',
+        'custom-row-vertical',
+        'custom-document-upload',
+        'custom-password-check',
+        'custom-24-support',
+        'custom-fatrows',
+        'custom-element-plus',
+        'custom-add-item',
+        'custom-clipboard',
+        'custom-story',
+        'custom-text-align-justify-center'
+      ];
+      for (var i = 0, l = icon_list.length; i < l; i++) {
+        let icon_block = document.createElement('div');
+        icon_block.setAttribute('class', 'i-block');
+        icon_block.setAttribute('data-clipboard-text', icon_list[i]);
+        icon_block.setAttribute('data-bs-toggle', 'tooltip');
+        icon_block.setAttribute('data-filter', icon_list[i]);
+        icon_block.setAttribute('title', icon_list[i]);
+
+        let icon_main = document.createElement('svg');
+        icon_main.setAttribute('class', 'pc-icon');
+
+        let icon_symbol = document.createElement('use');
+        icon_symbol.setAttribute('xlink:href', '#' + icon_list[i]);
+
+        icon_main.appendChild(icon_symbol);
+        icon_block.appendChild(icon_main);
+        document.querySelector('#icon-wrapper').append(icon_block);
+      }
+      window.addEventListener('load', (event) => {
+        var cont = document.querySelector('#icon-wrapper').innerHTML;
+        document.querySelector('#icon-wrapper').innerHTML = '';
+        document.querySelector('#icon-wrapper').innerHTML = cont;
+
+        var i_copy = new ClipboardJS('.i-block');
+        i_copy.on('success', function (e) {
+          var targetElement = e.trigger;
+          let icon_badge = document.createElement('span');
+          icon_badge.setAttribute('class', 'ic-badge badge bg-success');
+          icon_badge.innerHTML = 'copied';
+          targetElement.append(icon_badge);
+          setTimeout(function () {
+            targetElement.children[1].remove();
+          }, 3000);
+        });
+
+        i_copy.on('error', function (e) {
+          var targetElement = e.trigger;
+          let icon_badge = document.createElement('span');
+          icon_badge.setAttribute('class', 'ic-badge badge bg-danger');
+          icon_badge.innerHTML = 'Error';
+          targetElement.append(icon_badge);
+          setTimeout(function () {
+            targetElement.children[1].remove();
+          }, 3000);
+        });
+        document.querySelector('#icon-search').addEventListener('keyup', function () {
+          var g = document.querySelector('#icon-search').value.toLowerCase();
+          var tc = document.querySelectorAll('.i-main .i-block');
+          for (var i = 0; i < tc.length; i++) {
+            var c = tc[i];
+            var t = c.getAttribute('data-filter');
+            if (t) {
+              var s = t.toLowerCase();
+            }
+            if (s) {
+              var n = s.indexOf(g);
+              if (n !== -1) {
+                c.style.display = 'inline-flex';
+              } else {
+                c.style.display = 'none';
+              }
+            }
+          }
+        });
+      });
+    </script>
+    <!-- [Page Specific JS] end -->
+  </body>
+  <!-- [Body] end -->
+</html>

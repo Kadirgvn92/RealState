@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    @@include('../layouts/head-page-meta.html', {'title': 'Tree View'})
+    <!-- [Page specific CSS] start -->
+    <!-- jstree css -->
+    <link rel="stylesheet" href="../assets/css/plugins/vanillatree.css" />
+    <!-- Page specific CSS end  -->
+    @@include('../layouts/head-css.html')
+    <link rel="stylesheet" href="../assets/css/uikit.css" />
+  </head>
+
+  <body @@bodySetup class="component-page">
+    <!-- [ Main Content ] start -->
+    @@include('../layouts/loader.html') @@include('../layouts/component/component-header.html')
+    <section class="component-block">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-3"> @@include('../layouts/component/component-menu-list.html') </div>
+          <div class="col-xl-9">
+            <div class="row">
+              <!-- prettier-ignore -->
+              @@include('../layouts/component/component-breadcrumb.html',{title:'Tree View',text:'Standalone tree view library',link:'https://github.com/finom/vanillatree'})
+            </div>
+            <!-- [ Main Content ] start -->
+            <div class="row">
+              <!-- [ rangeslider ] start -->
+              <div class="col-sm-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h5>HTML Demo</h5>
+                  </div>
+                  <div class="card-body">
+                    <div id="tree-demo"> </div>
+                    <p id="tree-msg"></p>
+                  </div>
+                </div>
+              </div>
+              <!-- [ rangeslider ] end -->
+            </div>
+            <!-- [ Main Content ] end -->
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- [ Main Content ] end -->
+    @@include('../layouts/footer-js.html') @@include('../layouts/component/layout-component-footer-js.html')
+    <!-- [Page Specific JS] start -->
+    <!-- jstree Js -->
+    <script src="../assets/js/plugins/vanillatree.min.js"></script>
+    <script src="../assets/js/pages/ac-treeview.js"></script>
+    <!-- [Page Specific JS] end -->
+    @@include('../layouts/customizer.html')
+  </body>
+</html>
