@@ -1,0 +1,29 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+@await Component.InvokeAsync("_HeadPartial")
+<body data-pc-preset="preset-1"
+      data-pc-sidebar-caption="true"
+      data-pc-direction="ltr"
+      data-pc-theme_contrast=""
+      data-pc-theme="light"
+      class="landing-page">
+
+    <div class="page-loader">
+        <div class="bar"></div>
+    </div>
+
+    @await Component.InvokeAsync("_HeaderPartial")
+
+    @RenderBody()
+
+    @await Component.InvokeAsync("_FooterPartial")
+
+    @await Component.InvokeAsync("_ScriptPartial")
+
+</body>
+</html>

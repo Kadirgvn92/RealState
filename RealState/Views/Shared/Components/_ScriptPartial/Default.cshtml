@@ -1,0 +1,95 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<!-- [ Main Content ] end -->
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<!-- Required Js -->
+<script src="/Able/src/assets/js/plugins/popper.min.js"></script>
+<script src="/Able/src/assets/js/plugins/simplebar.min.js"></script>
+<script src="/Able/src/assets/js/plugins/bootstrap.min.js"></script>
+<script src="/Able/src/assets/js/fonts/custom-font.js"></script>
+<script src="/Able/src/assets/js/pcoded.js"></script>
+<script src="/Able/src/assets/js/plugins/feather.min.js"></script>
+<script>
+    layout_change('light');
+</script>
+<script>
+    layout_theme_contrast_change('false');
+</script>
+<script>
+    change_box_container('false');
+</script>
+<script>
+    layout_caption_change('true');
+</script>
+<script>
+    layout_rtl_change('false');
+</script>
+<script>
+    preset_change('preset-1');
+</script>
+<!-- [Page Specific JS] start -->
+<script src="/Able/src/assets/js/plugins/wow.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.marquee/1.4.0/jquery.marquee.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script src="/Able/src/assets/js/plugins/Jarallax.js"></script>
+<script>
+    // Start [ Menu hide/show on scroll ]
+    let ost = 0;
+    document.addEventListener('scroll', function () {
+        let cOst = document.documentElement.scrollTop;
+        if (cOst == 0) {
+            document.querySelector('.navbar').classList.add('top-nav-collapse');
+        } else if (cOst > ost) {
+            document.querySelector('.navbar').classList.add('top-nav-collapse');
+            document.querySelector('.navbar').classList.remove('default');
+        } else {
+            document.querySelector('.navbar').classList.add('default');
+            document.querySelector('.navbar').classList.remove('top-nav-collapse');
+        }
+        ost = cOst;
+    });
+    // End [ Menu hide/show on scroll ]
+    var wow = new WOW({
+        animateClass: 'animated'
+    });
+    wow.init();
+
+    // slider start
+    $('.screen-slide').owlCarousel({
+        loop: true,
+        margin: 30,
+        center: true,
+        nav: false,
+        dotsContainer: '.app_dotsContainer',
+        URLhashListener: true,
+        items: 1
+    });
+    $('.workspace-slider').owlCarousel({
+        loop: true,
+        margin: 30,
+        center: true,
+        nav: false,
+        dotsContainer: '.workspace-card-block',
+        URLhashListener: true,
+        items: 1.5
+    });
+    // slider end
+    // marquee start
+    $('.marquee').marquee({
+        duration: 500000,
+        pauseOnHover: true,
+        startVisible: true,
+        duplicated: true
+    });
+    $('.marquee-1').marquee({
+        duration: 500000,
+        pauseOnHover: true,
+        startVisible: true,
+        duplicated: true,
+        direction: 'right'
+    });
+    // marquee end
+</script>
