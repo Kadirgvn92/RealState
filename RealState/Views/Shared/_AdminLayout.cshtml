@@ -6,22 +6,25 @@
 
 <html lang="en">
 @await Component.InvokeAsync("_HeadPartial")
-<body data-pc-preset="preset-1"
-      data-pc-sidebar-caption="true"
-      data-pc-direction="ltr"
-      data-pc-theme_contrast=""
-      data-pc-theme="light"
-      class="landing-page">
+<body data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-layout="vertical" data-pc-direction="ltr" data-pc-theme_contrast="" data-pc-theme="light">
 
     <div class="page-loader">
         <div class="bar"></div>
     </div>
+    @await Component.InvokeAsync("_NavbarPartial")
 
     @await Component.InvokeAsync("_HeaderPartial")
 
     @RenderBody()
 
     @await Component.InvokeAsync("_FooterPartial")
+
+    <div class="pct-c-btn">
+        <a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvas_pc_layout">
+            <i class="ph-duotone ph-gear-six"></i>
+        </a>
+    </div>
+    @await Component.InvokeAsync("_OffCanvas_2Partial")
 
     @await Component.InvokeAsync("_ScriptPartial")
 

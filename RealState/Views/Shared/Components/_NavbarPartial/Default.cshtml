@@ -1,13 +1,9 @@
-﻿
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
-<nav class="pc-sidebar">
+﻿<nav class="pc-sidebar">
     <div class="navbar-wrapper">
         <div class="m-header">
             <a href="../dashboard/index.html" class="b-brand text-primary">
                 <!-- ========   Change your logo from here   ============ -->
-                <img src="../assets/images/logo-dark.svg" class="img-fluid logo-lg" alt="logo" />
+                <img src="/Able/dist/assets/images/logo-white.svg" class="image-fluid logo" alt="logo" />
                 <span class="badge bg-light-success rounded-pill ms-2 theme-version">v9.4.1</span>
             </a>
         </div>
@@ -16,11 +12,11 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <div class="flex-shrink-0">
-                            <img src="../assets/images/user/avatar-1.jpg" alt="user-image" class="user-avtar wid-45 rounded-circle" />
+                            <img src="/Able/dist/assets/images/profile.jpeg" alt="user-image" class="user-avtar wid-45 rounded-circle" />
                         </div>
                         <div class="flex-grow-1 ms-3 me-2">
-                            <h6 class="mb-0">Jonh Smith</h6>
-                            <small>Administrator</small>
+                            <h6 class="mb-0">Burcu GÜVEN</h6>
+                            <small>Gayrimenkul Uzmanı</small>
                         </div>
                         <a class="btn btn-icon btn-link-secondary avtar" data-bs-toggle="collapse" href="#pc_sidebar_userlink">
                             <svg class="pc-icon">
@@ -32,19 +28,19 @@
                         <div class="pt-3">
                             <a href="#!">
                                 <i class="ti ti-user"></i>
-                                <span>My Account</span>
+                                <span>Hesabım</span>
                             </a>
                             <a href="#!">
                                 <i class="ti ti-settings"></i>
-                                <span>Settings</span>
+                                <span>Ayarlar</span>
                             </a>
                             <a href="#!">
                                 <i class="ti ti-lock"></i>
-                                <span>Lock Screen</span>
+                                <span>Ekran Kilidi</span>
                             </a>
                             <a href="#!">
                                 <i class="ti ti-power"></i>
-                                <span>Logout</span>
+                                <span>Çıkış</span>
                             </a>
                         </div>
                     </div>
@@ -53,26 +49,19 @@
 
             <ul class="pc-navbar">
                 <li class="pc-item pc-caption">
-                    <label>Navigation</label>
+                    <label>Yönetim Paneli</label>
                 </li>
-                <li class="pc-item pc-hasmenu">
-                    <a href="#!" class="pc-link">
+                <li class="pc-item">
+                    <a href="#" class="pc-link">
                         <span class="pc-micon">
                             <svg class="pc-icon">
-                                <use xlink:href="#custom-status-up"></use>
+                                <use xlink:href="#custom-presentation-chart"></use>
                             </svg>
                         </span>
                         <span class="pc-mtext">Dashboard</span>
-                        <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
-                        <span class="pc-badge">2</span>
                     </a>
-                    <ul class="pc-submenu">
-                        <li class="pc-item"><a class="pc-link" href="../dashboard/index.html">Default</a></li>
-                        <li class="pc-item"><a class="pc-link" href="../dashboard/analytics.html">Analytics</a></li>
-                        <li class="pc-item"><a class="pc-link" href="../dashboard/finance.html">Finance</a></li>
-                    </ul>
                 </li>
-
+@* 
                 <li class="pc-item pc-hasmenu">
                     <a href="#!" class="pc-link">
                         <span class="pc-micon">
@@ -90,35 +79,35 @@
                         <li class="pc-item"><a class="pc-link" href="../demo/layout-compact.html">Compact</a></li>
                         <li class="pc-item"><a class="pc-link" href="../demo/layout-tab.html">Tab</a></li>
                     </ul>
-                </li>
+                </li> *@
 
                 <li class="pc-item pc-caption">
-                    <label>Widget</label>
+                    <label>Portföy</label>
                     <svg class="pc-icon">
                         <use xlink:href="#custom-presentation-chart"></use>
                     </svg>
                 </li>
                 <li class="pc-item">
-                    <a href="../widget/w_statistics.html" class="pc-link">
+                    <a href="#" class="pc-link">
                         <span class="pc-micon">
                             <svg class="pc-icon">
-                                <use xlink:href="#custom-story"></use>
+                                <use xlink:href="#custom-layer"></use>
                             </svg>
                         </span>
-                        <span class="pc-mtext">Statistics</span>
+                        <span class="pc-mtext">Portföyüm</span>
                     </a>
                 </li>
-                <li class="pc-item">
+                @* <li class="pc-item">
                     <a href="../widget/w_data.html" class="pc-link">
                         <span class="pc-micon">
                             <svg class="pc-icon">
                                 <use xlink:href="#custom-fatrows"></use>
                             </svg>
                         </span>
-                        <span class="pc-mtext">Data</span>
+                        <span class="pc-mtext"></span>
                     </a>
-                </li>
-                <li class="pc-item">
+                </li> *@
+               @*  <li class="pc-item">
                     <a href="../widget/w_chart.html" class="pc-link">
                         <span class="pc-micon">
                             <svg class="pc-icon">
@@ -127,9 +116,9 @@
                         </span>
                         <span class="pc-mtext">Chart</span>
                     </a>
-                </li>
+                </li> *@
                 <li class="pc-item pc-caption">
-                    <label>Admin Panel</label>
+                    <label>Müşteri</label>
                     <svg class="pc-icon">
                         <use xlink:href="#custom-layer"></use>
                     </svg>

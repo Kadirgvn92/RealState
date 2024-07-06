@@ -1,4 +1,5 @@
-﻿<header class="pc-header">
+﻿
+<header class="pc-header">
     <div class="header-wrapper">
         <!-- [Mobile Media Block] start -->
         <div class="me-auto pc-mob-drp">
@@ -227,7 +228,7 @@
                        aria-haspopup="false"
                        data-bs-auto-close="outside"
                        aria-expanded="false">
-                        <img src="../assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar" />
+                        <img src="/Able/dist/assets/images/profile.jpeg" alt="user-image" class="user-avtar" />
                     </a>
                     <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
                         <div class="dropdown-header d-flex align-items-center justify-content-between">
@@ -237,7 +238,7 @@
                             <div class="profile-notification-scroll position-relative" style="max-height: calc(100vh - 225px)">
                                 <div class="d-flex mb-1">
                                     <div class="flex-shrink-0">
-                                        <img src="../assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar wid-35" />
+                                        <img src="/Able/dist/assets/images/user/profile.jpeg" alt="user-image" class="user-avtar wid-35" />
                                     </div>
                                     <div class="flex-grow-1 ms-3">
                                         <h6 class="mb-1">Carson Darrin 🖖</h6>
@@ -294,7 +295,7 @@
                                         <span>UI Design team</span>
                                     </span>
                                     <div class="user-group">
-                                        <img src="../assets/images/user/avatar-1.jpg" alt="user-image" class="avtar" />
+                                        <img src="/Able/dist/assets/images/profile.jpeg" alt="user-image" class="avtar" />
                                         <span class="avtar bg-danger text-white">K</span>
                                         <span class="avtar bg-success text-white">
                                             <svg class="pc-icon m-0">
@@ -312,7 +313,7 @@
                                         <span>Friends Groups</span>
                                     </span>
                                     <div class="user-group">
-                                        <img src="../assets/images/user/avatar-1.jpg" alt="user-image" class="avtar" />
+                                        <img src="/Able/dist/assets/images/profile.jpeg" alt="user-image" class="avtar" />
                                         <span class="avtar bg-danger text-white">K</span>
                                         <span class="avtar bg-success text-white">
                                             <svg class="pc-icon m-0">
@@ -348,11 +349,11 @@
                                      style="background-image: url(../assets/images/layout/img-profile-card.jpg)">
                                     <div class="card-body">
                                         <div class="user-group">
-                                            <img src="../assets/images/user/avatar-1.jpg" alt="user-image" class="avtar" />
-                                            <img src="../assets/images/user/avatar-2.jpg" alt="user-image" class="avtar" />
-                                            <img src="../assets/images/user/avatar-3.jpg" alt="user-image" class="avtar" />
-                                            <img src="../assets/images/user/avatar-4.jpg" alt="user-image" class="avtar" />
-                                            <img src="../assets/images/user/avatar-5.jpg" alt="user-image" class="avtar" />
+                                            <img src="/Able/dist/assets/images/user/avatar-1.jpg" alt="user-image" class="avtar" />
+                                            <img src="/Able/dist/assets/images/user/avatar-2.jpg" alt="user-image" class="avtar" />
+                                            <img src="/Able/dist/assets/images/user/avatar-3.jpg" alt="user-image" class="avtar" />
+                                            <img src="/Able/dist/assets/images/user/avatar-4.jpg" alt="user-image" class="avtar" />
+                                            <img src="/Able/dist/assets/images/user/avatar-5.jpg" alt="user-image" class="avtar" />
                                             <span class="avtar bg-light-primary text-primary">+20</span>
                                         </div>
                                         <h3 class="my-3 text-dark">245.3k <small class="text-muted">Followers</small></h3>
@@ -372,3 +373,5 @@
         </div>
     </div>
 </header>
+
+@await Component.InvokeAsync("_OffCanvasPartial")
