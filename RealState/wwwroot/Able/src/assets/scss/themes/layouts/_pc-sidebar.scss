@@ -274,7 +274,7 @@
   }
 
   .m-header {
-    height: $header-height;
+    height: 110px;
     display: flex;
     align-items: center;
     padding: 16px 24px;
@@ -286,7 +286,7 @@
 
   .navbar-content {
     position: relative;
-    height: calc(100vh - #{$header-height});
+    height: calc(100vh - #{110px});
     padding: 10px 0;
   }
 
@@ -484,7 +484,7 @@
       background: var(--pc-sidebar-background);
       border-radius: 0 12px 0 0;
       padding: 18px 0 10px;
-      height: calc(100% - #{$header-height});
+      height: calc(100% - #{110px});
       position: relative;
     }
   }
