@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using RealState.Context;
+using RealState.Repository.GenericRepository;
+using RealState.Repository.IRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +20,10 @@ builder.Services.AddControllersWithViews()
         options.JsonSerializerOptions.NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.AllowNamedFloatingPointLiterals;
 
     });
+
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
+
 
 
 
