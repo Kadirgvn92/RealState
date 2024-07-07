@@ -2,6 +2,11 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+
+
+@section Styles {
+    <link rel="stylesheet" href="/Able/dist/assets/css/plugins/dataTables.bootstrap5.min.css" />
+}
 <section class="pc-container">
     <div class="pc-content">
         <div class="page-header">
@@ -39,7 +44,6 @@
                                     <div class="col-12 ">
                                         <table id="setting-default" class="table table-striped table-bordered nowrap dataTable" aria-describedby="setting-default_info" style="width: 1490px;">
                                             <thead>
-                                                <tr role="row">
                                                 <tr>
                                                     <th>Customer ID</th>
                                                     <th>Full Name</th>
@@ -53,6 +57,7 @@
                                                     <th>FSBO Date</th>
                                                     <th>Next Call Date</th>
                                                     <th>Description</th>
+                                                    <th>IsDeleted</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -71,18 +76,20 @@
 
 @section Scripts {
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="/Able/dist/assets/js/plugins/dataTables.min.js"></script>
     <script src="/Able/dist/assets/js/plugins/dataTables.bootstrap5.min.js"></script>
     <script>
         $(document).ready(function () {
-
             $.ajax({
-                url: '/Customer/GetCustomer', // Verileri almak için gerekli olan URL'yi ayarlayın
-                type: 'GET', // Verileri almak için GET isteği gönderiyoruz
-                dataType: 'json', // Sunucudan alınacak veri türü
+                url: '/Customer/GetCustomer',
+                type: 'GET',
+                dataType: 'json',
                 success: function (data) {
                     console.log(data);
+
                     $('#setting-default').DataTable({
+                        data: data[0],
                         columns: [
                             { data: "CustomerID" },
                             { data: "CustomerFullName" },
@@ -96,24 +103,13 @@
                             { data: "FSBODate" },
                             { data: "NextCallDate" },
                             { data: "CustomerDescription" },
-                        ],
+                            { data: "IsDeleted" }
+                        ]
                     });
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
                 }
-
-
-
-                // ajax : {
-                //     "url": "/Customer/GetCustomer",
-                //     "type": "GET",
-                //     "datatype": "json",
-                //     "success": function (data) {
-                //         console.log("Data received from server:");
-                //         console.log(data);
-                //     },
-                // },
-                // "data" : data,
-
-                // processing: true
             });
         });
     </script>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using RealState.Entity;
 using RealState.Repository.IRepository;
 
 namespace RealState.Controllers;
@@ -22,10 +23,10 @@ public class CustomerController : Controller
     public IActionResult GetCustomer()
     {
         // Comment nesnelerini al
-        var comments = _customerRepository.GetAll();
-        // Comment nesnelerini JSON formatına dönüştür
-        var jsonComments = JsonConvert.SerializeObject(comments);
+        var customers = _customerRepository.GetAll();
+        //// Comment nesnelerini JSON formatına dönüştür
+        var data = JsonConvert.SerializeObject(customers);
         // JSON formatındaki Comment nesnelerini View'e gönder
-        return Content(jsonComments, "application/json");
+        return Json(data);
     }
 }
