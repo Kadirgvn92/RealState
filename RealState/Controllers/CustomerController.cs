@@ -18,6 +18,11 @@ public class CustomerController : Controller
         var values = _customerRepository.GetAll();
         return View(values);
     }
+    public IActionResult CustomerAdd(Customer customer)
+    {
+        _customerRepository.Insert(customer);
+        return View();
+    }
 
     [HttpGet]
     public IActionResult GetCustomer()

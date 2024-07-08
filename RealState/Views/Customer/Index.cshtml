@@ -1,7 +1,6 @@
 ﻿@{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Müşteriler";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    int count = 0;
 }
 
 
@@ -10,32 +9,11 @@
 }
 <section class="pc-container">
     <div class="pc-content">
-        <div class="page-header">
-            <div class="page-block">
-                <div class="row align-items-center">
-                    <div class="col-md-12">
-                        <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="../dashboard/index.html">Ana Sayfa</a></li>
-                            <li class="breadcrumb-item" aria-current="page">Müşteriler</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="page-header-title">
-                            <h2 class="mb-0">Müşteriler</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+       @await Component.InvokeAsync("_BreadcrumbPartial")
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
-                    @* <div class="card-header">
-                        <h5>Müşteriler</h5>
-                         <small>
-                        When working with DataTables over multiple pages it is often useful to set the initialization defaults to common values
-                        </small> 
-                    </div> *@
+                    
                     <div class="card-body">
                         <div class="table-responsive dt-responsive">
                             <div id="setting-default_wrapper" class="dt-container dt-bootstrap5">
@@ -63,6 +41,12 @@
                                     </div>
                                 </div>
                             </div>
+                            
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="float-left ">
+                            <a href="/Customer/CustomerAdd" class="btn btn-primary">Müşteri Ekle</a>
                         </div>
                     </div>
                 </div>
