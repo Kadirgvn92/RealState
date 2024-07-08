@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
 }
 
 
@@ -14,9 +15,8 @@
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="../dashboard/index.html">Home</a></li>
-                            <li class="breadcrumb-item"><a href="javascript: void(0)">DataTable</a></li>
-                            <li class="breadcrumb-item" aria-current="page">Advance Initialization</li>
+                            <li class="breadcrumb-item"><a href="../dashboard/index.html">Ana Sayfa</a></li>
+                            <li class="breadcrumb-item" aria-current="page">Müşteriler</li>
                         </ul>
                     </div>
                     <div class="col-md-12">
@@ -30,34 +30,31 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
-                    <div class="card-header">
+                    @* <div class="card-header">
                         <h5>Müşteriler</h5>
-                        @* <small>
+                         <small>
                         When working with DataTables over multiple pages it is often useful to set the initialization defaults to common values
-                        </small> *@
-                    </div>
+                        </small> 
+                    </div> *@
                     <div class="card-body">
                         <div class="table-responsive dt-responsive">
                             <div id="setting-default_wrapper" class="dt-container dt-bootstrap5">
-
                                 <div class="row mt-2 justify-content-md-center">
                                     <div class="col-12 ">
                                         <table id="setting-default" class="table table-striped table-bordered nowrap dataTable" aria-describedby="setting-default_info" style="width: 1490px;">
                                             <thead>
                                                 <tr>
-                                                    <th>Customer ID</th>
-                                                    <th>Full Name</th>
-                                                    <th>Phone</th>
-                                                    <th>Listing Number</th>
-                                                    <th>Type</th>
-                                                    <th>Address</th>
-                                                    <th>Room Count</th>
-                                                    <th>Price</th>
-                                                    <th>Listing Date</th>
-                                                    <th>FSBO Date</th>
-                                                    <th>Next Call Date</th>
-                                                    <th>Description</th>
-                                                    <th>IsDeleted</th>
+                                                    <th>Ad Soyad</th>
+                                                    <th>Telefon</th>
+                                                    <th>İlan No</th>
+                                                    <th>Alıcı/Satıcı</th>
+                                                    <th>Adres</th>
+                                                    <th>Oda Sayısı</th>
+                                                    <th>Fiyat</th>
+                                                    <th>İlan Tarihi</th>
+                                                    <th>FSBO Tarihi</th>
+                                                    <th>Sonraki Arama T.</th>
+                                                    <th>Açıklama</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -98,7 +95,6 @@
                     $('#setting-default').DataTable({
                         data:data,
                         columns: [
-                            { data: 'CustomerID' },
                             { data: 'CustomerFullName' },
                             { data: 'CustomerPhone' },
                             { data: 'ListingNumber' },
@@ -106,12 +102,44 @@
                             { data: 'CustomerAddress' },
                             { data: 'ListingRoomCount' },
                             { data: 'CustomerPrice' },
-                            { data: 'ListingDate' },
-                            { data: 'FSBODate' },
-                            { data: 'NextCallDate' },
-                            { data: 'CustomerDescription' },
-                            { data: 'IsDeleted' }
-                        ]
+                            {
+                                data: 'ListingDate',
+                                render: function (data) {
+                                    return new Date(data).toLocaleDateString('tr-TR', {
+                                        day: '2-digit',
+                                        month: 'short',
+                                        year: '2-digit'
+                                    });
+                                }
+                            },
+                            {
+                                data: 'FSBODate',
+                                render: function (data) {
+                                    return new Date(data).toLocaleDateString('tr-TR', {
+                                        day: '2-digit',
+                                        month: 'short',
+                                        year: '2-digit'
+                                    });
+                                }
+                            },
+                            {
+                                data: 'NextCallDate',
+                                render: function (data) {
+                                    if (data) {
+                                        return new Date(data).toLocaleDateString('tr-TR', {
+                                            day: '2-digit',
+                                            month: 'short',
+                                            year: '2-digit'
+                                        });
+                                    }
+                                    return '';
+                                }
+                            },
+                            { data: 'CustomerDescription' }
+                        ],
+                        language: {
+                            url: "//cdn.datatables.net/plug-ins/1.11.5/i18n/tr.json"
+                        }
                     });
                 },
                 error: function (xhr, status, error) {
