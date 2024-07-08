@@ -27,6 +27,6 @@ public class CustomerController : Controller
         //// Comment nesnelerini JSON formatına dönüştür
         var data = JsonConvert.SerializeObject(customers);
         // JSON formatındaki Comment nesnelerini View'e gönder
-        return Json(data);
+        return Content(data, "application/json");
     }
 }
