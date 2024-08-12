@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using RealState.DTOs.CustomerDTOs;
 using RealState.Entity;
 using RealState.Repository.IRepository;
 
@@ -7,10 +9,12 @@ namespace RealState.Controllers;
 public class CustomerController : Controller
 {
     private readonly ICustomerRepository _customerRepository;
+    private readonly IMapper _mapper;
 
-    public CustomerController(ICustomerRepository customerRepository)
+    public CustomerController(ICustomerRepository customerRepository, IMapper mapper)
     {
         _customerRepository = customerRepository;
+        _mapper = mapper;
     }
 
     public IActionResult Index()
@@ -18,10 +22,31 @@ public class CustomerController : Controller
         var values = _customerRepository.GetAll();
         return View(values);
     }
-    public IActionResult CustomerAdd(Customer customer)
+    [HttpGet]
+    public IActionResult CustomerAdd()
     {
-        _customerRepository.Insert(customer);
         return View();
+    }
+    [HttpPost]
+    public IActionResult CustomerAdd(CustomerAddDTO dTO)
+    {
+        
+        var customer = _mapper.Map<Customer>(dTO);
+
+        customer.ListingDate = customer.ListingDate?.ToUniversalTime();
+        customer.FSBODate = customer.FSBODate?.ToUniversalTime();
+        customer.NextCallDate = customer.NextCallDate?.ToUniversalTime();
+
+        if (!ModelState.IsValid)
+        {
+            return View(dTO); 
+        }
+
+        _customerRepository.Insert(customer);
+
+        TempData["SuccessMessage"] = "Kayıt başarılı şekilde gerçekleşti.";
+
+        return RedirectToAction("CustomerAdd");
     }
 
     [HttpGet]

@@ -70,7 +70,7 @@ namespace RealState.Migrations
 
                     b.HasKey("CustomerID");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", (string)null);
                 });
 
             modelBuilder.Entity("RealState.Entity.Drawing", b =>
@@ -96,7 +96,7 @@ namespace RealState.Migrations
 
                     b.HasKey("DrawingId");
 
-                    b.ToTable("Drawings");
+                    b.ToTable("Drawings", (string)null);
                 });
 #pragma warning restore 612, 618
         }

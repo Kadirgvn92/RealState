@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using RealState.Container;
 using RealState.Context;
 using RealState.Repository.GenericRepository;
 using RealState.Repository.IRepository;
@@ -24,8 +25,9 @@ builder.Services.AddControllersWithViews()
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 
+builder.Services.AddAutoMapper(typeof(Program)); 
 
-
+builder.Services.RegisterValidator();
 
 var app = builder.Build();
 
@@ -33,7 +35,6 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 

@@ -12,4 +12,6 @@ public class RealStateContext : DbContext
 
     public DbSet<Drawing> Drawings { get; set; }
     public DbSet<Customer> Customers { get; set; }
+   
+
 }
