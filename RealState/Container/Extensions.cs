@@ -1,9 +1,11 @@
-﻿using FluentValidation.AspNetCore;
-using FluentValidation;
-using RealState.ValidationRules;
-using Microsoft.AspNetCore.Hosting;
+﻿using FluentValidation;
+using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Identity;
+using RealState.Entity;
+using RealState.JWTools;
 using RealState.Repository.GenericRepository;
 using RealState.Repository.IRepository;
+using RealState.ValidationRules;
 
 namespace RealState.Container;
 
@@ -22,6 +24,11 @@ public static class Extensions
         services.AddScoped<IBuyerRepository, BuyerRepository>();
         services.AddScoped<ISellerRepository, SellerRepository>();
         services.AddScoped<IPortfolioRepository, PortfolioRepository>();
+        services.AddScoped<IUserService, UserService>();
+
+        services.AddScoped<IPasswordHasher<AppUser>, PasswordHasher<AppUser>>();
         services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
+        services.AddScoped<JWTokenGenerator>();
+
     }
 }

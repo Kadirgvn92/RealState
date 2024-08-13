@@ -1,0 +1,83 @@
+﻿
+@using RealState.ViewModels.AuthViewModels
+
+@{
+    Layout = null;
+}
+
+@model LoginViewModel
+
+<!doctype html>
+<html lang="en">
+
+@await Component.InvokeAsync("_HeadPartial")
+
+<body data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-layout="vertical" data-pc-direction="ltr" data-pc-theme_contrast="" data-pc-theme="light">
+
+
+    <div class="auth-main">
+        <div class="auth-wrapper v2">
+            <div class="auth-sidecontent">
+                <img src="/images/dia.jpg" width="500px" height="400px" alt="images" class="img-fluid " />
+            </div>
+            <div class="auth-form">
+                <div class="card my-5">
+                    <div class="card-body">
+                        <form method="post">
+                            <div class="text-center">
+
+                                <div class="d-grid my-3">
+                                    <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
+                                        <img src="/Able/dist/assets/images/authentication/facebook.svg" alt="img" /> <span> Facebook ile giriş yap</span>
+                                    </button>
+                                    <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
+                                        <img src="/Able/dist/assets/images/authentication/twitter.svg" alt="img" /> <span> Twitter ile giriş yap</span>
+                                    </button>
+                                    <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
+                                        <img src="/Able/dist/assets/images/authentication/google.svg" alt="img" /> <span> Google ile giriş yap</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="saprator my-3">
+                                <span>VEYA</span>
+                            </div>
+                            <h4 class="text-center f-w-500 mb-3">Hemen üye olun</h4>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" asp-for="Username" placeholder="Kullanıcı Adı" />
+                            </div>
+                            <div class="mb-3">
+                                <input type="password" class="form-control" asp-for="Password" placeholder="Şifre" />
+                            </div>
+                            <div class="d-flex mt-1 justify-content-between align-items-center">
+                                <div class="form-check">
+                                    <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked="" />
+                                    <label class="form-check-label text-muted" for="customCheckc1">Beni Hatırla?</label>
+                                </div>
+                                <h6 class="text-secondary f-w-400 mb-0">
+                                    <a href="forgot-password-v2.html"> Şifremi Unuttum? </a>
+                                </h6>
+                            </div>
+                            <div class="d-grid mt-4">
+                                <button type="submit" class="btn btn-primary">Giriş Yap</button>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-end mt-4">
+                                <h6 class="f-w-500 mb-0">Bir hesabın yok mu? Hemen Kaydol</h6>
+                                <a href="/Auth/Register" class="link-primary">Hesap Oluştur</a>
+                            </div>
+                        </form>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @await Component.InvokeAsync("_FooterPartial")
+
+
+    @await Component.InvokeAsync("_ScriptPartial")
+
+</body>
+<!-- [Body] end -->
+</html>
+

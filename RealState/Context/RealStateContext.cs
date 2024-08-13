@@ -19,6 +19,8 @@ public class RealStateContext : DbContext
     public DbSet<RealEstateCategory> RealEstateCategories { get; set; }
     public DbSet<RealEstateType> RealEstateTypes { get; set; }
     public DbSet<RealEstateStatus> RealEstateStatuses { get; set; }
+    public DbSet<AppUser> AppUsers { get; set; }
+    public DbSet<AppRole> AppRoles { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -29,5 +31,8 @@ public class RealStateContext : DbContext
             .HasOne(p => p.RealEstateAddress)
             .WithOne(r => r.Portfolio)
             .HasForeignKey<Portfolio>(p => p.RealEstateAddressID);
+
+        modelBuilder.Entity<AppUser>().ToTable("AppUsers");
+        modelBuilder.Entity<AppRole>().ToTable("AppRoles");
     }
 }
