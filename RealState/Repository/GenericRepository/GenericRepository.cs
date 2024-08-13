@@ -1,49 +1,61 @@
-﻿using RealState.Context;
+﻿using Microsoft.EntityFrameworkCore;
 using RealState.Repository.IRepository;
-using System.Linq.Expressions;
-
-namespace RealState.Repository.GenericRepository;
 
 public class GenericRepository<T> : IRepository<T> where T : class
 {
-    private readonly RealStateContext _db;
+    private readonly DbContext _context;
+    private readonly DbSet<T> _dbSet;
 
-    public GenericRepository(RealStateContext db)
+    public GenericRepository(DbContext context)
     {
-        _db = db;
+        _context = context;
+        _dbSet = _context.Set<T>();
     }
+
+    public void Insert(T entity)
+    {
+        _dbSet.Add(entity);
+        _context.SaveChanges();
+    }
+
+    public void Update(T entity)
+    {
+        _dbSet.Attach(entity);
+        _context.Entry(entity).State = EntityState.Modified;
+        _context.SaveChanges();
+    }
+
     public void Delete(int id)
     {
-
-        var values = _db.Set<T>().Find(id);
-        if (values != null)
+        var entity = _dbSet.Find(id);
+        if (entity != null)
         {
-            _db.Set<T>().Remove(values);
-            _db.SaveChanges();
+            var softDeletable = entity as ISoftDeletable;
+            if (softDeletable != null)
+            {
+                softDeletable.IsDeleted = true;
+                Update(entity);
+            }
+            else
+            {
+                _dbSet.Remove(entity);
+                _context.SaveChanges();
+            }
         }
-    }
-
-    public List<T> GetAll()
-    {
-        var values = _db.Set<T>().ToList();
-        return values;
     }
 
     public T GetByID(int id)
     {
-        var values = _db.Set<T>().Find(id);
-        return values;
+        return _dbSet.Find(id);
     }
 
-    public void Insert(T t)
+    public List<T> GetAll()
     {
-        _db.Set<T>().Add(t);
-        _db.SaveChanges();
+        return _dbSet.Where(e => !(e as ISoftDeletable).IsDeleted).ToList();
     }
 
-    public void Update(T t)
+    public List<T> GetAllIncludingDeleted()
     {
-        _db.Set<T>().Update(t);
-        _db.SaveChanges();
+        return _dbSet.ToList();
     }
 }

@@ -9,4 +9,5 @@ public interface IRepository<T> where T : class
     void Delete(int id);
     T GetByID(int id);
     List<T> GetAll();
+    List<T> GetAllIncludingDeleted(); // Tüm kayıtları (silinmiş dahil) getirecek
 }
