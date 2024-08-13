@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using RealState.DTOs.CustomerDTOs;
 using RealState.Entity;
 using RealState.ViewModels.BuyerViewModels;
+using RealState.ViewModels.SellerViewModels;
 
 namespace RealState.AutoMapper;
 
@@ -9,7 +9,10 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
-        CreateMap<CustomerAddDTO, Customer>();
+      
+
         CreateMap<CreateBuyerViewModel, Buyer>();
+
+        CreateMap<CreateSellerViewModel, Seller>();
     }
 }

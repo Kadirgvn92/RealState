@@ -3,12 +3,12 @@ using RealState.ViewModels.BuyerViewModels;
 
 namespace RealState.ValidationRules;
 
-public class BuyerValidator : AbstractValidator<CreateBuyerViewModel>
+public class SellerValidator : AbstractValidator<CreateBuyerViewModel>
 {
-    public BuyerValidator()
+    public SellerValidator()
     {
         RuleFor(x => x.FirstName)
-            .NotEmpty().WithMessage("Lütfen Alıcı adı kısmını boş geçmeyin")
+            .NotEmpty().WithMessage("Lütfen Satıcı adı kısmını boş geçmeyin")
             .MaximumLength(100).WithMessage("Ad Soyad en fazla 100 karakter olabilir");
 
 

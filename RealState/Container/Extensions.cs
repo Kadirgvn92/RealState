@@ -16,11 +16,11 @@ public static class Extensions
             config.DisableDataAnnotationsValidation = true;
         });
 
-        services.AddValidatorsFromAssemblyContaining<CustomerValidator>();
+        services.AddValidatorsFromAssemblyContaining<BuyerValidator>();
 
 
-        services.AddScoped<ICustomerRepository, CustomerRepository>();
         services.AddScoped<IBuyerRepository, BuyerRepository>();
+        services.AddScoped<ISellerRepository, SellerRepository>();
         services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
     }
 }

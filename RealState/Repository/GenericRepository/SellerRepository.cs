@@ -4,10 +4,9 @@ using RealState.Repository.IRepository;
 
 namespace RealState.Repository.GenericRepository;
 
-public class CustomerRepository : GenericRepository<Customer>, ICustomerRepository
+public class SellerRepository : GenericRepository<Seller>, ISellerRepository
 {
-    public CustomerRepository(RealStateContext db) : base(db)
+    public SellerRepository(RealStateContext db) : base(db)
     {
     }
-
 }

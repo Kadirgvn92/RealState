@@ -2,6 +2,6 @@
 
 namespace RealState.Repository.IRepository;
 
-public interface ICustomerRepository : IRepository<Customer>
+public interface ISellerRepository : IRepository<Seller>
 {
 }
