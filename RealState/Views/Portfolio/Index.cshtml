@@ -1,0 +1,170 @@
+﻿
+@{
+    ViewData["Title"] = "Portföyler";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="/Able/dist/assets/css/plugins/dataTables.bootstrap5.min.css" />
+}
+<section class="pc-container">
+    <div class="pc-content">
+        @await Component.InvokeAsync("_BreadcrumbPartial")
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive dt-responsive">
+                            <div id="setting-default_wrapper" class="dt-container dt-bootstrap5">
+                                <div class="row mt-2 justify-content-md-center">
+                                    <div class="col-12 ">
+                                        <table id="setting-default" class="table table-striped table-bordered nowrap dataTable" aria-describedby="setting-default_info" style="width: 1490px;">
+                                            <thead>
+                                                <tr>
+                                                    <th>Kiralık/Satılık</th>
+                                                    <th>Başlık</th>
+                                                    <th>Açıklama</th>
+                                                    <th>Mülk Sahibi Adı Soyadı</th>
+                                                    <th>Mülk Sahibi Telefon</th>
+                                                    <th>Adres</th>
+                                                    <th>Tipi</th>
+                                                    <th>Türü</th>
+                                                    <th>Eklenme Tarihi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="float-left ">
+                            <a href="/Portfolio/CreatePortfolio" class="btn btn-primary btn-shadow">Portföy Ekle</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="/Able/dist/assets/js/plugins/dataTables.min.js"></script>
+    <script src="/Able/dist/assets/js/plugins/dataTables.bootstrap5.min.js"></script>
+    <script src="/Able/dist/assets/js/plugins/dataTables.autoFill.min.js"></script>
+    <script src="/Able/dist/assets/js/plugins/dataTables.fixedColumns.min.js"></script>
+    <script src="/Able/dist/assets/js/plugins/dataTables.buttons.min.js"></script>
+    <script src="/Able/dist/assets/js/plugins/dataTables.fixedHeader.min.js"></script>
+    <script src="/Able/dist/assets/js/plugins/dataTables.responsive.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: '/Portfolio/GetPortfolio',
+                type: 'GET',
+                dataType: 'json',
+                dataSrc: '',
+                success: function (data) {
+                    console.log(data);
+
+                    $('#setting-default').DataTable({
+                        data: data,
+                        columns: [
+                            { data: 'RealEstateStatus.StatusName' },
+                            { data: 'Title' },
+                            { data: 'Description' },
+                            {
+                                data: 'Seller', 
+                                render: function (data, type, row) {
+                                    if (data && data.FirstName && data.LastName) {
+                                        return data.FirstName + ' ' + data.LastName;
+                                    }
+                                    return '';
+                                }
+                            },
+                            { data: 'Seller.PhoneNumber' },
+                            {
+                                data: 'RealEstateAddress', // RealEstateAddress nesnesini al
+                                render: function (data, type, row) {
+
+                                    const neighborhood = `${data.Neighborhood} Mah.`;
+
+                                    if (data) {
+                                        // Address bilgilerini birleştir
+                                        return [neighborhood, data.AddressLine, data.Description]
+                                            .filter(part => part) // Boş değerleri filtrele
+                                            .join(', '); // Ayrı karakter olarak virgül kullan
+                                    }
+                                    return '';
+                                }
+                            },
+                            { data: 'RealEstateCategory.CategoryName' },
+                            { data: 'RealEstateType.TypeName' },
+                            {
+                                data: 'CreatedDate',
+                                render: function (data) {
+                                    if (data) {
+                                        var date = new Date(data);
+                                        var options = {
+                                            day: '2-digit',
+                                            month: 'short',
+                                            year: '2-digit',
+                                            hour: '2-digit',
+                                            minute: '2-digit',
+                                            hour12: false
+                                        };
+
+                                        var formattedDate = new Intl.DateTimeFormat('tr-TR', options).format(date);
+
+                                        return formattedDate;
+                                    }
+                                    return '';
+                                }
+                            }
+
+                        ],
+                        language: {
+                            "sEmptyTable": "Tabloda veri bulunmuyor",
+                            "sInfo": "_TOTAL_ kayıt içinden _START_ - _END_ arası kayıt gösteriliyor",
+                            "sInfoEmpty": "Kayıt bulunmuyor",
+                            "sInfoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
+                            "sInfoPostFix": "",
+                            "sInfoThousands": ".",
+                            "sLengthMenu": "_MENU_ kayıt göster",
+                            "sLoadingRecords": "Yükleniyor...",
+                            "sProcessing": "İşleniyor...",
+                            "sSearch": "Ara:",
+                            "sZeroRecords": "Eşleşen kayıt bulunamadı",
+                            "oPaginate": {
+                                "sFirst": "İlk",
+                                "sLast": "Son",
+                                "sNext": "Sonraki",
+                                "sPrevious": "Önceki"
+                            },
+                            "oAria": {
+                                "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                                "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+                            },
+                            "buttons": {
+                                "copy": "Kopyala",
+                                "csv": "CSV",
+                                "excel": "Excel",
+                                "pdf": "PDF",
+                                "print": "Yazdır"
+                            }
+                        }
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+        });
+    </script>
+}

@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
     <style>
         #map {
-            height: 1000px; /* Haritanın yüksekliğini ayarlayın */
+            height: 70vh; /* Haritanın yüksekliğini ayarlayın */
             width: 100%; /* Haritanın genişliğini ayarlayın */
         }
     </style>
@@ -32,7 +32,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
     <script>
         // Harita oluşturuluyor ve başlangıç koordinatları ile başlatılıyor
-        var map = L.map('map').setView([40.2150789, 28.9000977], 13);
+        var map = L.map('map').setView([40.2150789, 28.9000977], 12);
 
         // Tile layer ekleniyor
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -198,7 +198,7 @@
 
             var geo = L.geoJSON(geoJsonFeature, {
                 onEachFeature: function (feature, layer) {
-                    layer.bindPopup('<b>İsim:</b> @drawing.Name <br> <b>Açıklama:</b> @drawing.Description<br> <a href="/Map/UpdateGeo/@drawing.DrawingId" class="btn btn-xs bg-dark">Güncelle</a>&nbsp; <a href="/Map/DeleteGeo/@drawing.DrawingId" class="btn btn-xs bg-danger">Sil</a>');
+                    layer.bindPopup('<b>İsim:</b> @drawing.Name <br> <b>Açıklama:</b> @drawing.Description<br> <a href="/Map/UpdateGeo/@drawing.DrawingId" class="btn btn-xs btn-success text-light">Güncelle</a>&nbsp; <a href="/Map/DeleteGeo/@drawing.DrawingId" class="btn btn-xs btn-danger text-light">Sil</a>');
                 }
             });
             geos.addLayer(geo);
@@ -212,7 +212,7 @@
                         weight: 2          // Alanın kenar çizgisi kalınlığı
                     },
                     onEachFeature: function (feature, layer) {
-                        layer.bindPopup('<b>İsim:</b> @drawing.Name <br> <b>Açıklama:</b> @drawing.Description<br> <a href="/Map/UpdateGeo/@drawing.DrawingId" class="btn btn-xs bg-dark">Güncelle</a>&nbsp; <a href="/Map/DeleteGeo/@drawing.DrawingId" class="btn btn-xs bg-danger">Sil</a>');
+                        layer.bindPopup('<b>İsim:</b> @drawing.Name <br> <b>Açıklama:</b> @drawing.Description<br> <a href="/Map/UpdateGeo/@drawing.DrawingId" class="btn btn-xs btn-success text-light">Güncelle</a>&nbsp; <a href="/Map/DeleteGeo/@drawing.DrawingId" class="btn btn-xs btn-danger text-light">Sil</a>');
                     }
                 });
                 polygonGroup.addLayer(layer);
@@ -221,7 +221,7 @@
             if ('@drawing.Type' === 'Point') {
                 pointLayer = L.geoJSON(geoJsonFeature, {
                     onEachFeature: function (feature, layer) {
-                        layer.bindPopup('<b>İsim:</b> @drawing.Name <br> <b>Açıklama:</b> @drawing.Description<br> <a href="/Map/UpdateGeo/@drawing.DrawingId" class="btn btn-xs bg-dark">Güncelle</a>&nbsp; <a href="/Map/DeleteGeo/@drawing.DrawingId" class="btn btn-xs bg-danger">Sil</a>');
+                        layer.bindPopup('<b>İsim:</b> @drawing.Name <br> <b>Açıklama:</b> @drawing.Description<br> <a href="/Map/UpdateGeo/@drawing.DrawingId" class="btn btn-xs btn-success text-light">Güncelle</a>&nbsp; <a href="/Map/DeleteGeo/@drawing.DrawingId" class="btn btn-xs btn-danger text-light">Sil</a>');
                     }
                 });
                 points.addLayer(pointLayer);

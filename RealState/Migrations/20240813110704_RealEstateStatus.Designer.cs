@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -12,9 +13,11 @@ using RealState.Context;
 namespace RealState.Migrations
 {
     [DbContext(typeof(RealStateContext))]
-    partial class RealStateContextModelSnapshot : ModelSnapshot
+    [Migration("20240813110704_RealEstateStatus")]
+    partial class RealEstateStatus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -110,6 +113,9 @@ namespace RealState.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("PortfolioID"));
 
+                    b.Property<int?>("BuyerID")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
@@ -143,6 +149,8 @@ namespace RealState.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("PortfolioID");
+
+                    b.HasIndex("BuyerID");
 
                     b.HasIndex("RealEstateAddressID")
                         .IsUnique();
@@ -312,6 +320,10 @@ namespace RealState.Migrations
 
             modelBuilder.Entity("RealState.Entity.Portfolio", b =>
                 {
+                    b.HasOne("RealState.Entity.Buyer", "Buyer")
+                        .WithMany("Portfolios")
+                        .HasForeignKey("BuyerID");
+
                     b.HasOne("RealState.Entity.RealEstateAddress", "RealEstateAddress")
                         .WithOne("Portfolio")
                         .HasForeignKey("RealState.Entity.Portfolio", "RealEstateAddressID")
@@ -340,6 +352,8 @@ namespace RealState.Migrations
                         .WithMany("Portfolios")
                         .HasForeignKey("SellerID");
 
+                    b.Navigation("Buyer");
+
                     b.Navigation("RealEstateAddress");
 
                     b.Navigation("RealEstateCategory");
@@ -349,6 +363,11 @@ namespace RealState.Migrations
                     b.Navigation("RealEstateType");
 
                     b.Navigation("Seller");
+                });
+
+            modelBuilder.Entity("RealState.Entity.Buyer", b =>
+                {
+                    b.Navigation("Portfolios");
                 });
 
             modelBuilder.Entity("RealState.Entity.RealEstateAddress", b =>

@@ -13,7 +13,6 @@ public class Buyer : ISoftDeletable
     public string? PreferredLocation { get; set; } 
     public string? Description { get; set; } 
     public string? Rooms { get; set; }
-    public List<Portfolio> Portfolios { get; set; }
     public DateTime CreatedDate { get; set; }
     public bool IsDeleted { get; set; }
 }

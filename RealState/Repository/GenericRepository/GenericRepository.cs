@@ -3,7 +3,7 @@ using RealState.Repository.IRepository;
 
 public class GenericRepository<T> : IRepository<T> where T : class
 {
-    private readonly DbContext _context;
+    protected readonly DbContext _context;
     private readonly DbSet<T> _dbSet;
 
     public GenericRepository(DbContext context)

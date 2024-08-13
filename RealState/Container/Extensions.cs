@@ -21,6 +21,7 @@ public static class Extensions
 
         services.AddScoped<IBuyerRepository, BuyerRepository>();
         services.AddScoped<ISellerRepository, SellerRepository>();
+        services.AddScoped<IPortfolioRepository, PortfolioRepository>();
         services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
     }
 }

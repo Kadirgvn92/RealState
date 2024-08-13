@@ -10,9 +10,6 @@ public class Portfolio : ISoftDeletable
     public int? SellerID { get; set; }
     public Seller Seller { get; set; }
 
-    public int? BuyerID { get; set; }
-    public Buyer Buyer { get; set; }
-
     public int RealEstateAddressID { get; set; }
     public RealEstateAddress RealEstateAddress { get; set; }
 
@@ -21,6 +18,10 @@ public class Portfolio : ISoftDeletable
 
     public int RealEstateCategoryID { get; set; }
     public RealEstateCategory RealEstateCategory { get; set; }
+
+    public int RealEstateStatusID { get; set; }
+    public RealEstateStatus RealEstateStatus { get; set; }
+
 
     public DateTime CreatedDate { get; set; }
     public bool IsAvailable { get; set; }

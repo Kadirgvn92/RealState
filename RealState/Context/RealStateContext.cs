@@ -5,6 +5,7 @@ namespace RealState.Context;
 
 public class RealStateContext : DbContext
 {
+
     public RealStateContext(DbContextOptions options) : base(options)
     {
 
@@ -17,6 +18,7 @@ public class RealStateContext : DbContext
     public DbSet<RealEstateAddress> RealEstateAddresses { get; set; }
     public DbSet<RealEstateCategory> RealEstateCategories { get; set; }
     public DbSet<RealEstateType> RealEstateTypes { get; set; }
+    public DbSet<RealEstateStatus> RealEstateStatuses { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
