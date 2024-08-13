@@ -1,0 +1,92 @@
+﻿@using RealState.ViewModels.BuyerViewModels
+
+@model CreateBuyerViewModel
+
+@{
+    ViewData["Title"] = "Alıcı Ekleme Ekranı";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<section class="pc-container">
+    <div class="pc-content">
+        <!-- [ breadcrumb ] start -->
+        @await Component.InvokeAsync("_BreadcrumbPartial")
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form method="post">
+                            <input type="hidden" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")" asp-for="CreatedDate" />
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="FirstName">Alıcı Adı</label>
+                                        <input type="text" class="form-control" asp-for="FirstName" placeholder="Alıcının adını giriniz" tabindex="1" />
+                                         <span asp-validation-for="FirstName" class="text-danger"></span> 
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="PhoneNumber">Telefon Numarası</label>
+                                        <input type="text" class="form-control" id="PhoneNumber" asp-for="PhoneNumber" data-mask="(999) 999-9999" tabindex="3" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="Budget">Alıcı Fiyat Aralığı</label>
+                                        <input type="text" class="form-control" asp-for="Budget" placeholder="Alıcının karşılayabildiği fiyat aralığını giriniz" tabindex="5" />
+                                        <small>(TL Cinsinden)</small>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="Rooms">İstenilen Oda Sayısı</label>
+                                        <input type="text" class="form-control" id="Rooms" asp-for="Rooms" tabindex="7" />
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="LastName">Alıcı Soyadı</label>
+                                        <input type="text" class="form-control" asp-for="LastName" placeholder="Alıcının soyadını giriniz" tabindex="2" />
+                                       
+                                    </div>
+                                   
+                                    <div class="mb-3">
+                                        <label class="form-label" for="Email">Mail Adresi</label>
+                                        <input type="text" class="form-control" asp-for="Email" placeholder="Varsa Mail adresi giriniz" tabindex="4" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="PreferredLocation">Talep Edilen Mevki/Konum</label>
+                                        <input type="text" class="form-control" asp-for="PreferredLocation" placeholder="Tercih edilen mevkiyi giriniz" tabindex="6" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="Description">Alıcı Açıklaması</label>
+                                        <textarea class="form-control" asp-for="Description" rows="2" tabindex="8"></textarea>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div asp-validation-summary="ModelOnly"></div>
+                            <button type="submit" class="btn btn-primary btn-shadow mb-4" tabindex="9">Alıcı Kaydı Oluştur</button>
+                        </form>
+                        @if (TempData["SuccessMessage"] != null)
+                        {
+                            <div class="alert alert-success">
+                                @TempData["SuccessMessage"]
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section Scripts {
+
+    <script src="/Able/dist/assets/js/plugins/imask.min.js"></script>
+
+    <script type="text/javascript">
+        // Mask için IMask kullanımı
+        var phoneMask = IMask(
+            document.getElementById('PhoneNumber'), {
+            mask: '(000) 000-0000'
+        });
+    </script>
+}

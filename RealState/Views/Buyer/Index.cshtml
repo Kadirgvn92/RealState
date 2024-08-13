@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Müşteriler";
+    ViewData["Title"] = "Alıcılar";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -9,7 +9,7 @@
 }
 <section class="pc-container">
     <div class="pc-content">
-       @await Component.InvokeAsync("_BreadcrumbPartial")
+        @await Component.InvokeAsync("_BreadcrumbPartial")
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
@@ -21,17 +21,15 @@
                                         <table id="setting-default" class="table table-striped table-bordered nowrap dataTable" aria-describedby="setting-default_info" style="width: 1490px;">
                                             <thead>
                                                 <tr>
-                                                    <th>Ad Soyad</th>
+                                                    <th>Ad</th>
+                                                    <th>Soyad</th>
                                                     <th>Telefon</th>
-                                                    <th>İlan No</th>
-                                                    <th>Alıcı/Satıcı</th>
-                                                    <th>Adres</th>
+                                                    <th>Mail</th>
+                                                    <th>Bütçe</th>
+                                                    <th>Mevki</th>
                                                     <th>Oda Sayısı</th>
-                                                    <th>Fiyat</th>
-                                                    <th>İlan Tarihi</th>
-                                                    <th>FSBO Tarihi</th>
-                                                    <th>Sonraki Arama T.</th>
                                                     <th>Açıklama</th>
+                                                    <th>Eklenme Tarihi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -40,12 +38,12 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                     <div class="card-footer">
                         <div class="float-left ">
-                            <a href="/Customer/CustomerAdd" class="btn btn-primary">Müşteri Ekle</a>
+                            <a href="/Buyer/CreateBuyer" class="btn btn-primary btn-shadow">Alıcı Ekle</a>
                         </div>
                     </div>
                 </div>
@@ -68,57 +66,46 @@
     <script>
         $(document).ready(function () {
             $.ajax({
-                url: '/Customer/GetCustomer',
+                url: '/Buyer/GetBuyer',
                 type: 'GET',
                 dataType: 'json',
-                dataSrc:'',
+                dataSrc: '',
                 success: function (data) {
                     console.log(data);
 
                     $('#setting-default').DataTable({
-                        data:data,
+                        data: data,
                         columns: [
-                            { data: 'CustomerFullName' },
-                            { data: 'CustomerPhone' },
-                            { data: 'ListingNumber' },
-                            { data: 'CustomerType' },
-                            { data: 'CustomerAddress' },
-                            { data: 'ListingRoomCount' },
-                            { data: 'CustomerPrice' },
+                            { data: 'FirstName' },
+                            { data: 'LastName' },
+                            { data: 'PhoneNumber' },
+                            { data: 'Email' },
+                            { data: 'Budget' },
+                            { data: 'PreferredLocation' },
+                            { data: 'Rooms' },
+                            { data: 'Description' },
                             {
-                                data: 'ListingDate',
-                                render: function (data) {
-                                    return new Date(data).toLocaleDateString('tr-TR', {
-                                        day: '2-digit',
-                                        month: 'short',
-                                        year: '2-digit'
-                                    });
-                                }
-                            },
-                            {
-                                data: 'FSBODate',
-                                render: function (data) {
-                                    return new Date(data).toLocaleDateString('tr-TR', {
-                                        day: '2-digit',
-                                        month: 'short',
-                                        year: '2-digit'
-                                    });
-                                }
-                            },
-                            {
-                                data: 'NextCallDate',
+                                data: 'CreatedDate',
                                 render: function (data) {
                                     if (data) {
-                                        return new Date(data).toLocaleDateString('tr-TR', {
-                                            day: '2-digit',
-                                            month: 'short',
-                                            year: '2-digit'
-                                        });
+                                        var date = new Date(data);
+                                        var options = {
+                                            day: '2-digit',  
+                                            month: 'short',   
+                                            year: '2-digit',  
+                                            hour: '2-digit',  
+                                            minute: '2-digit',
+                                            hour12: false     
+                                        };
+
+                                        var formattedDate = new Intl.DateTimeFormat('tr-TR', options).format(date);
+
+                                        return formattedDate;
                                     }
                                     return '';
                                 }
-                            },
-                            { data: 'CustomerDescription' }
+                            }
+
                         ],
                         language: {
                             "sEmptyTable": "Tabloda veri bulunmuyor",

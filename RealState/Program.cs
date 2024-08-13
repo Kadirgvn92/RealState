@@ -22,8 +22,6 @@ builder.Services.AddControllersWithViews()
 
     });
 
-builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
-builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 
 builder.Services.AddAutoMapper(typeof(Program)); 
 

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -12,9 +13,11 @@ using RealState.Context;
 namespace RealState.Migrations
 {
     [DbContext(typeof(RealStateContext))]
-    partial class RealStateContextModelSnapshot : ModelSnapshot
+    [Migration("20240813085730_Buyer2")]
+    partial class Buyer2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,8 +35,8 @@ namespace RealState.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("BuyerID"));
 
-                    b.Property<string>("Budget")
-                        .HasColumnType("text");
+                    b.Property<decimal?>("Budget")
+                        .HasColumnType("numeric");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
@@ -60,8 +63,8 @@ namespace RealState.Migrations
                     b.Property<string>("PreferredLocation")
                         .HasColumnType("text");
 
-                    b.Property<string>("Rooms")
-                        .HasColumnType("text");
+                    b.Property<int?>("Rooms")
+                        .HasColumnType("integer");
 
                     b.HasKey("BuyerID");
 

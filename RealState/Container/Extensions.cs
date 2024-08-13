@@ -2,6 +2,8 @@
 using FluentValidation;
 using RealState.ValidationRules;
 using Microsoft.AspNetCore.Hosting;
+using RealState.Repository.GenericRepository;
+using RealState.Repository.IRepository;
 
 namespace RealState.Container;
 
@@ -17,5 +19,8 @@ public static class Extensions
         services.AddValidatorsFromAssemblyContaining<CustomerValidator>();
 
 
+        services.AddScoped<ICustomerRepository, CustomerRepository>();
+        services.AddScoped<IBuyerRepository, BuyerRepository>();
+        services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
     }
 }
