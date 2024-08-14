@@ -22,14 +22,12 @@ namespace RealState.Controllers
             _userService = userService;
         }
 
-        // Kayıt sayfasını gösterir
         [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
 
-        // Kayıt işlemini yapar
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
@@ -45,7 +43,7 @@ namespace RealState.Controllers
 
                 if (result != null)
                 {
-                    return RedirectToAction("Login"); // Kayıttan sonra giriş sayfasına yönlendir
+                    return RedirectToAction("Login"); 
                 }
 
                 ModelState.AddModelError("", "Kayıt başarısız.");
@@ -54,14 +52,13 @@ namespace RealState.Controllers
             return View(model);
         }
 
-        // Giriş sayfasını gösterir
         [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
 
-        // Giriş işlemini yapar
+        
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
@@ -104,52 +101,12 @@ namespace RealState.Controllers
 
             return View(model);
         }
-
-        //[HttpPost]
-        //public async Task<IActionResult> Login(LoginViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var user = await _userService.AuthenticateUserAsync(model.Username, model.Password);
-
-        //        if (user != null)
-        //        {
-        //            // Kullanıcı bilgilerini claim olarak ekleyin
-        //            var claims = new List<Claim>
-        //            {
-        //                new Claim(ClaimTypes.Name, user.Username),
-        //                new Claim(ClaimTypes.Role, user.RoleID.ToString())
-        //            };
-
-        //            var tokenGenerated = _tokenGenerator.GenerateToken(new GetCheckAppUserViewModel
-        //            {
-        //                Username = user.Username,
-        //                RoleID = user.RoleID
-        //            });
-        //            JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
-        //            var token = handler.ReadJwtToken(tokenGenerated.Token);
-        //            var claims2 = token.Claims.ToList();
-        //            if(tokenGenerated.Token != null)
-        //            {
-        //                claims.Add(new Claim("accessToken", tokenGenerated.Token));
-        //                var claimsIdentity = new ClaimsIdentity(claims, JwtBearerDefaults.AuthenticationScheme);
-        //                var authProps = new AuthenticationProperties
-        //                {
-        //                    ExpiresUtc = tokenGenerated.ExpireDate,
-        //                    IsPersistent = true
-        //                };
-
-        //                await HttpContext.SignInAsync(JwtBearerDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProps);
-
-        //                return RedirectToAction("Index", "Dashboard");
-        //            }
-
-        //        }
-
-        //        ModelState.AddModelError("", "Geçersiz kullanıcı adı veya şifre.");
-        //    }
-
-        //    return View(model);
-        //}
+        [HttpGet]
+        public async Task<IActionResult> SignOut()
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Login", "Auth");
+        }
+        
     }
 }

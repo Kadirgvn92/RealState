@@ -1,12 +1,7 @@
-﻿@using System.Security.Claims
-@* @using RealState.Entity
-@model AppUser *@
-@{
-    var userName = User.FindFirstValue(ClaimTypes.Name);
-    var userRole = User.FindFirstValue(ClaimTypes.Role);
-}
-<p>Username: @userName</p>
-<p>Role: @userRole</p>
+﻿@using RealState.ViewModels.AuthViewModels
+
+@model UserViewModel
+
 
 <nav class="pc-sidebar">
     <div class="navbar-wrapper">
@@ -22,11 +17,11 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <div class="flex-shrink-0">
-                            <img src="" alt="user-image" class="user-avtar wid-45 rounded-circle" />
+                            <img src="@Model.ImageUrl" alt="user-image" class="user-avtar wid-45 rounded-circle" />
                         </div>
                         <div class="flex-grow-1 ms-3 me-2">
-                            <h6 class="mb-0"> </h6>
-                            <small></small>
+                            <h6 class="mb-0">@Model.FirstName @Model.LastName </h6>
+                            <small>@Model.Title</small>
                         </div>
                         <a class="btn btn-icon btn-link-secondary avtar" data-bs-toggle="collapse" href="#pc_sidebar_userlink">
                             <svg class="pc-icon">
@@ -34,8 +29,7 @@
                             </svg>
                         </a>
                     </div>
-                    <p>Username: @userName</p>
-                    <p>Role: @userRole</p>
+                  
                     <div class="collapse pc-user-links" id="pc_sidebar_userlink">
                         <div class="pt-3">
                             <a href="#!">
@@ -60,19 +54,39 @@
             </div>
 
             <ul class="pc-navbar">
-                <li class="pc-item pc-caption">
-                    <label>Yönetim Paneli</label>
-                </li>
-                <li class="pc-item">
-                    <a href="/Dashboard/Index" class="pc-link">
-                        <span class="pc-micon">
-                            <svg class="pc-icon">
-                                <use xlink:href="#custom-presentation-chart"></use>
-                            </svg>
-                        </span>
-                        <span class="pc-mtext">Dashboard</span>
-                    </a>
-                </li>
+                @if(Model.Role == "Admin")
+                {
+                    <li class="pc-item pc-caption">
+                        <label>Yönetim Paneli</label>
+                    </li>
+                    <li class="pc-item">
+                        <a href="/Dashboard/Index" class="pc-link">
+                            <span class="pc-micon">
+                                <svg class="pc-icon">
+                                    <use xlink:href="#custom-presentation-chart"></use>
+                                </svg>
+                            </span>
+                            <span class="pc-mtext">Dashboard</span>
+                        </a>
+                    </li>
+                }
+
+                @if (Model.Role == "Member")
+                {
+                    <li class="pc-item pc-caption">
+                        <label>Danışman Paneli</label>
+                    </li>
+                    <li class="pc-item">
+                        <a href="/Dashboard/Index" class="pc-link">
+                            <span class="pc-micon">
+                                <svg class="pc-icon">
+                                    <use xlink:href="#custom-presentation-chart"></use>
+                                </svg>
+                            </span>
+                            <span class="pc-mtext">Dashboard</span>
+                        </a>
+                    </li>
+                }
 
                 <li class="pc-item pc-caption">
                     <label>Portföy</label>
@@ -127,6 +141,17 @@
                             </svg>
                         </span>
                         <span class="pc-mtext">Satıcılar</span>
+                    </a>
+
+                </li>
+                <li class="pc-item pc-hasmenu">
+                    <a href="/Auth/SignOut" class="pc-link">
+                        <span class="pc-micon text-danger">
+                            <svg class="pc-icon">
+                                <use xlink:href="#custom-logout"></use>
+                            </svg>
+                        </span>
+                        <span class="pc-mtext text-danger">Çıkış</span>
                     </a>
 
                 </li>

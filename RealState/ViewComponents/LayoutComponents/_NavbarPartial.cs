@@ -2,6 +2,7 @@
 using RealState.Entity;
 using RealState.JWTools;
 using RealState.Repository.IRepository;
+using RealState.ViewModels.AuthViewModels;
 using System.Data;
 using System.Security.Claims;
 
@@ -21,11 +22,21 @@ public class _NavbarPartial : ViewComponent
         var userClaims = _httpContextAccessor.HttpContext.User.Claims;
 
         var username = userClaims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
-        var Role = userClaims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+        var role = userClaims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
 
-        var value = _userService.GetUserByUsernameAsync(username);
+        var value = await _userService.GetUserByUsernameAsync(username);
 
-        return View();
+        var model = new UserViewModel
+        {
+            FirstName = value.FirstName,
+            LastName = value.LastName,
+            Mail = value.Mail,
+            ImageUrl = value.ImageUrl,
+            Title = value.Title,
+            Role = role,
+        };
+
+        return View(model);
 
     }
 }
