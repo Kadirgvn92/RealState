@@ -44,39 +44,47 @@
                                 <div class="col-sm-6">
                                     <div class="mb-3">
                                         <input type="text" class="form-control" asp-for="FirstName" placeholder="Ad" />
+                                        <span asp-validation-for="FirstName" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="mb-3">
                                         <input type="text" class="form-control" asp-for="LastName" placeholder="Soyad" />
+                                        <span asp-validation-for="LastName" class="text-danger"></span>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="mb-3">
-                                        <input type="tel" class="form-control" asp-for="PhoneNumber" placeholder="Telefon Numarası" />
+                                        <input type="text" class="form-control" id="PhoneNumber" asp-for="PhoneNumber" placeholder="Telefon Numarası" />
+                                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="mb-3">
                                         <input type="email" class="form-control" asp-for="Mail" placeholder="Mail Adresi" />
+                                        <span asp-validation-for="Mail" class="text-danger"></span>
                                     </div>
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <input type="text" class="form-control" asp-for="Username" placeholder="Kullanıcı Adı" />
+                                <input type="text" class="form-control" asp-for="Username"  placeholder="Kullanıcı Adı" />
+                                <span asp-validation-for="Username" class="text-danger"></span>
                             </div>
                             <div class="mb-3">
-                                <input type="password" class="form-control" asp-for="Password" placeholder="Şifre" />
+                                <input type="password" class="form-control" asp-for="Password"  placeholder="Şifre" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
                             </div>
                             <div class="mb-3">
-                                <input type="password" class="form-control" asp-for="ConfirmPassword" placeholder="Şifre Tekrar" />
+                                <input type="password" class="form-control" asp-for="ConfirmPassword"  placeholder="Şifre Tekrar" />
+                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                             </div>
                             <div class="d-flex mt-1 justify-content-between">
                                 <div class="form-check">
-                                    <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked="" />
-                                    <label class="form-check-label text-muted" for="customCheckc1">Şartları kabul ediyorum.</label>
+                                    <input class="form-check-input input-primary" asp-for="IsConfirmed" type="checkbox" id="customCheckc1" checked="" />
+                                    <label  class="form-check-label text-muted" for="customCheckc1">Şartları kabul ediyorum.</label>
+                                    <span asp-validation-for="IsConfirmed" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="d-grid mt-4">
@@ -93,6 +101,16 @@
             </div>
         </div>
     </div>
+
+    <script src="/Able/dist/assets/js/plugins/imask.min.js"></script>
+
+    <script type="text/javascript">
+        // Mask için IMask kullanımı
+        var phoneMask = IMask(
+            document.getElementById('PhoneNumber'), {
+            mask: '(000) 000-0000'
+        });
+    </script>
 
     @await Component.InvokeAsync("_FooterPartial")
 
