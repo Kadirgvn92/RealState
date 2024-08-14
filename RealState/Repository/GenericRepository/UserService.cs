@@ -5,10 +5,11 @@ using RealState.Context;
 using RealState.Entity;
 using RealState.Repository.IRepository;
 using RealState.ViewModels.AuthViewModels;
+using System.Linq.Expressions;
 
 namespace RealState.Repository.GenericRepository;
 
-public class UserService : IUserService
+public class UserService  : IUserService
 {
     private readonly RealStateContext _context;
     private readonly IPasswordHasher<AppUser> _passwordHasher;
@@ -17,6 +18,20 @@ public class UserService : IUserService
     {
         _context = context;
         _passwordHasher = passwordHasher;
+    }
+    public async Task<AppUser> GetUserByUsernameAsync(string username)
+    {
+        // Retrieve the user by username
+        return await _context.AppUsers.SingleOrDefaultAsync(u => u.Username == username);
+    }
+    public async Task<AppUser> GetAppUserByFilterAsync(Expression<Func<AppUser, bool>> filter)
+    {
+       return await _context.Set<AppUser>().SingleOrDefaultAsync(filter);
+    }
+
+    public async Task<AppRole> GetAppRoleByFilterAsync(Expression<Func<AppRole, bool>> filter)
+    {
+        return await _context.Set<AppRole>().SingleOrDefaultAsync(filter);
     }
 
     public async Task<AppUser> AuthenticateUserAsync(string username, string password)
@@ -54,7 +69,10 @@ public class UserService : IUserService
             PhoneNumber = model.PhoneNumber,
             Mail = model.Mail,
             PasswordHash = hashedPassword,
-            Role = "User" // Varsayılan rol
+            ImageUrl = "/Able/dist/assets/images/user/avatar-1.jpg",
+            Title = "Gayrimenkul Danışmanı",
+            RoleID = 1,
+            Role = "Member"
         };
 
         _context.AppUsers.Add(user);

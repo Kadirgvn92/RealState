@@ -1,8 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc;
 using RealState.Entity;
 using RealState.JWTools;
 using RealState.Repository.IRepository;
 using RealState.ViewModels.AuthViewModels;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
 namespace RealState.Controllers
@@ -58,6 +62,7 @@ namespace RealState.Controllers
         }
 
         // Giriş işlemini yapar
+
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
@@ -67,22 +72,31 @@ namespace RealState.Controllers
 
                 if (user != null)
                 {
-                    // Kullanıcı bilgilerini claim olarak ekleyin
                     var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Name, user.Username),
                         new Claim(ClaimTypes.Role, user.Role)
                     };
 
-                    var token = _tokenGenerator.GenerateToken(new GetCheckAppUserViewModel
+                    var tokenGenerated = _tokenGenerator.GenerateToken(new GetCheckAppUserViewModel
                     {
                         Username = user.Username,
                         Role = user.Role
                     });
 
-                    ViewBag.Token = token;
+                    if (tokenGenerated.Token != null)
+                    {
+                        var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                        var authProps = new AuthenticationProperties
+                        {
+                            ExpiresUtc = tokenGenerated.ExpireDate,
+                            IsPersistent = true
+                        };
 
-                    return RedirectToAction("Index", "Dashboard"); 
+                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProps);
+
+                        return RedirectToAction("Index", "Dashboard");
+                    }
                 }
 
                 ModelState.AddModelError("", "Geçersiz kullanıcı adı veya şifre.");
@@ -90,5 +104,52 @@ namespace RealState.Controllers
 
             return View(model);
         }
+
+        //[HttpPost]
+        //public async Task<IActionResult> Login(LoginViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var user = await _userService.AuthenticateUserAsync(model.Username, model.Password);
+
+        //        if (user != null)
+        //        {
+        //            // Kullanıcı bilgilerini claim olarak ekleyin
+        //            var claims = new List<Claim>
+        //            {
+        //                new Claim(ClaimTypes.Name, user.Username),
+        //                new Claim(ClaimTypes.Role, user.RoleID.ToString())
+        //            };
+
+        //            var tokenGenerated = _tokenGenerator.GenerateToken(new GetCheckAppUserViewModel
+        //            {
+        //                Username = user.Username,
+        //                RoleID = user.RoleID
+        //            });
+        //            JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
+        //            var token = handler.ReadJwtToken(tokenGenerated.Token);
+        //            var claims2 = token.Claims.ToList();
+        //            if(tokenGenerated.Token != null)
+        //            {
+        //                claims.Add(new Claim("accessToken", tokenGenerated.Token));
+        //                var claimsIdentity = new ClaimsIdentity(claims, JwtBearerDefaults.AuthenticationScheme);
+        //                var authProps = new AuthenticationProperties
+        //                {
+        //                    ExpiresUtc = tokenGenerated.ExpireDate,
+        //                    IsPersistent = true
+        //                };
+
+        //                await HttpContext.SignInAsync(JwtBearerDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProps);
+
+        //                return RedirectToAction("Index", "Dashboard");
+        //            }
+
+        //        }
+
+        //        ModelState.AddModelError("", "Geçersiz kullanıcı adı veya şifre.");
+        //    }
+
+        //    return View(model);
+        //}
     }
 }

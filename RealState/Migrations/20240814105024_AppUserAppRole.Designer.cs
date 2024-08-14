@@ -13,8 +13,8 @@ using RealState.Context;
 namespace RealState.Migrations
 {
     [DbContext(typeof(RealStateContext))]
-    [Migration("20240814074412_appusrFirstname")]
-    partial class appusrFirstname
+    [Migration("20240814105024_AppUserAppRole")]
+    partial class AppUserAppRole
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,7 +41,7 @@ namespace RealState.Migrations
 
                     b.HasKey("AppRoleId");
 
-                    b.ToTable("AppRoles", (string)null);
+                    b.ToTable("AppRoles");
                 });
 
             modelBuilder.Entity("RealState.Entity.AppUser", b =>
@@ -53,6 +53,10 @@ namespace RealState.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("AppUserID"));
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -72,7 +76,10 @@ namespace RealState.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Role")
+                    b.Property<int>("RoleID")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -82,7 +89,9 @@ namespace RealState.Migrations
 
                     b.HasKey("AppUserID");
 
-                    b.ToTable("AppUsers", (string)null);
+                    b.HasIndex("RoleID");
+
+                    b.ToTable("AppUsers");
                 });
 
             modelBuilder.Entity("RealState.Entity.Buyer", b =>
@@ -362,6 +371,16 @@ namespace RealState.Migrations
                     b.ToTable("Sellers");
                 });
 
+            modelBuilder.Entity("RealState.Entity.AppUser", b =>
+                {
+                    b.HasOne("RealState.Entity.AppRole", "AppRole")
+                        .WithMany("AppUsers")
+                        .HasForeignKey("RoleID")
+                        .IsRequired();
+
+                    b.Navigation("AppRole");
+                });
+
             modelBuilder.Entity("RealState.Entity.Drawing", b =>
                 {
                     b.HasOne("RealState.Entity.Portfolio", "Portfolio")
@@ -410,6 +429,11 @@ namespace RealState.Migrations
                     b.Navigation("RealEstateType");
 
                     b.Navigation("Seller");
+                });
+
+            modelBuilder.Entity("RealState.Entity.AppRole", b =>
+                {
+                    b.Navigation("AppUsers");
                 });
 
             modelBuilder.Entity("RealState.Entity.RealEstateAddress", b =>

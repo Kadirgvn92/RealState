@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -8,6 +9,7 @@ using RealState.Repository.IRepository;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -26,12 +28,14 @@ builder.Services.AddControllersWithViews()
     });
 
 builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    {
+    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-})
-   .AddJwtBearer(options =>
-   {
+    })
+    .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
        options.TokenValidationParameters = new TokenValidationParameters
        {
            ValidateIssuer = true,
@@ -42,9 +46,9 @@ builder.Services.AddAuthentication(options =>
            ValidAudience = builder.Configuration["Jwt:Audience"],
            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
        };
-   });
+     });
 
-
+builder.Services.AddHttpContextAccessor();
 
 
 builder.Services.AddAutoMapper(typeof(Program));
@@ -66,6 +70,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthentication();
+
 app.UseAuthorization();
 
 app.MapControllerRoute(

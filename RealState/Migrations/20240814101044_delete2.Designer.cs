@@ -13,8 +13,8 @@ using RealState.Context;
 namespace RealState.Migrations
 {
     [DbContext(typeof(RealStateContext))]
-    [Migration("20240813151121_AppUser")]
-    partial class AppUser
+    [Migration("20240814101044_delete2")]
+    partial class delete2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,48 +26,6 @@ namespace RealState.Migrations
 
             NpgsqlModelBuilderExtensions.HasPostgresExtension(modelBuilder, "postgis");
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("RealState.Entity.AppRole", b =>
-                {
-                    b.Property<int>("AppRoleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("AppRoleId"));
-
-                    b.Property<string>("RoleName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("AppRoleId");
-
-                    b.ToTable("AppRoles", (string)null);
-                });
-
-            modelBuilder.Entity("RealState.Entity.AppUser", b =>
-                {
-                    b.Property<int>("AppUserID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("AppUserID"));
-
-                    b.Property<string>("PasswordHash")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("AppUserID");
-
-                    b.ToTable("AppUsers", (string)null);
-                });
 
             modelBuilder.Entity("RealState.Entity.Buyer", b =>
                 {

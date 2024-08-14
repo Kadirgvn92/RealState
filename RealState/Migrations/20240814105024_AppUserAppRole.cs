@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace RealState.Migrations
 {
     /// <inheritdoc />
-    public partial class AppUser : Migration
+    public partial class AppUserAppRole : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -31,23 +31,39 @@ namespace RealState.Migrations
                     AppUserID = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Username = table.Column<string>(type: "text", nullable: false),
+                    FirstName = table.Column<string>(type: "text", nullable: false),
+                    LastName = table.Column<string>(type: "text", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "text", nullable: false),
+                    Mail = table.Column<string>(type: "text", nullable: false),
                     PasswordHash = table.Column<string>(type: "text", nullable: false),
-                    Role = table.Column<string>(type: "text", nullable: false)
+                    RoleID = table.Column<int>(type: "integer", nullable: false),
+                    ImageUrl = table.Column<string>(type: "text", nullable: false),
+                    Title = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AppUsers", x => x.AppUserID);
+                    table.ForeignKey(
+                        name: "FK_AppUsers_AppRoles_RoleID",
+                        column: x => x.RoleID,
+                        principalTable: "AppRoles",
+                        principalColumn: "AppRoleId");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppUsers_RoleID",
+                table: "AppUsers",
+                column: "RoleID");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AppRoles");
+                name: "AppUsers");
 
             migrationBuilder.DropTable(
-                name: "AppUsers");
+                name: "AppRoles");
         }
     }
 }

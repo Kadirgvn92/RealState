@@ -32,7 +32,10 @@ public class RealStateContext : DbContext
             .WithOne(r => r.Portfolio)
             .HasForeignKey<Portfolio>(p => p.RealEstateAddressID);
 
-        modelBuilder.Entity<AppUser>().ToTable("AppUsers");
-        modelBuilder.Entity<AppRole>().ToTable("AppRoles");
+        modelBuilder.Entity<AppUser>()
+        .HasOne(u => u.AppRole)
+        .WithMany(r => r.AppUsers)
+        .HasForeignKey(u => u.RoleID)
+        .OnDelete(DeleteBehavior.ClientSetNull);
     }
 }

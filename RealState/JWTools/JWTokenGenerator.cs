@@ -20,6 +20,7 @@ public class JWTokenGenerator
 
         if(!string.IsNullOrWhiteSpace(model.Role))
             claims.Add(new Claim(ClaimTypes.Role, model.Role));
+            
 
         if (!string.IsNullOrWhiteSpace(model.Username))
             claims.Add(new Claim("Username", model.Username));
@@ -33,8 +34,8 @@ public class JWTokenGenerator
             claims: claims,
             expires: DateTime.UtcNow.AddMinutes(double.Parse(_configuration["Jwt:ExpireMinutes"])),
             signingCredentials: creds);
-
+        var expireDate = DateTime.UtcNow.AddMinutes(double.Parse(_configuration["Jwt:ExpireMinutes"]));
         var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
-        return new TokenResponseViewModel(tokenString, token.ValidTo);
+        return new TokenResponseViewModel(tokenString, expireDate);
     }
 }

@@ -1,4 +1,14 @@
-﻿<nav class="pc-sidebar">
+﻿@using System.Security.Claims
+@* @using RealState.Entity
+@model AppUser *@
+@{
+    var userName = User.FindFirstValue(ClaimTypes.Name);
+    var userRole = User.FindFirstValue(ClaimTypes.Role);
+}
+<p>Username: @userName</p>
+<p>Role: @userRole</p>
+
+<nav class="pc-sidebar">
     <div class="navbar-wrapper">
         <div class="m-header m-4">
             <a href="../dashboard/index.html" class="b-brand text-primary ">
@@ -12,11 +22,11 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <div class="flex-shrink-0">
-                            <img src="/Able/dist/assets/images/user/avatar-3.jpg" alt="user-image" class="user-avtar wid-45 rounded-circle" />
+                            <img src="" alt="user-image" class="user-avtar wid-45 rounded-circle" />
                         </div>
                         <div class="flex-grow-1 ms-3 me-2">
-                            <h6 class="mb-0">Burcu GÜVEN</h6>
-                            <small>Gayrimenkul Uzmanı</small>
+                            <h6 class="mb-0"> </h6>
+                            <small></small>
                         </div>
                         <a class="btn btn-icon btn-link-secondary avtar" data-bs-toggle="collapse" href="#pc_sidebar_userlink">
                             <svg class="pc-icon">
@@ -24,6 +34,8 @@
                             </svg>
                         </a>
                     </div>
+                    <p>Username: @userName</p>
+                    <p>Role: @userRole</p>
                     <div class="collapse pc-user-links" id="pc_sidebar_userlink">
                         <div class="pt-3">
                             <a href="#!">

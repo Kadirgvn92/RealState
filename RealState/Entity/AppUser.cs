@@ -10,4 +10,8 @@ public class AppUser
     public string Mail { get; set; }
     public string PasswordHash { get; set; }
     public string Role { get; set; }
+    public int RoleID { get; set; }
+    public AppRole AppRole { get; set; }
+    public string? ImageUrl { get; set; }
+    public string? Title { get; set; }
 }

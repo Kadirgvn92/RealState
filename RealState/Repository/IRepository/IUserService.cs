@@ -8,4 +8,5 @@ public interface IUserService
     Task<AppUser> AuthenticateUserAsync(string username, string password);
     Task<AppUser> RegisterUserAsync(RegisterViewModel model);
     Task<IEnumerable<AppRole>> GetRolesAsync();
+    Task<AppUser> GetUserByUsernameAsync(string username);
 }
