@@ -43,12 +43,24 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="mb-3">
-                                        <input type="text" class="form-control" placeholder="Ad" />
+                                        <input type="text" class="form-control" asp-for="FirstName" placeholder="Ad" />
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="mb-3">
-                                        <input type="text" class="form-control" placeholder="Soyad" />
+                                        <input type="text" class="form-control" asp-for="LastName" placeholder="Soyad" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="mb-3">
+                                        <input type="tel" class="form-control" asp-for="PhoneNumber" placeholder="Telefon Numarası" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="mb-3">
+                                        <input type="email" class="form-control" asp-for="Mail" placeholder="Mail Adresi" />
                                     </div>
                                 </div>
                             </div>

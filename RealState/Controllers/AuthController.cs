@@ -37,7 +37,7 @@ namespace RealState.Controllers
                     return View(model);
                 }
 
-                var result = await _userService.RegisterUserAsync(model.Username, model.Password);
+                var result = await _userService.RegisterUserAsync(model);
 
                 if (result != null)
                 {
@@ -82,7 +82,7 @@ namespace RealState.Controllers
 
                     ViewBag.Token = token;
 
-                    return RedirectToAction("Index", "Default"); 
+                    return RedirectToAction("Index", "Dashboard"); 
                 }
 
                 ModelState.AddModelError("", "Geçersiz kullanıcı adı veya şifre.");

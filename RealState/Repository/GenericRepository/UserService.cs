@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using RealState.Context;
 using RealState.Entity;
 using RealState.Repository.IRepository;
+using RealState.ViewModels.AuthViewModels;
 
 namespace RealState.Repository.GenericRepository;
 
@@ -42,12 +43,16 @@ public class UserService : IUserService
         return user;
     }
 
-    public async Task<AppUser> RegisterUserAsync(string username, string password)
+    public async Task<AppUser> RegisterUserAsync(RegisterViewModel model)
     {
-        var hashedPassword = _passwordHasher.HashPassword(null, password);
+        var hashedPassword = _passwordHasher.HashPassword(null, model.Password);
         var user = new AppUser
         {
-            Username = username,
+            Username = model.Username,
+            FirstName = model.FirstName,
+            LastName = model.LastName,
+            PhoneNumber = model.PhoneNumber,
+            Mail = model.Mail,
             PasswordHash = hashedPassword,
             Role = "User" // Varsayılan rol
         };
