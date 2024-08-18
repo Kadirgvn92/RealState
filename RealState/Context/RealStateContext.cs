@@ -13,6 +13,7 @@ public class RealStateContext : DbContext
 
     public DbSet<Drawing> Drawings { get; set; }
     public DbSet<Buyer> Buyers { get; set; }
+    public DbSet<CalendarEvent> CalendarEvents { get; set; }
     public DbSet<Seller> Sellers { get; set; }
     public DbSet<Portfolio> Portfolios { get; set; }
     public DbSet<FSBO> FSBOs { get; set; }
@@ -35,9 +36,15 @@ public class RealStateContext : DbContext
             .HasForeignKey<Portfolio>(p => p.RealEstateAddressID);
 
         modelBuilder.Entity<AppUser>()
-        .HasOne(u => u.AppRole)
-        .WithMany(r => r.AppUsers)
-        .HasForeignKey(u => u.RoleID)
-        .OnDelete(DeleteBehavior.ClientSetNull);
+            .HasOne(u => u.AppRole)
+            .WithMany(r => r.AppUsers)
+            .HasForeignKey(u => u.RoleID)
+            .OnDelete(DeleteBehavior.ClientSetNull);
+
+        modelBuilder.Entity<CalendarEvent>()
+            .HasOne(ce => ce.Portfolio)
+            .WithMany(p => p.CalendarEvents)
+            .HasForeignKey(ce => ce.PortfolioID)
+            .OnDelete(DeleteBehavior.ClientSetNull);
     }
 }

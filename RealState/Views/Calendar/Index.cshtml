@@ -20,11 +20,64 @@
     </div>
 </section>
 
+<div class="offcanvas offcanvas-end cal-event-offcanvas" tabindex="-1" id="calendar-add_edit_event">
+    <div class="offcanvas-header">
+        <h3 class="f-w-600 text-truncate">Program Ekle</h3>
+        <a href="#" class="avtar avtar-s btn-link-danger btn-pc-default ms-auto" data-bs-dismiss="offcanvas">
+            <i class="ti ti-x f-20"></i>
+        </a>
+    </div>
+    <div class="offcanvas-body">
+        <form id="pc-form-event" novalidate>
+            <div class="mb-3">
+                <label class="form-label">Başlık</label>
+                <input type="email" class="form-control" id="pc-e-title" placeholder="Program başlığı girin" autofocus />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Konum</label>
+                <input type="email" class="form-control" id="pc-e-venue" placeholder="Program konumu girin" />
+            </div>
+            <div>
+                <input type="hidden" class="form-control" id="pc-e-sdate" />
+                <input type="hidden" class="form-control" id="pc-e-edate" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Açıklama</label>
+                <textarea class="form-control" placeholder="Program açıklaması girin" rows="3" id="pc-e-description"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Tipi</label>
+                <select class="form-select" id="pc-e-type">
+                    <option value="empty" selected>Tipi seçiniz..</option>
+                    <option value="event-primary">Öncelikli</option>
+                    <option value="event-secondary">Normal</option>
+                    <option value="event-success">Başarılı</option>
+                    <option value="event-danger">Tehlikeli</option>
+                    <option value="event-warning">Uyarı</option>
+                    <option value="event-info">Bilgilendirme</option>
+                </select>
+            </div>
+            <div class="row justify-content-between">
+                <div class="col-auto">
+                    <button type="button" class="btn btn-link-danger btn-pc-default" data-bs-dismiss="offcanvas">
+                        <i class="align-text-bottom me-1 ti ti-circle-x"></i> Kapat
+                    </button>
+                </div>
+                <div class="col-auto">
+                    <button id="pc_event_add" type="button" class="btn btn-secondary" data-pc-action="add">
+                        <span id="pc-e-btn-text"><i class="align-text-bottom me-1 ti ti-calendar-plus"></i> Ekle</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
 <div class="modal fade" id="calendar-modal" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="calendar-modal-title f-w-600 text-truncate">Modal title</h3>
+                <h3 class="calendar-modal-title f-w-600 text-truncate">Başlık</h3>
                 <a href="#" class="avtar avtar-s btn-link-danger btn-pc-default ms-auto" data-bs-dismiss="modal">
                     <i class="ti ti-x f-20"></i>
                 </a>
@@ -37,7 +90,7 @@
                         </div>
                     </div>
                     <div class="flex-grow-1 ms-3">
-                        <h5 class="mb-1"><b>Title</b></h5>
+                        <h5 class="mb-1"><b>Başlık</b></h5>
                         <p class="pc-event-title text-muted"></p>
                     </div>
                 </div>
@@ -48,7 +101,7 @@
                         </div>
                     </div>
                     <div class="flex-grow-1 ms-3">
-                        <h5 class="mb-1"><b>Venue</b></h5>
+                        <h5 class="mb-1"><b>Konum</b></h5>
                         <p class="pc-event-venue text-muted"></p>
                     </div>
                 </div>
@@ -59,7 +112,7 @@
                         </div>
                     </div>
                     <div class="flex-grow-1 ms-3">
-                        <h5 class="mb-1"><b>Date</b></h5>
+                        <h5 class="mb-1"><b>Tarih</b></h5>
                         <p class="pc-event-date text-muted"></p>
                     </div>
                 </div>
@@ -70,7 +123,7 @@
                         </div>
                     </div>
                     <div class="flex-grow-1 ms-3">
-                        <h5 class="mb-1"><b>Description</b></h5>
+                        <h5 class="mb-1"><b>Açıklama</b></h5>
                         <p class="pc-event-description text-muted"></p>
                     </div>
                 </div>
