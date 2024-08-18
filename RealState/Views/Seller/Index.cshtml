@@ -63,6 +63,11 @@
     <script src="/Able/dist/assets/js/plugins/dataTables.fixedHeader.min.js"></script>
     <script src="/Able/dist/assets/js/plugins/dataTables.responsive.min.js"></script>
 
+    <script src="/Able/dist/assets/js/plugins/jszip.min.js"></script>
+    <script src="/Able/dist/assets/js/plugins/pdfmake.min.js"></script>
+    <script src="/Able/dist/assets/js/plugins/vfs_fonts.js"></script>
+    <script src="/Able/dist/assets/js/plugins/buttons.html5.min.js"></script>
+    <script src="/Able/dist/assets/js/plugins/buttons.print.min.js"></script>
     <script>
         $(document).ready(function () {
             $.ajax({
@@ -105,6 +110,34 @@
                                 }
                             }
 
+                        ],
+                        dom: 'Bfrtip', // Add this to include the buttons
+                        buttons: [
+                            {
+                                extend: 'copy',
+                                text: '<i class="fas fa-copy"></i> Kopyala',
+                                className: 'btn  btn-outline-secondary'
+                            },
+                            {
+                                extend: 'csv',
+                                text: '<i class="fas fa-file-csv"></i> CSV',
+                                className: 'btn  btn-outline-secondary'
+                            },
+                            {
+                                extend: 'excel',
+                                text: '<i class="fas fa-file-excel"></i> Excel',
+                                className: 'btn  btn-outline-success'
+                            },
+                            {
+                                extend: 'pdf',
+                                text: '<i class="fas fa-file-powerpoint"></i> PDF',
+                                className: 'btn btn-outline-danger'
+                            },
+                            {
+                                extend: 'print',
+                                text: '<i class="fa fa-print"></i> Yazdır',
+                                className: 'btn btn-outline-secondary'
+                            }
                         ],
                         language: {
                             "sEmptyTable": "Tabloda veri bulunmuyor",

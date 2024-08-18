@@ -7,6 +7,7 @@ public class RealEstateType : ISoftDeletable
     public int RealEstateTypeID { get; set; }
     public string TypeName { get; set; }
     public List<Portfolio> Portfolios { get; set; }
+    public List<Quest> Quests { get; set; }
 
     public bool IsDeleted { get; set; }
 }

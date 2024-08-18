@@ -1,8 +1,8 @@
-﻿
-@{
-    ViewData["Title"] = "Portföyler";
+﻿@{
+    ViewData["Title"] = "FSBO";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+
 
 @section Styles {
     <link rel="stylesheet" href="/Able/dist/assets/css/plugins/dataTables.bootstrap5.min.css" />
@@ -21,15 +21,10 @@
                                         <table id="setting-default" class="table table-striped table-bordered nowrap dataTable" aria-describedby="setting-default_info" style="width: 1490px;">
                                             <thead>
                                                 <tr>
-                                                    <th>Kiralık/Satılık</th>
-                                                    <th>Başlık</th>
+                                                    <th>İlan No</th>
+                                                    <th>Telefon</th>
                                                     <th>Açıklama</th>
-                                                    <th>Mülk Sahibi Adı Soyadı</th>
-                                                    <th>Mülk Sahibi Telefon</th>
-                                                    <th>Adres</th>
-                                                    <th>Tipi</th>
-                                                    <th>Türü</th>
-                                                    <th>Eklenme Tarihi</th>
+                                                    <th>Tarih</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -43,7 +38,7 @@
                     </div>
                     <div class="card-footer">
                         <div class="float-left ">
-                            <a href="/Portfolio/CreatePortfolio" class="btn btn-primary btn-shadow">Portföy Ekle</a>
+                            <a href="/FSBO/CreateFSBO" class="btn btn-primary btn-shadow">FSBO Ekle</a>
                         </div>
                     </div>
                 </div>
@@ -71,7 +66,7 @@
     <script>
         $(document).ready(function () {
             $.ajax({
-                url: '/Portfolio/GetPortfolio',
+                url: '/FSBO/GetFSBO',
                 type: 'GET',
                 dataType: 'json',
                 dataSrc: '',
@@ -81,36 +76,9 @@
                     $('#setting-default').DataTable({
                         data: data,
                         columns: [
-                            { data: 'RealEstateStatus.StatusName' },
-                            { data: 'Title' },
+                            { data: 'ListingNumber' },
+                            { data: 'PhoneNumber' },
                             { data: 'Description' },
-                            {
-                                data: 'Seller', 
-                                render: function (data, type, row) {
-                                    if (data && data.FirstName && data.LastName) {
-                                        return data.FirstName + ' ' + data.LastName;
-                                    }
-                                    return '';
-                                }
-                            },
-                            { data: 'Seller.PhoneNumber' },
-                            {
-                                data: 'RealEstateAddress', // RealEstateAddress nesnesini al
-                                render: function (data, type, row) {
-
-                                    const neighborhood = `${data.Neighborhood} Mah.`;
-
-                                    if (data) {
-                                        // Address bilgilerini birleştir
-                                        return [neighborhood, data.AddressLine, data.Description]
-                                            .filter(part => part) // Boş değerleri filtrele
-                                            .join(', '); // Ayrı karakter olarak virgül kullan
-                                    }
-                                    return '';
-                                }
-                            },
-                            { data: 'RealEstateCategory.CategoryName' },
-                            { data: 'RealEstateType.TypeName' },
                             {
                                 data: 'CreatedDate',
                                 render: function (data) {

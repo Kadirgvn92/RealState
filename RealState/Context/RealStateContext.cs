@@ -15,6 +15,8 @@ public class RealStateContext : DbContext
     public DbSet<Buyer> Buyers { get; set; }
     public DbSet<Seller> Sellers { get; set; }
     public DbSet<Portfolio> Portfolios { get; set; }
+    public DbSet<FSBO> FSBOs { get; set; }
+    public DbSet<Quest> Quests { get; set; }
     public DbSet<RealEstateAddress> RealEstateAddresses { get; set; }
     public DbSet<RealEstateCategory> RealEstateCategories { get; set; }
     public DbSet<RealEstateType> RealEstateTypes { get; set; }

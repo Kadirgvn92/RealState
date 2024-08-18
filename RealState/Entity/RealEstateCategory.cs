@@ -8,5 +8,6 @@ public class RealEstateCategory : ISoftDeletable
     public string CategoryName { get; set; }
 
     public List<Portfolio> Portfolios { get; set; }
+    public List<Quest> Quests { get; set; }
     public bool IsDeleted { get; set; }
 }
