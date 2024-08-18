@@ -28,8 +28,8 @@
         select: function (info) {
             var sdt = new Date(info.start);
             var edt = new Date(info.end);
-            document.getElementById('pc-e-sdate').value = sdt.getFullYear() + '-' + getRound(sdt.getMonth() + 1) + '-' + getRound(sdt.getDate());
-            document.getElementById('pc-e-edate').value = edt.getFullYear() + '-' + getRound(edt.getMonth() + 1) + '-' + getRound(edt.getDate());
+            //document.getElementById('pc-e-sdate').value = '';
+            //document.getElementById('pc-e-edate').value = '';
 
             document.getElementById('pc-e-title').value = '';
             document.getElementById('pc-e-venue').value = '';
@@ -217,53 +217,127 @@
                 });
         });
     }
-
+    
     var pc_event_add = document.querySelector('#pc_event_add');
     if (pc_event_add) {
         pc_event_add.addEventListener('click', function () {
             var day = true;
-            var end = null;
-            var e_date_start = document.getElementById('pc-e-sdate').value === null ? '' : document.getElementById('pc-e-sdate').value;
-            var e_date_end = document.getElementById('pc-e-edate').value === null ? '' : document.getElementById('pc-e-edate').value;
-            if (!e_date_end == '') {
-                end = new Date(e_date_end);
-            }
-            calendar.addEvent({
+            var e_date_start = document.getElementById('pc-e-sdate').value;
+            var e_date_end = document.getElementById('pc-e-edate').value;
+
+
+            var eventData = {
                 title: document.getElementById('pc-e-title').value,
-                start: new Date(e_date_start),
-                end: end,
+                start: e_date_start,
+                end: e_date_end,
                 allDay: day,
                 description: document.getElementById('pc-e-description').value,
                 venue: document.getElementById('pc-e-venue').value,
                 className: document.getElementById('pc-e-type').value
-            });
-            if (pc_event_add.getAttribute('data-pc-action') == 'add') {
-                Swal.fire({
-                    customClass: {
-                        confirmButton: 'btn btn-light-primary'
-                    },
-                    buttonsStyling: false,
-                    icon: 'success',
-                    title: 'Success',
-                    text: 'Program takvime baþarýyla iþlendi.'
+            };
+
+            console.log(eventData);
+
+            // Determine action based on button state
+            var action = pc_event_add.getAttribute('data-pc-action');
+            var url = action === 'add' ? '/Calendar/Add' : '/Calendar/Update';
+            var method = 'POST';  // Both 'add' and 'update' use POST method
+
+            fetch(url, {
+                method: method,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(eventData)
+            }).then(response => response.json())
+                .then(data => {
+                    if (action === 'add') {
+                        calendar.addEvent(eventData);
+                        Swal.fire({
+                            customClass: {
+                                confirmButton: 'btn btn-light-primary'
+                            },
+                            buttonsStyling: false,
+                            icon: 'success',
+                            title: 'Success',
+                            text: 'Program baþarýyla oluþturuldu.'
+                        });
+                    } else {
+                        calendevent.remove();
+                        calendar.addEvent(eventData);
+                        Swal.fire({
+                            customClass: {
+                                confirmButton: 'btn btn-light-primary'
+                            },
+                            buttonsStyling: false,
+                            icon: 'success',
+                            title: 'Success',
+                            text: 'Program baþarýyla güncellendi.'
+                        });
+                    }
+                    calendaroffcanvas.hide();
+                }).catch(error => {
+                    console.error('Error:', error);
+                    Swal.fire({
+                        customClass: {
+                            confirmButton: 'btn btn-light-primary'
+                        },
+                        buttonsStyling: false,
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Program oluþtururken hata meydana geldi!'
+                    });
                 });
-            } else {
-                calendevent.remove();
-                document.getElementById('pc-e-btn-text').innerHTML = '<i class="align-text-bottom me-1 ti ti-calendar-plus"></i> Add';
-                document.querySelector('#pc_event_add').setAttribute('data-pc-action', 'add');
-                Swal.fire({
-                    customClass: {
-                        confirmButton: 'btn btn-light-primary'
-                    },
-                    buttonsStyling: false,
-                    icon: 'success',
-                    title: 'Success',
-                    text: 'Program baþarýyla güncellendi'
-                });
-            }
-            calendaroffcanvas.hide();
         });
     }
+
+
+    //var pc_event_add = document.querySelector('#pc_event_add');
+    //if (pc_event_add) {
+    //    pc_event_add.addEventListener('click', function () {
+    //        var day = true;
+    //        var end = null;
+    //        var e_date_start = document.getElementById('pc-e-sdate').value === null ? '' : document.getElementById('pc-e-sdate').value;
+    //        var e_date_end = document.getElementById('pc-e-edate').value === null ? '' : document.getElementById('pc-e-edate').value;
+    //        if (!e_date_end == '') {
+    //            end = new Date(e_date_end);
+    //        }
+    //        calendar.addEvent({
+    //            title: document.getElementById('pc-e-title').value,
+    //            start: new Date(e_date_start),
+    //            end: end,
+    //            allDay: day,
+    //            description: document.getElementById('pc-e-description').value,
+    //            venue: document.getElementById('pc-e-venue').value,
+    //            className: document.getElementById('pc-e-type').value
+    //        });
+    //        if (pc_event_add.getAttribute('data-pc-action') == 'add') {
+    //            Swal.fire({
+    //                customClass: {
+    //                    confirmButton: 'btn btn-light-primary'
+    //                },
+    //                buttonsStyling: false,
+    //                icon: 'success',
+    //                title: 'Success',
+    //                text: 'Program takvime baþarýyla iþlendi.'
+    //            });
+    //        } else {
+    //            calendevent.remove();
+    //            document.getElementById('pc-e-btn-text').innerHTML = '<i class="align-text-bottom me-1 ti ti-calendar-plus"></i> Add';
+    //            document.querySelector('#pc_event_add').setAttribute('data-pc-action', 'add');
+    //            Swal.fire({
+    //                customClass: {
+    //                    confirmButton: 'btn btn-light-primary'
+    //                },
+    //                buttonsStyling: false,
+    //                icon: 'success',
+    //                title: 'Success',
+    //                text: 'Program baþarýyla güncellendi'
+    //            });
+    //        }
+    //        calendaroffcanvas.hide();
+    //    });
+    //}
 
     var pc_event_edit = document.querySelector('#pc_event_edit');
     if (pc_event_edit) {

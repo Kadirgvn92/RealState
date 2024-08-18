@@ -31,15 +31,19 @@
         <form id="pc-form-event" novalidate>
             <div class="mb-3">
                 <label class="form-label">Başlık</label>
-                <input type="email" class="form-control" id="pc-e-title" placeholder="Program başlığı girin" autofocus />
+                <input type="text" class="form-control" id="pc-e-title" placeholder="Program başlığı girin" autofocus />
             </div>
             <div class="mb-3">
                 <label class="form-label">Konum</label>
-                <input type="email" class="form-control" id="pc-e-venue" placeholder="Program konumu girin" />
+                <input type="text" class="form-control" id="pc-e-venue" placeholder="Program konumu girin" />
             </div>
-            <div>
-                <input type="hidden" class="form-control" id="pc-e-sdate" />
-                <input type="hidden" class="form-control" id="pc-e-edate" />
+            <div class="mb-3">
+                <label class="form-label">Başlangıç</label>
+                <input type="date" class="form-control" id="pc-e-sdate" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Bitiş</label>
+                <input type="date" class="form-control" id="pc-e-edate" />
             </div>
             <div class="mb-3">
                 <label class="form-label">Açıklama</label>
