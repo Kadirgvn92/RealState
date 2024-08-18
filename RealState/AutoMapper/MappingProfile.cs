@@ -10,10 +10,11 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
-        CreateMap<CreateBuyerViewModel, Buyer>();
+        CreateMap<CreateBuyerViewModel, Buyer>().ReverseMap();
 
-        CreateMap<CreateSellerViewModel, Seller>();
+        CreateMap<CreateSellerViewModel, Seller>().ReverseMap();
+        CreateMap<ResultSellerViewModel, Seller>().ReverseMap();
 
-        CreateMap<CreatePortfolioViewModel, Portfolio>();
+        CreateMap<CreatePortfolioViewModel, Portfolio>().ReverseMap();
     }
 }

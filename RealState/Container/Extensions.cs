@@ -25,6 +25,10 @@ public static class Extensions
         services.AddScoped<ISellerRepository, SellerRepository>();
         services.AddScoped<IPortfolioRepository, PortfolioRepository>();
         services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IAddressRepository, AddressRepository>();
+        services.AddScoped<ITypeRepository, TypeRepository>();
+        services.AddScoped<IStatusRepository, StatusRepository>();
+        services.AddScoped<ICategoryRepository, CategoryRepository>();
 
         services.AddScoped<IPasswordHasher<AppUser>, PasswordHasher<AppUser>>();
         services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));

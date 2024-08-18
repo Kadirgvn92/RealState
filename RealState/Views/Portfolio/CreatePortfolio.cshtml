@@ -1,0 +1,234 @@
+﻿@using RealState.ViewModels.PortfolioViewModels
+
+@model CreatePortfolioViewModel
+
+@{
+    ViewData["Title"] = "Portföy Oluşturma Sihirbazı";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var successMessage = TempData["SuccessMessage"] as string;
+}
+
+
+<section class="pc-container">
+    <div class="pc-content">
+        @await Component.InvokeAsync("_BreadcrumbPartial")
+        <div class="row">
+            <!-- [ sample-page ] start -->
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Portföy Oluşturma Sihirbazı</h5>
+                    </div>
+                </div>
+                <div id="basicwizard" class="form-wizard row justify-content-center">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body p-3">
+                                <ul class="nav nav-pills nav-justified">
+                                    <li class="nav-item" data-target-form="#contactDetailForm">
+                                        <a href="#contactDetail" data-bs-toggle="tab" data-toggle="tab" class="nav-link active">
+                                            <i class="ph-duotone ph-user-circle"></i>
+                                            <span class="d-none d-sm-inline">Portföy Özellikleri</span>
+                                        </a>
+                                    </li>
+                                    <!-- end nav item -->
+                                    <li class="nav-item" data-target-form="#jobDetailForm">
+                                        <a href="#addressDetail" data-bs-toggle="tab" data-toggle="tab" class="nav-link icon-btn">
+                                            <i class="ph-duotone ph-map-pin"></i>
+                                            <span class="d-none d-sm-inline">Portföy Adresi</span>
+                                        </a>
+                                    </li>
+                                    <!-- end nav item -->
+                                    <li class="nav-item">
+                                        <a href="#finish" data-bs-toggle="tab" data-toggle="tab" class="nav-link icon-btn">
+                                            <i class="ph-duotone ph-check-circle"></i>
+                                            <span class="d-none d-sm-inline">Son Adım</span>
+                                        </a>
+                                    </li>
+                                    <!-- end nav item -->
+                                </ul>
+                            </div>
+                        </div>
+                        @if (!string.IsNullOrEmpty(successMessage))
+                        {
+                            <div class="alert alert-success">
+                                @successMessage
+                            </div>
+                        }
+                        <div class="card">
+                            <div class="card-body">
+                                <form method="post" enctype="multipart/form-data">
+
+                                    <div class="tab-content">
+                                        <div id="bar" class="progress mb-3" style="height: 7px">
+                                            <div class="bar progress-bar progress-bar-striped progress-bar-animated bg-success"></div>
+                                        </div>
+                                        <div class="tab-pane show active" id="contactDetail">
+
+                                            <div class="text-center">
+                                                <h3 class="mb-2">Portföy Özellikleri</h3>
+                                                <small class="text-muted">Portföy'ün tipini, çeşidini ve hangi mülk sahibine ait olduğunu giriniz</small>
+                                            </div>
+                                            <div class="row mt-4">
+                                               
+                                                <div class="col">
+                                                    <div class="row">
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="RealEstateStatusID">Mülk Durumu Seç</label>
+                                                                <select id="RealEstateStatusID" class="form-control" asp-for="RealEstateStatusID" asp-items="ViewBag.StatusList">
+                                                                    <option value="">Mülk durumunu seçin</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="RealEstateTypeID">Mülk Tipi Seç</label>
+                                                                <select id="RealEstateTypeID" class="form-control" asp-for="RealEstateTypeID" asp-items="ViewBag.TypeList">
+                                                                    <option value="">Mülk tipini seçin</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="SellerID">Mülk Sahibi Seç</label>
+                                                                <select id="SellerID" class="form-control" asp-for="SellerID" asp-items="ViewBag.SellerList">
+                                                                    <option value="">Mülk sahibi seçin</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="RealEstateCategoryID">Mülk Kategorisi Seç</label>
+                                                                <select id="RealEstateCategoryID" class="form-control" asp-for="RealEstateCategoryID" asp-items="ViewBag.CategoryList">
+                                                                    <option value="">Mülk kategorisi seçin</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <!-- end contact detail tab pane -->
+                                        <div class="tab-pane" id="addressDetail">
+
+                                            <div class="text-center">
+                                                <h3 class="mb-2">Portföy Adresi</h3>
+                                                <small class="text-muted">Portföy'e ait adres bilgilerini giriniz</small>
+                                            </div>
+                                            <div class="row mt-4">
+                                                <div class="col-sm-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">İl</label>
+                                                        <input asp-for="City" class="form-control" placeholder="Şehir adı giriniz" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">İlçe</label>
+                                                        <input asp-for="District" class="form-control" placeholder="İlçe adı giriniz" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Mahalle</label>
+                                                        <input asp-for="Neighborhood" class="form-control" placeholder="Mahalle adı giriniz" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Sokak</label>
+                                                        <input asp-for="Street" class="form-control" placeholder="Sokak adı giriniz" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Bina No</label>
+                                                        <input asp-for="BuildingNumber" class="form-control" placeholder="Bina numarası giriniz" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Daire No</label>
+                                                        <input asp-for="ApartmentNumber" class="form-control" placeholder="Daire numarası giriniz" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Açıklama</label>
+                                                        <input asp-for="AddressDescription" class="form-control" placeholder="Adres açıklaması giriniz" />
+                                                    </div>
+                                                </div>
+                                                <!-- Add other address fields similarly -->
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="tab-pane" id="finish">
+                                            <div class="row d-flex justify-content-center">
+                                                <div class="col-sm-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Başlık</label>
+                                                        <input type="text" class="form-control" asp-for="Title" placeholder="Portföy başlığını giriniz" />
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Açıklama</label>
+                                                        <textarea class="form-control" asp-for="Description" rows="2" tabindex="8"></textarea>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="Image" class="form-label">Portföy Kapak Resmi</label>
+                                                        <input class="form-control" type="file" asp-for="Image">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <button type="submit" class="form-control"> Portföy Oluştur </button>
+                                                    </div>
+                                                </div>
+                                                <!-- end col -->
+                                            </div>
+                                            <!-- end row -->
+                                        </div>
+                                        <!-- END: Define your tab pans here -->
+                                        <!-- START: Define your controller buttons here-->
+                                        <div class="d-flex wizard justify-content-between flex-wrap gap-2 mt-3">
+                                            <div class="first">
+                                                <a href="javascript:void(0);" class="btn btn-secondary"> First </a>
+                                            </div>
+                                            <div class="d-flex">
+                                                <div class="previous me-2">
+                                                    <a href="javascript:void(0);" class="btn btn-secondary"> Back To Previous </a>
+                                                </div>
+                                                <div class="next">
+                                                    <a href="javascript:void(0);" class="btn btn-secondary"> Next Step </a>
+                                                </div>
+                                            </div>
+                                            <div class="last">
+                                                <a href="javascript:void(0);" class="btn btn-secondary"> Finish </a>
+                                            </div>
+                                        </div>
+                                        <!-- END: Define your controller buttons here-->
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- end tab content-->
+                    </div>
+                </div>
+            </div>
+            <!-- [ sample-page ] end -->
+        </div>
+        <!-- [ Main Content ] end -->
+    </div>
+</section>
+
+
+@section Scripts {
+    <script src="/Able/dist/assets/js/plugins/wizard.min.js"></script>
+    <script>
+        new Wizard('#basicwizard', {
+            validate: true,
+            progress: true
+        });
+    </script>
+}
+

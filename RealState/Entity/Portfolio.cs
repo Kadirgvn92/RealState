@@ -22,7 +22,7 @@ public class Portfolio : ISoftDeletable
     public int RealEstateStatusID { get; set; }
     public RealEstateStatus RealEstateStatus { get; set; }
 
-
+    public string CoverImageUrl { get; set; }
     public DateTime CreatedDate { get; set; }
     public bool IsAvailable { get; set; }
     public bool IsDeleted { get; set; }

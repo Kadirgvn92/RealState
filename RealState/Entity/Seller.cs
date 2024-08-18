@@ -15,4 +15,6 @@ public class Seller : ISoftDeletable
     public DateTime ListingDate { get; set; } 
     public List<Portfolio> Portfolios { get; set; }
     public bool IsDeleted { get; set; }
+
+
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using RealState.Entity;
 using RealState.Repository.IRepository;
@@ -20,6 +21,7 @@ public class SellerController : Controller
     public IActionResult Index()
     {
         var values = _sellerRepository.GetAll();
+       
         return View(values);
     }
     [HttpGet]
