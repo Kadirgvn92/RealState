@@ -13,18 +13,19 @@
 @await Component.InvokeAsync("_HeadPartial")
 
 <body data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-layout="vertical" data-pc-direction="ltr" data-pc-theme_contrast="" data-pc-theme="light">
-
-
     <div class="auth-main">
         <div class="auth-wrapper v2">
             <div class="auth-sidecontent">
-                <img src="/images/dia.jpg" width="500px" height="400px" alt="images" class="img-fluid " />
+                <img src="/images/dia.jpg" alt="images" class="img-fluid img-auth-side">
             </div>
             <div class="auth-form">
                 <div class="card my-5">
                     <div class="card-body">
+                        <div class="text-center">
+                            <img src="/images/dialog.png" width="60%" alt="img">
+                        </div>
                         <form method="post">
-                          
+                            
                             <h4 class="text-center f-w-500 mb-3">Hemen Giriş Yap</h4>
                             <div class="mb-3">
                                 <input type="text" class="form-control" asp-for="Username" placeholder="Kullanıcı Adı" value="Kadir" />
@@ -57,9 +58,6 @@
             </div>
         </div>
     </div>
-
-
-    @await Component.InvokeAsync("_FooterPartial")
 
 
     @await Component.InvokeAsync("_ScriptPartial")
