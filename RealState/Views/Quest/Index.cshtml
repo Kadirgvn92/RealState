@@ -1,0 +1,177 @@
+﻿@{
+    ViewData["Title"] = "Arayış";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@section Styles {
+    <link rel="stylesheet" href="/Able/dist/assets/css/plugins/dataTables.bootstrap5.min.css" />
+}
+<section class="pc-container">
+    <div class="pc-content">
+        @await Component.InvokeAsync("_BreadcrumbPartial")
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive dt-responsive">
+                            <div id="setting-default_wrapper" class="dt-container dt-bootstrap5">
+                                <div class="row mt-2 justify-content-md-center">
+                                    <div class="col-12 ">
+                                        <table id="setting-default" class="table table-striped table-bordered nowrap dataTable" aria-describedby="setting-default_info" style="width: 1490px;">
+                                            <thead>
+                                                <tr>
+                                                    <th>Başlık</th>
+                                                    <th>Fiyat Aralığı</th>
+                                                    <th>Adres</th>
+                                                    <th>Durum</th>
+                                                    <th>Tipi</th>
+                                                    <th>Türü</th>
+                                                    <th>Tarih</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="float-left ">
+                            <a href="/Quest/CreateQuest" class="btn btn-primary btn-shadow">Arayış Ekle</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="/Able/dist/assets/js/plugins/dataTables.min.js"></script>
+    <script src="/Able/dist/assets/js/plugins/dataTables.bootstrap5.min.js"></script>
+    <script src="/Able/dist/assets/js/plugins/dataTables.autoFill.min.js"></script>
+    <script src="/Able/dist/assets/js/plugins/dataTables.fixedColumns.min.js"></script>
+    <script src="/Able/dist/assets/js/plugins/dataTables.buttons.min.js"></script>
+    <script src="/Able/dist/assets/js/plugins/dataTables.fixedHeader.min.js"></script>
+    <script src="/Able/dist/assets/js/plugins/dataTables.responsive.min.js"></script>
+
+    <script src="/Able/dist/assets/js/plugins/jszip.min.js"></script>
+    <script src="/Able/dist/assets/js/plugins/pdfmake.min.js"></script>
+    <script src="/Able/dist/assets/js/plugins/vfs_fonts.js"></script>
+    <script src="/Able/dist/assets/js/plugins/buttons.html5.min.js"></script>
+    <script src="/Able/dist/assets/js/plugins/buttons.print.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: '/Quest/GetQuest',
+                type: 'GET',
+                dataType: 'json',
+                dataSrc: '',
+                success: function (data) {
+                    console.log(data);
+
+                    $('#setting-default').DataTable({
+                        data: data,
+                        columns: [
+                            { data: 'Title' },
+                            { data: 'Price' },
+                            { data: 'AddressLine' },
+                            { data: 'RealEstateStatusName' },
+                            { data: 'RealEstateCategoryName' },
+                            { data: 'RealEstateTypeName' },
+                            {
+                                data: 'CreatedDate',
+                                render: function (data) {
+                                    if (data) {
+                                        var date = new Date(data);
+                                        var options = {
+                                            day: '2-digit',
+                                            month: 'short',
+                                            year: '2-digit',
+                                            hour: '2-digit',
+                                            minute: '2-digit',
+                                            hour12: false
+                                        };
+
+                                        var formattedDate = new Intl.DateTimeFormat('tr-TR', options).format(date);
+
+                                        return formattedDate;
+                                    }
+                                    return '';
+                                }
+                            }
+
+                        ],
+                        dom: 'Bfrtip', // Add this to include the buttons
+                        buttons: [
+                            {
+                                extend: 'copy',
+                                text: '<i class="fas fa-copy"></i> Kopyala',
+                                className: 'btn  btn-outline-secondary'
+                            },
+                            {
+                                extend: 'csv',
+                                text: '<i class="fas fa-file-csv"></i> CSV',
+                                className: 'btn  btn-outline-secondary'
+                            },
+                            {
+                                extend: 'excel',
+                                text: '<i class="fas fa-file-excel"></i> Excel',
+                                className: 'btn  btn-outline-success'
+                            },
+                            {
+                                extend: 'pdf',
+                                text: '<i class="fas fa-file-powerpoint"></i> PDF',
+                                className: 'btn btn-outline-danger'
+                            },
+                            {
+                                extend: 'print',
+                                text: '<i class="fa fa-print"></i> Yazdır',
+                                className: 'btn btn-outline-secondary'
+                            }
+                        ],
+                        language: {
+                            "sEmptyTable": "Tabloda veri bulunmuyor",
+                            "sInfo": "_TOTAL_ kayıt içinden _START_ - _END_ arası kayıt gösteriliyor",
+                            "sInfoEmpty": "Kayıt bulunmuyor",
+                            "sInfoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
+                            "sInfoPostFix": "",
+                            "sInfoThousands": ".",
+                            "sLengthMenu": "_MENU_ kayıt göster",
+                            "sLoadingRecords": "Yükleniyor...",
+                            "sProcessing": "İşleniyor...",
+                            "sSearch": "Ara:",
+                            "sZeroRecords": "Eşleşen kayıt bulunamadı",
+                            "oPaginate": {
+                                "sFirst": "İlk",
+                                "sLast": "Son",
+                                "sNext": "Sonraki",
+                                "sPrevious": "Önceki"
+                            },
+                            "oAria": {
+                                "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                                "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+                            },
+                            "buttons": {
+                                "copy": "Kopyala",
+                                "csv": "CSV",
+                                "excel": "Excel",
+                                "pdf": "PDF",
+                                "print": "Yazdır"
+                            }
+                        }
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+        });
+    </script>
+}
