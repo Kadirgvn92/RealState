@@ -38,7 +38,9 @@
                     </div>
                     <div class="card-footer">
                         <div class="float-left ">
-                            <a href="/FSBO/CreateFSBO" class="btn btn-primary btn-shadow">FSBO Ekle</a>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createFSBOModal">
+                                Yeni FSBO Ekle
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -46,6 +48,35 @@
         </div>
     </div>
 </section>
+
+<div class="modal fade" id="createFSBOModal" tabindex="-1" aria-labelledby="createFSBOModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createFSBOModalLabel">Yeni FSBO Ekle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="createFSBOForm">
+                    <div class="mb-3">
+                        <label for="listingNumber" class="form-label">İlan No</label>
+                        <input type="text" class="form-control" id="listingNumber" name="ListingNumber" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phoneNumber" class="form-label">Telefon</label>
+                        <input type="text" class="form-control" id="phoneNumber" name="PhoneNumber" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Açıklama</label>
+                        <textarea class="form-control" id="description" name="Description" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 @section Scripts {
 
@@ -165,6 +196,31 @@
                 error: function (xhr, status, error) {
                     console.error('Error:', error);
                 }
+            });
+
+
+            $('#createFSBOForm').on('submit', function (e) {
+                e.preventDefault();
+
+                var formData = {
+                    ListingNumber: $('#listingNumber').val(),
+                    PhoneNumber: $('#phoneNumber').val(),
+                    Description: $('#description').val()
+                };
+
+                $.ajax({
+                    url: '/FSBO/CreateFSBO',
+                    type: 'POST',
+                    data: formData,
+                    success: function (response) {
+                        
+                        $('#createFSBOModal').modal('hide');
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Hata:', error);
+                        alert('FSBO eklenirken bir hata oluştu.');
+                    }
+                });
             });
         });
     </script>

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using RealState.Entity;
 using RealState.ViewModels.BuyerViewModels;
+using RealState.ViewModels.FSBOViewModels;
 using RealState.ViewModels.PortfolioViewModels;
 using RealState.ViewModels.QuestViewModels;
 using RealState.ViewModels.SellerViewModels;
@@ -20,5 +21,7 @@ public class MappingProfile : Profile
         CreateMap<CreatePortfolioViewModel, Portfolio>().ReverseMap();
 
         CreateMap<CreateQuestViewModel, Quest>().ReverseMap();
+
+        CreateMap<CreateFSBOViewModel, FSBO>().ReverseMap();
     }
 }
