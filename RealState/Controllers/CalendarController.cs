@@ -22,6 +22,11 @@ public class CalendarController : Controller
     {
         if (ModelState.IsValid)
         {
+            calendarEvent.StartDate = DateTime.SpecifyKind(calendarEvent.StartDate, DateTimeKind.Utc);
+            calendarEvent.EndDate = calendarEvent.EndDate.HasValue
+                ? DateTime.SpecifyKind(calendarEvent.EndDate.Value, DateTimeKind.Utc)
+                : (DateTime?)null;
+
             _calendarRepository.Insert(calendarEvent);
             return Json(new { success = true, message = "Program başarıyla oluşturuldu." });
         }

@@ -14,5 +14,5 @@ public class CalendarEvent
     public string? ClassName { get; set; }
     // Foreign Key
     public int? PortfolioID { get; set; }
-    public Portfolio Portfolio { get; set; } // Navigation property
+    public Portfolio Portfolio { get; set; } 
 }

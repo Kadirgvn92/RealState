@@ -224,12 +224,12 @@
             var day = true;
             var e_date_start = document.getElementById('pc-e-sdate').value;
             var e_date_end = document.getElementById('pc-e-edate').value;
-
+            
 
             var eventData = {
                 title: document.getElementById('pc-e-title').value,
-                start: e_date_start,
-                end: e_date_end,
+                startDate: e_date_start, 
+                endDate: e_date_end ? e_date_end : null, 
                 allDay: day,
                 description: document.getElementById('pc-e-description').value,
                 venue: document.getElementById('pc-e-venue').value,
@@ -249,34 +249,51 @@
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(eventData)
-            }).then(response => response.json())
-                .then(data => {
-                    if (action === 'add') {
-                        calendar.addEvent(eventData);
+            })
+                .then(response => response.text()) // Yanýtý text olarak al
+                .then(text => {
+                    console.log(text); // Yanýtý kontrol et
+                    try {
+                        const data = JSON.parse(text); // Yanýtý JSON olarak ayrýþtýr
+                        if (action === 'add') {
+                            calendar.addEvent(eventData);
+                            Swal.fire({
+                                customClass: {
+                                    confirmButton: 'btn btn-light-primary'
+                                },
+                                buttonsStyling: false,
+                                icon: 'success',
+                                title: 'Success',
+                                text: 'Program baþarýyla oluþturuldu.'
+                            });
+                        } else {
+                            calendevent.remove();
+                            calendar.addEvent(eventData);
+                            Swal.fire({
+                                customClass: {
+                                    confirmButton: 'btn btn-light-primary'
+                                },
+                                buttonsStyling: false,
+                                icon: 'success',
+                                title: 'Success',
+                                text: 'Program baþarýyla güncellendi.'
+                            });
+                        }
+                        calendaroffcanvas.hide();
+                    } catch (e) {
+                        console.error('Parsing error:', e); // JSON parsing hatasý
                         Swal.fire({
                             customClass: {
                                 confirmButton: 'btn btn-light-primary'
                             },
                             buttonsStyling: false,
-                            icon: 'success',
-                            title: 'Success',
-                            text: 'Program baþarýyla oluþturuldu.'
-                        });
-                    } else {
-                        calendevent.remove();
-                        calendar.addEvent(eventData);
-                        Swal.fire({
-                            customClass: {
-                                confirmButton: 'btn btn-light-primary'
-                            },
-                            buttonsStyling: false,
-                            icon: 'success',
-                            title: 'Success',
-                            text: 'Program baþarýyla güncellendi.'
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Yanýt iþlenirken hata meydana geldi!'
                         });
                     }
-                    calendaroffcanvas.hide();
-                }).catch(error => {
+                })
+                .catch(error => {
                     console.error('Error:', error);
                     Swal.fire({
                         customClass: {
@@ -288,6 +305,7 @@
                         text: 'Program oluþtururken hata meydana geldi!'
                     });
                 });
+
         });
     }
 
