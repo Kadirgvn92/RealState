@@ -2,9 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using RealState.Entity;
-using RealState.Repository.GenericRepository;
 using RealState.Repository.IRepository;
-using RealState.ViewModels.BuyerViewModels;
 using RealState.ViewModels.FSBOViewModels;
 
 namespace RealState.Controllers;

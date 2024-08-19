@@ -33,6 +33,7 @@ public static class Extensions
         services.AddScoped<IFSBORepository, FSBORepository>();
         services.AddScoped<IQuestRepository, QuestRepository>();
         services.AddScoped<ICalendarRepository, CalendarRepository>();
+        services.AddScoped<INotificationRepository, NotificationRepository>();
 
         services.AddScoped<IPasswordHasher<AppUser>, PasswordHasher<AppUser>>();
         services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));

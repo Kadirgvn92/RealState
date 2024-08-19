@@ -23,4 +23,5 @@ public class Quest : ISoftDeletable
     public int AppUserID { get; set; }
     public AppUser AppUser { get; set; }
     public bool IsDeleted { get; set; }
+    public List<Notification> Notifications { get; set; }
 }

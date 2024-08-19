@@ -24,6 +24,7 @@ public class Portfolio : ISoftDeletable
 
 
     public List<CalendarEvent> CalendarEvents { get; set; }
+    public List<Notification> Notifications { get; set; }
     public string CoverImageUrl { get; set; }
     public DateTime CreatedDate { get; set; }
     public int AppUserID { get; set; }

@@ -2,6 +2,7 @@
 using RealState.Entity;
 using RealState.ViewModels.BuyerViewModels;
 using RealState.ViewModels.FSBOViewModels;
+using RealState.ViewModels.NotificationViewModels;
 using RealState.ViewModels.PortfolioViewModels;
 using RealState.ViewModels.QuestViewModels;
 using RealState.ViewModels.SellerViewModels;
@@ -14,6 +15,8 @@ public class MappingProfile : Profile
     {
         CreateMap<CreateBuyerViewModel, Buyer>().ReverseMap();
         CreateMap<ResultBuyerViewModel, Buyer>().ReverseMap();
+
+        CreateMap<CreateNotificationViewModel, Notification>().ReverseMap();
 
         CreateMap<CreateSellerViewModel, Seller>().ReverseMap();
         CreateMap<ResultSellerViewModel, Seller>().ReverseMap();

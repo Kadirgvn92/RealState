@@ -19,4 +19,5 @@ public class Buyer : ISoftDeletable
     [JsonIgnore]
     public AppUser AppUser { get; set; }
     public bool IsDeleted { get; set; }
+    public List<Notification> Notifications { get; set; }
 }
