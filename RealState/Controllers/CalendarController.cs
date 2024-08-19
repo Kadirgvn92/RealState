@@ -17,6 +17,32 @@ public class CalendarController : Controller
     {
         return View();
     }
+    public DateTime ConvertUtcToLocal(DateTime utcDate)
+    {
+        TimeZoneInfo turkeyTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Turkey Standard Time");
+        return TimeZoneInfo.ConvertTimeFromUtc(utcDate, turkeyTimeZone);
+    }
+    [HttpGet]
+    public async Task<IActionResult> GetEvents()
+    {
+
+
+        var events = _calendarRepository.GetAll()
+            .Select(e => new
+            {
+                id = e.Id,
+                title = e.Title,
+                start = e.StartDate,
+                end = e.EndDate.HasValue ? e.EndDate : null,
+                description = e.Description,
+                venue = e.Venue,
+                className = e.ClassName,
+            })
+            .ToList();
+
+        return Ok(events);
+    }
+
     [HttpPost]
     public async Task<IActionResult> Add([FromBody] CalendarEvent calendarEvent)
     {
@@ -36,7 +62,7 @@ public class CalendarController : Controller
     [HttpPost]
     public async Task<IActionResult> Remove(int id)
     {
-        if(id != null)
+        if (id != null)
         {
             _calendarRepository.Delete(id);
             return Json(new { success = true, message = "Event removed successfully." });

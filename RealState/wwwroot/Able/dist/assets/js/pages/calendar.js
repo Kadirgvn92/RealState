@@ -14,6 +14,14 @@
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
         },
+        buttonText: {
+            today: 'Bugun',
+            month: 'Ay',
+            week: 'Hafta',
+            day: 'Gun',
+            list: 'Liste'
+        },
+        timeZone: 'Europe/Istanbul',
         themeSystem: 'bootstrap',
         initialDate: new Date(y, m, 16),
         slotDuration: '00:10:00',
@@ -25,6 +33,7 @@
         editable: true,
         dayMaxEvents: true,
         handleWindowResize: true,
+        locale: 'tr',
         select: function (info) {
             var sdt = new Date(info.start);
             var edt = new Date(info.end);
@@ -42,12 +51,13 @@
             calendar.unselect();
         },
         eventClick: function (info) {
+            console.log(info)
             calendevent = info.event;
             var clickedevent = info.event;
             var e_title = clickedevent.title === undefined ? '' : clickedevent.title;
             var e_desc = clickedevent.extendedProps.description === undefined ? '' : clickedevent.extendedProps.description;
-            var e_date_start = clickedevent.start === null ? '' : dateformat(clickedevent.start);
-            var e_date_end = clickedevent.end === null ? '' : " <i class='text-sm'>to</i> " + dateformat(clickedevent.end);
+            var e_date_start = clickedevent.start ? toTurkeyTime(clickedevent.start).toLocaleString('tr-TR') : '';
+            var e_date_end = clickedevent.end ? " <i class='text-sm'>to</i> " + toTurkeyTime(clickedevent.end).toLocaleString('tr-TR') : '';
             e_date_end = clickedevent.end === null ? '' : e_date_end;
             var e_venue = clickedevent.extendedProps.description === undefined ? '' : clickedevent.extendedProps.venue;
 
@@ -59,121 +69,17 @@
 
             calendarmodal.show();
         },
-        events: [
-            {
-                title: 'All Day Event',
-                start: new Date(y, m, 1),
-                allDay: true,
-                description:
-                    'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s.',
-                venue: 'City Town',
-                className: 'event-warning'
-            },
-            {
-                title: 'Long Event',
-                start: new Date(y, m, 7),
-                end: new Date(y, m, 10),
-                allDay: true,
-                description:
-                    'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.',
-                venue: 'City Town',
-                className: 'event-primary'
-            },
-            {
-                groupId: 999,
-                title: 'Repeating Event',
-                start: new Date(y, m, 9, 16, 0),
-                allDay: false,
-                description:
-                    'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s.',
-                venue: 'City Town',
-                className: 'event-danger'
-            },
-            {
-                groupId: 999,
-                title: 'Repeating Event',
-                start: new Date(y, m, 16, 16, 0),
-                allDay: false,
-                description:
-                    'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.',
-                venue: 'City Town',
-                className: 'event-danger'
-            },
-            {
-                title: 'Conference',
-                start: new Date(y, m, 11),
-                end: new Date(y, m, 13),
-                allDay: true,
-                description:
-                    'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s.',
-                venue: 'City Town',
-                className: 'event-info'
-            },
-            {
-                title: 'Meeting',
-                start: new Date(y, m, 12, 10, 30),
-                end: new Date(y, m, 12, 12, 30),
-                allDay: false,
-                description:
-                    'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.',
-                venue: 'City Town',
-                className: 'event-danger'
-            },
-            {
-                title: 'Lunch',
-                start: new Date(y, m, 12, 12, 30),
-                allDay: false,
-                description:
-                    'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s.',
-                venue: 'City Town',
-                className: 'event-success'
-            },
-            {
-                title: 'Meeting',
-                start: new Date(y, m, 14, 14, 30),
-                allDay: false,
-                description:
-                    'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.',
-                venue: 'City Town',
-                className: 'event-warning'
-            },
-            {
-                title: 'Happy Hour',
-                start: new Date(y, m, 14, 17, 30),
-                allDay: false,
-                description:
-                    'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s.',
-                venue: 'City Town',
-                className: 'event-info'
-            },
-            {
-                title: 'Dinner',
-                start: new Date(y, m, 15, 20, 0),
-                allDay: false,
-                description:
-                    'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.',
-                venue: 'City Town',
-                className: 'event-primary'
-            },
-            {
-                title: 'Birthday Party',
-                start: new Date(y, m, 13, 0, 0),
-                allDay: false,
-                description:
-                    'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s.',
-                venue: 'City Town',
-                className: 'event-success'
-            },
-            {
-                title: 'Click for Google',
-                url: 'http://google.com/',
-                allDay: true,
-                description:
-                    'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.',
-                venue: 'City Town',
-                start: new Date(y, m, 28)
-            }
-        ]
+        events: function (fetchInfo, successCallback, failureCallback) {
+            fetch('/Calendar/GetEvents')
+                .then(response => {
+                    return response.json();
+                })
+                .then(data => {
+                   console.log(data)
+                   successCallback(data);
+                })
+                .catch(error => failureCallback(error));
+        }
     });
 
     calendar.render();
@@ -263,8 +169,10 @@
                                 },
                                 buttonsStyling: false,
                                 icon: 'success',
-                                title: 'Success',
-                                text: 'Program baþarýyla oluþturuldu.'
+                                title: 'Basarili',
+                                text: 'Program basariyla olusturuldu.'
+                            }).then(() => {
+                                window.location.reload(); // Sayfayý yenile
                             });
                         } else {
                             calendevent.remove();
@@ -275,8 +183,8 @@
                                 },
                                 buttonsStyling: false,
                                 icon: 'success',
-                                title: 'Success',
-                                text: 'Program baþarýyla güncellendi.'
+                                title: 'Basarili',
+                                text: 'Program basariyla guncellendi.'
                             });
                         }
                         calendaroffcanvas.hide();
@@ -288,7 +196,7 @@
                             },
                             buttonsStyling: false,
                             icon: 'error',
-                            title: 'Error',
+                            title: 'Hata',
                             text: 'Yanýt iþlenirken hata meydana geldi!'
                         });
                     }
@@ -301,61 +209,13 @@
                         },
                         buttonsStyling: false,
                         icon: 'error',
-                        title: 'Error',
+                        title: 'Hata',
                         text: 'Program oluþtururken hata meydana geldi!'
                     });
                 });
 
         });
     }
-
-
-    //var pc_event_add = document.querySelector('#pc_event_add');
-    //if (pc_event_add) {
-    //    pc_event_add.addEventListener('click', function () {
-    //        var day = true;
-    //        var end = null;
-    //        var e_date_start = document.getElementById('pc-e-sdate').value === null ? '' : document.getElementById('pc-e-sdate').value;
-    //        var e_date_end = document.getElementById('pc-e-edate').value === null ? '' : document.getElementById('pc-e-edate').value;
-    //        if (!e_date_end == '') {
-    //            end = new Date(e_date_end);
-    //        }
-    //        calendar.addEvent({
-    //            title: document.getElementById('pc-e-title').value,
-    //            start: new Date(e_date_start),
-    //            end: end,
-    //            allDay: day,
-    //            description: document.getElementById('pc-e-description').value,
-    //            venue: document.getElementById('pc-e-venue').value,
-    //            className: document.getElementById('pc-e-type').value
-    //        });
-    //        if (pc_event_add.getAttribute('data-pc-action') == 'add') {
-    //            Swal.fire({
-    //                customClass: {
-    //                    confirmButton: 'btn btn-light-primary'
-    //                },
-    //                buttonsStyling: false,
-    //                icon: 'success',
-    //                title: 'Success',
-    //                text: 'Program takvime baþarýyla iþlendi.'
-    //            });
-    //        } else {
-    //            calendevent.remove();
-    //            document.getElementById('pc-e-btn-text').innerHTML = '<i class="align-text-bottom me-1 ti ti-calendar-plus"></i> Add';
-    //            document.querySelector('#pc_event_add').setAttribute('data-pc-action', 'add');
-    //            Swal.fire({
-    //                customClass: {
-    //                    confirmButton: 'btn btn-light-primary'
-    //                },
-    //                buttonsStyling: false,
-    //                icon: 'success',
-    //                title: 'Success',
-    //                text: 'Program baþarýyla güncellendi'
-    //            });
-    //        }
-    //        calendaroffcanvas.hide();
-    //    });
-    //}
 
     var pc_event_edit = document.querySelector('#pc_event_edit');
     if (pc_event_edit) {
@@ -382,6 +242,13 @@
             calendaroffcanvas.show();
         });
     }
+
+    function toTurkeyTime(utcDate) {
+        var date = new Date(utcDate);
+        // Türkiye saat diliminde UTC+3
+        date.setHours(date.getHours() - 3);
+        return date;
+    }
     //  get round value
     function getRound(vale) {
         var tmp = '';
@@ -402,6 +269,13 @@
             return hour + ':' + minute;
         }
     }
+    function timeformat(time) {
+        var timeFormat = time.split(':');
+        var hours = getRound(parseInt(timeFormat[0]));
+        var minutes = getRound(timeFormat[1]);
+        return hours + ':' + minutes;
+    }
+
 
     //  get date
     function dateformat(dt) {

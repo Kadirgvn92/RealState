@@ -22,10 +22,18 @@ builder.Services.AddEntityFrameworkNpgsql().AddDbContext<RealStateContext>(opt =
 builder.Services.AddControllersWithViews()
     .AddJsonOptions(options =>
     {
-        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
-        options.JsonSerializerOptions.NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.AllowNamedFloatingPointLiterals;
+        // Referans yönetimini basit tutun, döngüsel referanslarý yok sayýn
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+
+        // Sayýlarýn adlandýrýlabilir noktalarýný desteklemeyin, varsayýlaný kullanýn
+        options.JsonSerializerOptions.NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.Strict;
+
+        // Özelleþtirilmiþ ayarlarý kullanarak JSON formatýný basitleþtirin
+        options.JsonSerializerOptions.PropertyNamingPolicy = null; // Varsayýlan isimlendirme politikasý
+        options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull; // Null deðerleri yok sayma
 
     });
+
 
 builder.Services.AddAuthentication(options =>
     {

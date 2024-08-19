@@ -1,8 +1,9 @@
 ﻿namespace RealState.Entity;
 
+using RealState.Repository.IRepository;
 using System;
 
-public class CalendarEvent
+public class CalendarEvent : ISoftDeletable
 {
     public int Id { get; set; }
     public string? Title { get; set; }
@@ -12,6 +13,8 @@ public class CalendarEvent
     public string? Description { get; set; }
     public string? Venue { get; set; }
     public string? ClassName { get; set; }
+
+    public bool IsDeleted { get; set; }
     // Foreign Key
     public int? PortfolioID { get; set; }
     public Portfolio Portfolio { get; set; } 
