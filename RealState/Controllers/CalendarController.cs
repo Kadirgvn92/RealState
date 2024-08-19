@@ -1,16 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RealState.Entity;
+using RealState.Models;
+using RealState.Repository.GenericRepository;
 using RealState.Repository.IRepository;
+using System.Security.Claims;
 
 namespace RealState.Controllers;
 public class CalendarController : Controller
 {
     private readonly ICalendarRepository _calendarRepository;
+    private readonly IUserService _userService;
 
-    public CalendarController(ICalendarRepository calendarRepository)
+    public CalendarController(ICalendarRepository calendarRepository, IUserService userService)
     {
         _calendarRepository = calendarRepository;
+        _userService = userService;
     }
 
     public IActionResult Index()
@@ -52,6 +57,10 @@ public class CalendarController : Controller
             calendarEvent.EndDate = calendarEvent.EndDate.HasValue
                 ? DateTime.SpecifyKind(calendarEvent.EndDate.Value, DateTimeKind.Utc)
                 : (DateTime?)null;
+
+            var user = await _userService.GetUserByUsernameAsync();
+            calendarEvent.AppUserID = user.AppUserID;
+
 
             _calendarRepository.Insert(calendarEvent);
             return Json(new { success = true, message = "Program başarıyla oluşturuldu." });

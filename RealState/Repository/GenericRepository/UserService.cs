@@ -6,6 +6,7 @@ using RealState.Entity;
 using RealState.Repository.IRepository;
 using RealState.ViewModels.AuthViewModels;
 using System.Linq.Expressions;
+using System.Security.Claims;
 
 namespace RealState.Repository.GenericRepository;
 
@@ -13,25 +14,22 @@ public class UserService  : IUserService
 {
     private readonly RealStateContext _context;
     private readonly IPasswordHasher<AppUser> _passwordHasher;
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public UserService(RealStateContext context, IPasswordHasher<AppUser> passwordHasher)
+    public UserService(RealStateContext context, IPasswordHasher<AppUser> passwordHasher, IHttpContextAccessor httpContextAccessor)
     {
         _context = context;
         _passwordHasher = passwordHasher;
+        _httpContextAccessor = httpContextAccessor;
     }
-    public async Task<AppUser> GetUserByUsernameAsync(string username)
+    public async Task<AppUser> GetUserByUsernameAsync()
     {
-        // Retrieve the user by username
-        return await _context.AppUsers.SingleOrDefaultAsync(u => u.Username == username);
-    }
-    public async Task<AppUser> GetAppUserByFilterAsync(Expression<Func<AppUser, bool>> filter)
-    {
-       return await _context.Set<AppUser>().SingleOrDefaultAsync(filter);
-    }
+        var userClaims = _httpContextAccessor.HttpContext.User.Claims;
 
-    public async Task<AppRole> GetAppRoleByFilterAsync(Expression<Func<AppRole, bool>> filter)
-    {
-        return await _context.Set<AppRole>().SingleOrDefaultAsync(filter);
+        var username = userClaims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
+        var role = userClaims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+        // Retrieve the user by username
+        return await _context.AppUsers.Include(x => x.AppRole).SingleOrDefaultAsync(u => u.Username == username);
     }
 
     public async Task<AppUser> AuthenticateUserAsync(string username, string password)

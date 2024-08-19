@@ -18,8 +18,9 @@ public class PortfolioController : Controller
     private readonly ITypeRepository _typeRepository;
     private readonly IStatusRepository _statusRepository;
     private readonly IAddressRepository _addressRepository;
+    private readonly IUserService _userService;
 
-    public PortfolioController(IPortfolioRepository portfolioRepository, IMapper mapper, ISellerRepository sellerRepository, IAddressRepository addressRepository, ICategoryRepository categoryRepository, ITypeRepository typeRepository, IStatusRepository statusRepository)
+    public PortfolioController(IPortfolioRepository portfolioRepository, IMapper mapper, ISellerRepository sellerRepository, IAddressRepository addressRepository, ICategoryRepository categoryRepository, ITypeRepository typeRepository, IStatusRepository statusRepository, IUserService userService)
     {
         _portfolioRepository = portfolioRepository;
         _mapper = mapper;
@@ -28,7 +29,8 @@ public class PortfolioController : Controller
         _typeRepository = typeRepository;
         _statusRepository = statusRepository;
         _addressRepository = addressRepository;
-}
+        _userService = userService;
+    }
 
     public IActionResult Index()
     {
@@ -76,7 +78,7 @@ public class PortfolioController : Controller
         return View();
     }
     [HttpPost]
-    public IActionResult CreatePortfolio(CreatePortfolioViewModel model)
+    public async Task<IActionResult> CreatePortfolio(CreatePortfolioViewModel model)
     {
         if (ModelState.IsValid)
         {
@@ -111,6 +113,8 @@ public class PortfolioController : Controller
             };
             _addressRepository.Insert(address);
 
+            var user = await _userService.GetUserByUsernameAsync();
+
             var portfolio = _mapper.Map<Portfolio>(model);
 
             portfolio.RealEstateAddressID = address.RealEstateAddressID;
@@ -118,6 +122,7 @@ public class PortfolioController : Controller
             portfolio.IsAvailable = model.IsAvailable;
             portfolio.IsDeleted = false;
             portfolio.CoverImageUrl = coverImageUrl;
+            portfolio.AppUserID = user.AppUserID;
 
             _portfolioRepository.Insert(portfolio);
 

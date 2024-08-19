@@ -17,5 +17,7 @@ public class CalendarEvent : ISoftDeletable
     public bool IsDeleted { get; set; }
     // Foreign Key
     public int? PortfolioID { get; set; }
-    public Portfolio Portfolio { get; set; } 
+    public Portfolio Portfolio { get; set; }
+    public int AppUserID { get; set; }
+    public AppUser AppUser { get; set; }
 }

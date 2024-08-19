@@ -19,12 +19,7 @@ public class _NavbarPartial : ViewComponent
 
     public async Task<IViewComponentResult> InvokeAsync()
     {
-        var userClaims = _httpContextAccessor.HttpContext.User.Claims;
-
-        var username = userClaims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
-        var role = userClaims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
-
-        var value = await _userService.GetUserByUsernameAsync(username);
+        var value = await _userService.GetUserByUsernameAsync();
 
         var model = new UserViewModel
         {
@@ -33,7 +28,7 @@ public class _NavbarPartial : ViewComponent
             Mail = value.Mail,
             ImageUrl = value.ImageUrl,
             Title = value.Title,
-            Role = role,
+            Role = value.Role,
         };
 
         return View(model);

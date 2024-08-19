@@ -1,0 +1,40 @@
+﻿@using RealState.ViewModels.QuestViewModels
+
+@model List<ResultQuestViewModel>
+
+@{
+    ViewData["Title"] = "Arayış";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<section class="pc-container">
+    <section class="pc-content">
+        @await Component.InvokeAsync("_BreadcrumbPartial")
+        <div class="row">
+            <div class="col-xl-12">
+                <br />
+                <br />
+                <div class="pc-component">
+                    <div class="row">
+                        @foreach(var item in Model)
+                        {
+                            <div class="col-sm-4">
+                                <div class="card text-white bg-danger">
+                                    <div class="card-header">@item.RealEstateStatusName - @item.RealEstateTypeName - @item.RealEstateCategoryName - @item.Price ₺</div>
+                                    <div class="card-body">
+                                        <h5 class="card-title text-white">@item.Title</h5>
+                                        <p class="card-text">@item.AddressLine</p>
+                                        <span class="small">@item.CreatedDate</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</section>

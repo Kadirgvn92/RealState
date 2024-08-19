@@ -26,6 +26,8 @@ public class Portfolio : ISoftDeletable
     public List<CalendarEvent> CalendarEvents { get; set; }
     public string CoverImageUrl { get; set; }
     public DateTime CreatedDate { get; set; }
+    public int AppUserID { get; set; }
+    public AppUser AppUser { get; set; }
     public bool IsAvailable { get; set; }
     public bool IsDeleted { get; set; }
 }

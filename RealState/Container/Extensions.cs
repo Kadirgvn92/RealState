@@ -3,6 +3,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using RealState.Entity;
 using RealState.JWTools;
+using RealState.Models;
 using RealState.Repository.GenericRepository;
 using RealState.Repository.IRepository;
 using RealState.ValidationRules;

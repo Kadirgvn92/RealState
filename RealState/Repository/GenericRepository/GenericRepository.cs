@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using RealState.Models;
 using RealState.Repository.IRepository;
 
 public class GenericRepository<T> : IRepository<T> where T : class

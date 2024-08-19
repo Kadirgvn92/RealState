@@ -9,5 +9,7 @@ public class FSBO : ISoftDeletable
     public string PhoneNumber { get; set; }
     public string Description { get; set; }
     public DateTime CreatedDate { get; set; }
+    public int AppUserID { get; set; }
+    public AppUser AppUser { get; set; }
     public bool IsDeleted { get; set; }
 }

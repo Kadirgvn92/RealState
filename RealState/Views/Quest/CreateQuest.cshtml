@@ -1,0 +1,85 @@
+﻿@using RealState.ViewModels.QuestViewModels
+
+@model CreateQuestViewModel
+
+@{
+    ViewData["Title"] = "Arayış Oluştur";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<section class="pc-container">
+    <div class="pc-content">
+        <!-- [ breadcrumb ] start -->
+        @await Component.InvokeAsync("_BreadcrumbPartial")
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form method="post">
+                            <input type="hidden" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")" asp-for="CreatedDate" />
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <div class="form-group">
+                                        <label for="RealEstateStatusID">Mülk Durumu Seç</label>
+                                        <select id="RealEstateStatusID" class="form-control" asp-for="RealEstateStatusID" asp-items="ViewBag.StatusList">
+                                            <option value="">Mülk durumunu seçin</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="form-group">
+                                        <label for="RealEstateTypeID">Mülk Tipi Seç</label>
+                                        <select id="RealEstateTypeID" class="form-control" asp-for="RealEstateTypeID" asp-items="ViewBag.TypeList">
+                                            <option value="">Mülk tipini seçin</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <div class="form-group">
+                                        <label for="RealEstateCategoryID">Mülk Kategorisi Seç</label>
+                                        <select id="RealEstateCategoryID" class="form-control" asp-for="RealEstateCategoryID" asp-items="ViewBag.CategoryList">
+                                            <option value="">Mülk kategorisi seçin</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="Title">Başlık</label>
+                                        <input type="text" class="form-control" asp-for="Title" placeholder="Arayış başlığı giriniz" tabindex="1" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="Price">Fiyat</label>
+                                        <input type="text" class="form-control" asp-for="Price" tabindex="3" />
+                                        <small>(TL Cinsinden)</small>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="Description">Arayış Adresi</label>
+                                        <textarea class="form-control" asp-for="AddressLine" rows="2" tabindex="8"></textarea>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div asp-validation-summary="ModelOnly"></div>
+                            <button type="submit" class="btn btn-primary btn-shadow mb-4" tabindex="9">Alıcı Kaydı Oluştur</button>
+                        </form>
+                        @if (TempData["SuccessMessage"] != null)
+                        {
+                            <div class="alert alert-success">
+                                @TempData["SuccessMessage"]
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
