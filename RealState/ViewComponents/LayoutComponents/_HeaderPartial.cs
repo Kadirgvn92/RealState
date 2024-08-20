@@ -14,8 +14,9 @@ public class _HeaderPartial : ViewComponent
 
     public IViewComponentResult Invoke()
     {
-        
-
-        return View();
+        var values = _notificationRepository.GetLast10Notifications();
+        var count = values.Count;
+        ViewBag.Count = count;  
+        return View(values);
     }
 }

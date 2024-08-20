@@ -94,6 +94,17 @@
     <script src="/Able/dist/assets/js/plugins/vfs_fonts.js"></script>
     <script src="/Able/dist/assets/js/plugins/buttons.html5.min.js"></script>
     <script src="/Able/dist/assets/js/plugins/buttons.print.min.js"></script>
+
+    <script src="/Able/dist/assets/js/plugins/imask.min.js"></script>
+
+    <script type="text/javascript">
+        // Mask için IMask kullanımı
+        var phoneMask = IMask(
+            document.getElementById('phoneNumber'), {
+            mask: '(000) 000-0000'
+        });
+    </script>
+
     <script>
         $(document).ready(function () {
             $.ajax({
@@ -215,6 +226,7 @@
                     success: function (response) {
                         
                         $('#createFSBOModal').modal('hide');
+                        window.location.reload(); // Sayfayı yenile
                     },
                     error: function (xhr, status, error) {
                         console.error('Hata:', error);

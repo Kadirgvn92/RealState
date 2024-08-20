@@ -2,8 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using RealState.Entity;
+using RealState.Repository.GenericRepository;
 using RealState.Repository.IRepository;
 using RealState.ViewModels.FSBOViewModels;
+using RealState.ViewModels.NotificationViewModels;
 
 namespace RealState.Controllers;
 public class FSBOController : Controller
@@ -11,12 +13,14 @@ public class FSBOController : Controller
     private readonly IFSBORepository _fSBORepository;
     private readonly IUserService _userService;
     private readonly IMapper _mapper;
+    private readonly INotificationRepository _notificationRepository;
 
-    public FSBOController(IFSBORepository fSBORepository, IUserService userService, IMapper mapper)
+    public FSBOController(IFSBORepository fSBORepository, IUserService userService, IMapper mapper, INotificationRepository notificationRepository)
     {
         _fSBORepository = fSBORepository;
         _userService = userService;
         _mapper = mapper;
+        _notificationRepository = notificationRepository;
     }
 
     public IActionResult Index()
@@ -53,6 +57,20 @@ public class FSBOController : Controller
         }
 
         _fSBORepository.Insert(FSBOs);
+
+
+        var notModel = new CreateNotificationViewModel
+        {
+            Title = "Yeni FSBO Kaydı Eklendi",
+            FSBOId = FSBOs.FSBOId,
+            Message = $"{FSBOs.ListingNumber} ilan numaralı {FSBOs.PhoneNumber} numaraya sahip FSBO kaydı {user.FirstName} {user.LastName} tarafından gerçekleştirildi.",
+            CreatedDate = DateTime.UtcNow,
+            IsRead = false,
+        };
+
+        var notification = _mapper.Map<Notification>(notModel);
+
+        _notificationRepository.Insert(notification);
 
         TempData["SuccessMessage"] = "Kayıt başarılı şekilde gerçekleşti.";
 

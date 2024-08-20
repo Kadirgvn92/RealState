@@ -6,7 +6,9 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RealState.Entity;
 using RealState.Repository.IRepository;
+using RealState.ViewModels.NotificationViewModels;
 using RealState.ViewModels.PortfolioViewModels;
+using System.Net.NetworkInformation;
 
 namespace RealState.Controllers;
 public class PortfolioController : Controller
@@ -19,8 +21,9 @@ public class PortfolioController : Controller
     private readonly IStatusRepository _statusRepository;
     private readonly IAddressRepository _addressRepository;
     private readonly IUserService _userService;
+    private readonly INotificationRepository _notificationRepository;
 
-    public PortfolioController(IPortfolioRepository portfolioRepository, IMapper mapper, ISellerRepository sellerRepository, IAddressRepository addressRepository, ICategoryRepository categoryRepository, ITypeRepository typeRepository, IStatusRepository statusRepository, IUserService userService)
+    public PortfolioController(IPortfolioRepository portfolioRepository, IMapper mapper, ISellerRepository sellerRepository, IAddressRepository addressRepository, ICategoryRepository categoryRepository, ITypeRepository typeRepository, IStatusRepository statusRepository, IUserService userService, INotificationRepository notificationRepository)
     {
         _portfolioRepository = portfolioRepository;
         _mapper = mapper;
@@ -30,6 +33,7 @@ public class PortfolioController : Controller
         _statusRepository = statusRepository;
         _addressRepository = addressRepository;
         _userService = userService;
+        _notificationRepository = notificationRepository;
     }
 
     public IActionResult Index()
@@ -125,6 +129,19 @@ public class PortfolioController : Controller
             portfolio.AppUserID = user.AppUserID;
 
             _portfolioRepository.Insert(portfolio);
+
+            var notModel = new CreateNotificationViewModel
+            {
+                Title = "Yeni Portföy Eklendi",
+                PortfolioID = portfolio.PortfolioID,
+                Message = $"{portfolio.Seller.FirstName} {portfolio.Seller.LastName} isimli mülk sahibinde ait {portfolio.RealEstateCategory.CategoryName} - {portfolio.RealEstateStatus.StatusName} - {portfolio.RealEstateType.TypeName} tipinde {portfolio.Seller.AskingPrice} istenilen fiyata sahip portföy  {user.FirstName} {user.LastName} tarafından eklendi.",
+                CreatedDate = DateTime.UtcNow,
+                IsRead = false,
+            };
+
+            var notification = _mapper.Map<Notification>(notModel);
+
+            _notificationRepository.Insert(notification);
 
             TempData["SuccessMessage"] = "Kayıt başarılı şekilde gerçekleşti.";
 

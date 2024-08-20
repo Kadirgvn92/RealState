@@ -6,6 +6,7 @@ using RealState.Entity;
 using RealState.Repository.GenericRepository;
 using RealState.Repository.IRepository;
 using RealState.ViewModels.BuyerViewModels;
+using RealState.ViewModels.NotificationViewModels;
 using RealState.ViewModels.QuestViewModels;
 
 namespace RealState.Controllers;
@@ -17,8 +18,9 @@ public class QuestController : Controller
     private readonly ICategoryRepository _categoryRepository;
     private readonly IStatusRepository _statusRepository;
     private readonly ITypeRepository _typeRepository;
+    private readonly INotificationRepository _notificationRepository;
 
-    public QuestController(IQuestRepository questRepository, IUserService userService, IMapper mapper, ICategoryRepository categoryRepository, IStatusRepository statusRepository, ITypeRepository typeRepository)
+    public QuestController(IQuestRepository questRepository, IUserService userService, IMapper mapper, ICategoryRepository categoryRepository, IStatusRepository statusRepository, ITypeRepository typeRepository, INotificationRepository notificationRepository)
     {
         _questRepository = questRepository;
         _userService = userService;
@@ -26,6 +28,7 @@ public class QuestController : Controller
         _categoryRepository = categoryRepository;
         _statusRepository = statusRepository;
         _typeRepository = typeRepository;
+        _notificationRepository = notificationRepository;
     }
 
     public IActionResult Index()
@@ -81,6 +84,19 @@ public class QuestController : Controller
         }
 
         _questRepository.Insert(quest);
+
+        var notModel = new CreateNotificationViewModel
+        {
+            Title = "Yeni Arayış Eklendi",
+            QuestID = quest.QuestID,
+            Message = $"{quest.Title} - {quest.Price} arayış {user.FirstName} {user.LastName} tarafından eklendi.",
+            CreatedDate = DateTime.UtcNow,
+            IsRead = false,
+        };
+
+        var notification = _mapper.Map<Notification>(notModel);
+
+        _notificationRepository.Insert(notification);
 
         TempData["SuccessMessage"] = "Kayıt başarılı şekilde gerçekleşti.";
 
