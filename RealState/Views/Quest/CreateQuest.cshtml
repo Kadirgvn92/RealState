@@ -15,8 +15,9 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="post">
+                        <form method="post" id="createQuestForm">
                             <input type="hidden" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")" asp-for="CreatedDate" />
+                            <input type="hidden" id="IsEmergency" name="IsEmergency" value="false" />
                             <div class="row">
                                 <div class="col-md-4 mb-3">
                                     <div class="form-group">
@@ -68,7 +69,10 @@
 
                             </div>
                             <div asp-validation-summary="ModelOnly"></div>
-                            <button type="submit" class="btn btn-primary btn-shadow mb-4" tabindex="9">Alıcı Kaydı Oluştur</button>
+                            <div class="d-flex justify-content-start">
+                                <button id="submitButton" type="button" class="btn btn-primary btn-shadow mb-4" style="margin-right:20px" tabindex="9">Alıcı Kaydı Oluştur</button>
+                            </div>
+
                         </form>
                         @if (TempData["SuccessMessage"] != null)
                         {
@@ -83,3 +87,54 @@
         </div>
     </div>
 </section>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        document.getElementById("submitButton").addEventListener("click", function () {
+            Swal.fire({
+                title: 'Bu kaydı acil olarak işaretlemek istiyor musunuz?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Evet, Acil!',
+                cancelButtonText: 'Hayır, Normal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById("IsEmergency").value = "true";
+                } else {
+                    document.getElementById("IsEmergency").value = "false";
+                }
+
+                // Form verilerini topla
+                const form = document.getElementById("createQuestForm");
+                const formData = new FormData(form);
+
+                // Verileri fetch ile gönder
+                fetch('@Url.Action("CreateQuest", "Quest")', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            // Başarılı bir cevap geldiğinde yapılacaklar
+                            Swal.fire('Başarılı', 'Kayıt başarıyla oluşturuldu', 'success')
+                                .then(() => {
+                                    window.location.href = '@Url.Action("Index", "Quest")'; // Başarılıysa kullanıcıyı liste sayfasına yönlendir
+                                });
+                        } else {
+                            return response.json().then(data => {
+                                // Hatalı bir cevap geldiğinde yapılacaklar
+                                Swal.fire('Hata', 'Kayıt oluşturulamadı: ' + data.errorMessage, 'error');
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Hata:', error);
+                        Swal.fire('Hata', 'Kayıt oluşturulurken bir hata oluştu', 'error');
+                    });
+            });
+        });
+    </script>
+
+}

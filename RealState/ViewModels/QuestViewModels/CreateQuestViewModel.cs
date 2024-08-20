@@ -14,4 +14,5 @@ public class CreateQuestViewModel
     public int RealEstateCategoryID { get; set; }
     public int RealEstateStatusID { get; set; }
     public int AppUserID { get; set; }
+    public bool IsEmergency { get; set; }
 }

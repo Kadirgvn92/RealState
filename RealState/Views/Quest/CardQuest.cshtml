@@ -19,8 +19,18 @@
                         @foreach(var item in Model)
                         {
                             <div class="col-sm-4">
-                                <div class="card text-white bg-danger">
-                                    <div class="card-header"> <b>@item.RealEstateStatusName - @item.RealEstateTypeName - @item.RealEstateCategoryName - @item.Price ₺</b></div>
+                                <div class="card text-white @(item.IsEmergency ? "bg-danger" : "bg-primary")">
+                                    <div class="card-header">
+                                        <b>
+                                            @item.RealEstateStatusName - @item.RealEstateTypeName - @item.RealEstateCategoryName - @item.Price ₺
+                                            @if (item.IsEmergency)
+                                            {
+                                                <div class="spinner-grow spinner-grow-sm text-light float-end" role="status">
+                                                    <span class="sr-only">Loading...</span>
+                                                </div>
+                                            }
+                                        </b>
+                                    </div>
                                     <div class="card-body">
                                         <h5 class="card-title text-white">@item.Title</h5>
                                         <p class="card-text">@item.AddressLine</p>

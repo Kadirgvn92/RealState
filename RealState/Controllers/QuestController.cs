@@ -117,7 +117,8 @@ public class QuestController : Controller
             CreatedDate = q.CreatedDate,
             RealEstateTypeName = q.RealEstateType.TypeName,
             RealEstateCategoryName = q.RealEstateCategory.CategoryName,
-            RealEstateStatusName = q.RealEstateStatus.StatusName
+            RealEstateStatusName = q.RealEstateStatus.StatusName,
+            IsEmergency = q.IsEmergency,
         }).ToList();
         return View(questDtos);
     }
@@ -139,7 +140,8 @@ public class QuestController : Controller
             CreatedDate = q.CreatedDate,
             RealEstateTypeName = q.RealEstateType.TypeName,
             RealEstateCategoryName = q.RealEstateCategory.CategoryName,
-            RealEstateStatusName = q.RealEstateStatus.StatusName
+            RealEstateStatusName = q.RealEstateStatus.StatusName,
+            IsEmergency= q.IsEmergency,
         }).ToList();
 
         var data = JsonConvert.SerializeObject(questDtos);

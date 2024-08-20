@@ -9,6 +9,7 @@ public class ResultQuestViewModel
     public string? Latitude { get; set; }
     public string? Longtitude { get; set; }
     public DateTime CreatedDate { get; set; }
+    public bool IsEmergency { get; set; }
 
     public string RealEstateTypeName { get; set; } // Just include the name, not the whole object
     public string RealEstateCategoryName { get; set; } // Same for category
